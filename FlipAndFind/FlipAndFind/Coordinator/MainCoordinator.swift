@@ -22,7 +22,7 @@ final class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let mainController = SettingsCollectionViewController()
+        let mainController = MainViewController()
         navigationController.pushViewController(mainController, animated: true)
     }
     
