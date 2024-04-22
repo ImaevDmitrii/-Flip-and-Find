@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "amargasaurus.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
