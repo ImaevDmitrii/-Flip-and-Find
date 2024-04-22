@@ -22,7 +22,7 @@ final class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let mainController = MainViewController()
+        let mainController = SettingsCollectionViewController()
         navigationController.pushViewController(mainController, animated: true)
     }
     
@@ -37,10 +37,9 @@ final class MainCoordinator: Coordinator {
     }
     
     func showSettings() {
-        let settingsViewController = MainViewController()
+        let settingsViewController = SettingsCollectionViewController()
         navigationController.pushViewController(settingsViewController, animated: true)
     }
-    
 }
 
 

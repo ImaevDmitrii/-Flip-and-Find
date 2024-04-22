@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "32 card_choosen.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

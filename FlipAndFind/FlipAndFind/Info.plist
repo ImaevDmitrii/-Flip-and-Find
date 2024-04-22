@@ -5,7 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Black</string>
-		<string>Montserrat-Regular</string>
+		<string>Montserrat-SemiBold</string>
 		<string>Nunito-SemiBold</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

@@ -11,13 +11,18 @@
 		CB4A1D992BBFE50F00A3DBE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A1D982BBFE50F00A3DBE4 /* SceneDelegate.swift */; };
 		CB4A1DA02BBFE51100A3DBE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB4A1D9F2BBFE51100A3DBE4 /* Assets.xcassets */; };
 		CB4A1DA32BBFE51100A3DBE4 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CB4A1DA22BBFE51100A3DBE4 /* Base */; };
+		CB552FC22BD63876008AE1C3 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FC12BD63876008AE1C3 /* SaveButton.swift */; };
+		CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */; };
+		CB8430F12BD2BAE900AC058E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */; };
 		CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5742BCBC35A005F91EA /* MainViewController.swift */; };
 		CB85E5782BCBC40F005F91EA /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5772BCBC40F005F91EA /* Color+Extension.swift */; };
 		CB85E57A2BCBC5FD005F91EA /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5792BCBC5FD005F91EA /* Localization.swift */; };
 		CB85E57D2BCBC692005F91EA /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E57C2BCBC692005F91EA /* MainCoordinator.swift */; };
-		CB85E58F2BCBCC47005F91EA /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB85E58E2BCBCC47005F91EA /* Montserrat-Regular.ttf */; };
 		CB85E5932BCBF05C005F91EA /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB85E5922BCBF05C005F91EA /* Nunito-Black.ttf */; };
 		CB85E5952BCBF0B7005F91EA /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB85E5942BCBF0B7005F91EA /* Nunito-SemiBold.ttf */; };
+		CB85E5972BCFB0A7005F91EA /* SettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5962BCFB0A7005F91EA /* SettingsCollectionViewController.swift */; };
+		CB85E5992BCFB32A005F91EA /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5982BCFB32A005F91EA /* SettingsCell.swift */; };
+		CB85E59C2BCFB3BF005F91EA /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,14 +32,19 @@
 		CB4A1D9F2BBFE51100A3DBE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB4A1DA22BBFE51100A3DBE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB4A1DA42BBFE51100A3DBE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB552FC12BD63876008AE1C3 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
+		CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CB85E5742BCBC35A005F91EA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CB85E5772BCBC40F005F91EA /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		CB85E5792BCBC5FD005F91EA /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		CB85E57C2BCBC692005F91EA /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		CB85E57F2BCBC887005F91EA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		CB85E58E2BCBCC47005F91EA /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "../../../../../../../Downloads/Montserrat,Nunito/Montserrat/static/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		CB85E5922BCBF05C005F91EA /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		CB85E5942BCBF0B7005F91EA /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		CB85E5962BCFB0A7005F91EA /* SettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewController.swift; sourceTree = "<group>"; };
+		CB85E5982BCFB32A005F91EA /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +80,7 @@
 				CB4A1D962BBFE50F00A3DBE4 /* AppDelegate.swift */,
 				CB4A1D982BBFE50F00A3DBE4 /* SceneDelegate.swift */,
 				CB85E5732BCBC340005F91EA /* ViewControllers */,
+				CB85E59A2BCFB3A1005F91EA /* Model */,
 				CB85E57B2BCBC681005F91EA /* Coordinator */,
 				CB85E5762BCBC3E4005F91EA /* Helpers */,
 				CB85E5802BCBCAD1005F91EA /* Fonts */,
@@ -84,6 +95,10 @@
 			isa = PBXGroup;
 			children = (
 				CB85E5742BCBC35A005F91EA /* MainViewController.swift */,
+				CB85E5962BCFB0A7005F91EA /* SettingsCollectionViewController.swift */,
+				CB85E5982BCFB32A005F91EA /* SettingsCell.swift */,
+				CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */,
+				CB552FC12BD63876008AE1C3 /* SaveButton.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -108,11 +123,19 @@
 		CB85E5802BCBCAD1005F91EA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */,
 				CB85E5942BCBF0B7005F91EA /* Nunito-SemiBold.ttf */,
 				CB85E5922BCBF05C005F91EA /* Nunito-Black.ttf */,
-				CB85E58E2BCBCC47005F91EA /* Montserrat-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		CB85E59A2BCFB3A1005F91EA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,10 +198,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB85E5932BCBF05C005F91EA /* Nunito-Black.ttf in Resources */,
-				CB85E58F2BCBCC47005F91EA /* Montserrat-Regular.ttf in Resources */,
 				CB4A1DA02BBFE51100A3DBE4 /* Assets.xcassets in Resources */,
 				CB4A1DA32BBFE51100A3DBE4 /* Base in Resources */,
 				CB85E5952BCBF0B7005F91EA /* Nunito-SemiBold.ttf in Resources */,
+				CB8430F12BD2BAE900AC058E /* Montserrat-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,8 +216,13 @@
 				CB85E57D2BCBC692005F91EA /* MainCoordinator.swift in Sources */,
 				CB85E57A2BCBC5FD005F91EA /* Localization.swift in Sources */,
 				CB4A1D972BBFE50F00A3DBE4 /* AppDelegate.swift in Sources */,
+				CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */,
 				CB4A1D992BBFE50F00A3DBE4 /* SceneDelegate.swift in Sources */,
 				CB85E5782BCBC40F005F91EA /* Color+Extension.swift in Sources */,
+				CB552FC22BD63876008AE1C3 /* SaveButton.swift in Sources */,
+				CB85E5992BCFB32A005F91EA /* SettingsCell.swift in Sources */,
+				CB85E59C2BCFB3BF005F91EA /* SettingsModels.swift in Sources */,
+				CB85E5972BCFB0A7005F91EA /* SettingsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
