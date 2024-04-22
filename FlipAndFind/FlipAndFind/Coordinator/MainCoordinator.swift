@@ -19,15 +19,17 @@ final class MainCoordinator: Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        navigationController.setupNavigationBar()
     }
     
     func start() {
         let mainController = MainViewController()
+        mainController.coordinator = self
         navigationController.pushViewController(mainController, animated: true)
     }
     
     func startGame() {
-        let gameViewController = MainViewController()
+        let gameViewController = GameCollectionViewController()
         navigationController.pushViewController(gameViewController, animated: true)
     }
     

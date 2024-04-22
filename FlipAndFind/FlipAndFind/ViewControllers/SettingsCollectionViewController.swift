@@ -37,34 +37,12 @@ final class SettingsCollectionViewController: UICollectionViewController {
         collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         collectionView.register(SaveButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: saveButtonID)
-        
         setup()
-        setupNavigationBar()
-    }
-    
-    private func setupNavigationBar() {
-        let appearence = UINavigationBarAppearance()
-        appearence.configureWithOpaqueBackground()
-        appearence.backgroundColor = .customBlue
-        
-        appearence.titleTextAttributes = [.foregroundColor: UIColor.customWhite, .font: UIFont(name: "Montserrat-SemiBold", size: 24) ?? UIFont.systemFont(ofSize: 24)]
-        appearence.largeTitleTextAttributes = [.foregroundColor: UIColor.customWhite, .font: UIFont(name: "Montserrat-SemiBold", size: 34) ?? UIFont.systemFont(ofSize: 34)]
-        
-        if let navigationBar = navigationController?.navigationBar {
-            navigationBar.layer.cornerRadius = 50
-            navigationBar.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-            navigationBar.layer.masksToBounds = true
-        }
-        
-        title = "Settings"
-        
-        navigationController?.navigationBar.standardAppearance = appearence
-        navigationController?.navigationBar.compactAppearance = appearence
-        navigationController?.navigationBar.scrollEdgeAppearance = appearence
     }
     
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
+        title = "Settings"
     }
     
     @objc private func tapSaveButton() {

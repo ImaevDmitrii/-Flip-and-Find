@@ -19,7 +19,7 @@ final class MainViewController: UIViewController {
     
     private let headerView = UIView()
     
-    private var coordinator: MainCoordinator?
+    var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
