@@ -11,6 +11,7 @@ final class GameCollectionViewController: UICollectionViewController {
     
     private let cellId = String(describing: CardCell.self)
     private let gameModel = GameModel()
+    private var selectedTheme: Theme = .dinosaurio
     
     init(){
         let layout = UICollectionViewFlowLayout()
@@ -58,7 +59,8 @@ final class GameCollectionViewController: UICollectionViewController {
     }
     
     private func setupGame() {
-        gameModel.setupGame(numberOfPairs: 6)
+        let factory = selectedTheme.getFactory()
+        gameModel.setupGame(numberOfPairs: 6, factory: factory)
         collectionView.reloadData()
     }
 }
@@ -99,7 +101,7 @@ extension GameCollectionViewController {
             collectionView.isUserInteractionEnabled = false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.gameModel.flipBack()
+                self.gameModel.flipBack(firstIndex: indexPath.row, secondIndex: indexPath.row)
                 let indexesToReload = [IndexPath(row: firstIndex, section: 0), indexPath]
                 collectionView.reloadItems(at: indexesToReload)
                 

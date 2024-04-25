@@ -7,38 +7,30 @@
 
 import Foundation
 
+protocol CardType {
+    var imageName: String { get }
+    var backImage: String { get }
+}
+
 struct CardModel {
     var id: Int
     var isFlipped = false
     var isMatched = false
-    var dinosaurType: DinosaurType
-
-    static let backImageName = "dinosaurio"
+    var cardType: CardType
     
     var imageName: String {
-        isFlipped ? dinosaurType.imageName : CardModel.backImageName
+        isFlipped ? cardType.imageName : cardType.backImage
     }
 }
 
-enum DinosaurType: String, CaseIterable {
-    case alamosaurus = "alamosaurus"
-    case amargasaurus = "amargasaurus"
-    case ankylosaurus = "ankylosaurus"
-    case apatosaurus = "apatosaurus"
-    case brachiosaurus = "brachiosaurus"
-    case dimorphodon = "dimorphodon"
-    case gallimimus = "gallimimus"
-    case gargoyleosaurus = "gargoyleosaurus"
-    case lambeosaurus = "lambeosaurus"
-    case parasaurolophus = "parasaurolophus"
-    case pteranodon = "pteranodon"
-    case spinosaurus = "spinosaurus"
-    case stegosaurus = "stegosaurus"
-    case styracosaurus = "styracosaurus"
-    case trex = "trex"
-    case triceratops = "triceratops"
+enum DinosaurType: String, CaseIterable, CardType {
+    case alamosaurus, amargasaurus, ankylosaurus, apatosaurus, brachiosaurus, dimorphodon, gallimimus, gargoyleosaurus, lambeosaurus, parasaurolophus, pteranodon, spinosaurus, stegosaurus, styracosaurus, trex, triceratops
     
     var imageName: String {
         self.rawValue
+    }
+    
+    var backImage: String {
+        "dinosaurio"
     }
 }

@@ -13,7 +13,7 @@ final class CardCell: UICollectionViewCell {
     private let frontImage = UIImageView()
     private let backImage = UIImageView()
     
-    private let nameBackImage = CardModel.backImageName
+    private let dinosaurType: DinosaurType
     
     private let animationDuration = 0.5
     private let scaleDuration = 0.3
@@ -23,6 +23,7 @@ final class CardCell: UICollectionViewCell {
     private let animationOptions: UIView.AnimationOptions = [.transitionFlipFromLeft, .showHideTransitionViews]
     
     override init(frame: CGRect) {
+        self.dinosaurType = DinosaurType.allCases.randomElement() ?? .alamosaurus
         super.init(frame: frame)
         configure()
     }
@@ -79,8 +80,9 @@ final class CardCell: UICollectionViewCell {
     }
     
     func configureCard(with card: CardModel) {
+        let dinosaurType = DinosaurType.allCases.randomElement()
         frontImage.image = UIImage(named: card.imageName)
-        backImage.image = UIImage(named: CardModel.backImageName)
+        backImage.image = UIImage(named: dinosaurType?.backImage ?? "")
         updateVisibility(isFlipped: card.isFlipped)
     }
     

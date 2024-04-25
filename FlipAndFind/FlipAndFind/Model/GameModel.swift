@@ -10,49 +10,38 @@ import Foundation
 final class GameModel {
     
     var cards: [CardModel] = []
-    
     var isCheckingMatches = false
-    
     var firstFlippedCardIndex: Int?
     
-    func setupGame(numberOfPairs: Int) {
-        let numberOfPairs = min(numberOfPairs, DinosaurType.allCases.count)
-        
-        let shuffledDinosaurs = DinosaurType.allCases.shuffled()
-        
-        cards = (0..<numberOfPairs).flatMap { id -> [CardModel] in
-            let dinosaurType = shuffledDinosaurs[id]
-            let card = CardModel(id: id, dinosaurType: dinosaurType)
-            return [card, card]
-        }.shuffled()
+    func setupGame(numberOfPairs: Int, factory: CardTypeFactory) {
+        cards = factory.createCards(numberOfPairs: numberOfPairs).shuffled()
     }
-    
     
     func flipCard(index: Int) {
         guard !cards[index].isFlipped, !cards[index].isMatched else { return }
         
         cards[index].isFlipped = true
         
-        if let firstIndex = firstFlippedCardIndex {
+        if let firstIndex = firstFlippedCardIndex, cards[firstIndex].cardType.imageName != cards[index].cardType.imageName {
             isCheckingMatches = true
-            
-            if firstIndex != index && cards[firstIndex].dinosaurType != cards[index].dinosaurType {
-                
-            } else if cards[firstIndex].dinosaurType == cards[index].dinosaurType {
-                cards[firstIndex].isMatched = true
-                cards[index].isMatched = true
-                isCheckingMatches = false
-                firstFlippedCardIndex = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.flipBack(firstIndex: firstIndex, secondIndex: index)
             }
+        } else if let firstIndex = firstFlippedCardIndex, cards[firstIndex].cardType.imageName == cards[index].cardType.imageName {
+            cards[firstIndex].isMatched = true
+            cards[index].isMatched = true
+            isCheckingMatches = false
+            firstFlippedCardIndex = nil
         } else {
             firstFlippedCardIndex = index
         }
     }
     
-    func flipBack() {
-        guard isCheckingMatches else { return }
-        for index in 0..<cards.count where !cards[index].isMatched && cards[index].isFlipped {
-            cards[index].isFlipped = false
+    func flipBack(firstIndex: Int, secondIndex: Int) {
+        [firstIndex, secondIndex].forEach { index in
+            if !cards[index].isMatched {
+                cards[index].isFlipped = false
+            }
         }
         isCheckingMatches = false
         firstFlippedCardIndex = nil

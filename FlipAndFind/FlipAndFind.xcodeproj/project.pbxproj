@@ -17,6 +17,7 @@
 		CB552FC82BD63DB9008AE1C3 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FC72BD63DB9008AE1C3 /* CardModel.swift */; };
 		CB552FCA2BD63F62008AE1C3 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FC92BD63F62008AE1C3 /* GameModel.swift */; };
 		CB552FCE2BD6563A008AE1C3 /* NavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */; };
+		CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEA2BD95618008AE1C3 /* CardFactory.swift */; };
 		CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */; };
 		CB8430F12BD2BAE900AC058E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */; };
 		CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5742BCBC35A005F91EA /* MainViewController.swift */; };
@@ -43,13 +44,13 @@
 		CB552FC72BD63DB9008AE1C3 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		CB552FC92BD63F62008AE1C3 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationBar+Extension.swift"; sourceTree = "<group>"; };
+		CB552FEA2BD95618008AE1C3 /* CardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFactory.swift; sourceTree = "<group>"; };
 		CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CB85E5742BCBC35A005F91EA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CB85E5772BCBC40F005F91EA /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		CB85E5792BCBC5FD005F91EA /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		CB85E57C2BCBC692005F91EA /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		CB85E57F2BCBC887005F91EA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CB85E5922BCBF05C005F91EA /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		CB85E5942BCBF0B7005F91EA /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		CB85E5962BCFB0A7005F91EA /* SettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 				CB4A1D962BBFE50F00A3DBE4 /* AppDelegate.swift */,
 				CB4A1D982BBFE50F00A3DBE4 /* SceneDelegate.swift */,
 				CB85E5732BCBC340005F91EA /* ViewControllers */,
+				CB552FE92BD955EE008AE1C3 /* Factory */,
 				CB85E59A2BCFB3A1005F91EA /* Model */,
 				CB85E57B2BCBC681005F91EA /* Coordinator */,
 				CB85E5762BCBC3E4005F91EA /* Helpers */,
@@ -117,6 +119,14 @@
 				CB552FC52BD63D85008AE1C3 /* CardCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		CB552FE92BD955EE008AE1C3 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				CB552FEA2BD95618008AE1C3 /* CardFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		CB85E5732BCBC340005F91EA /* ViewControllers */ = {
@@ -211,7 +221,6 @@
 			knownRegions = (
 				en,
 				Base,
-				ru,
 			);
 			mainGroup = CB4A1D8A2BBFE50E00A3DBE4;
 			productRefGroup = CB4A1D942BBFE50F00A3DBE4 /* Products */;
@@ -243,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */,
 				CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */,
 				CB85E57D2BCBC692005F91EA /* MainCoordinator.swift in Sources */,
 				CB85E57A2BCBC5FD005F91EA /* Localization.swift in Sources */,
@@ -269,7 +279,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CB4A1DA22BBFE51100A3DBE4 /* Base */,
-				CB85E57F2BCBC887005F91EA /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
