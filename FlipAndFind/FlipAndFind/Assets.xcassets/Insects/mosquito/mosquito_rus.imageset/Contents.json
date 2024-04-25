@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "mosquito_rus.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

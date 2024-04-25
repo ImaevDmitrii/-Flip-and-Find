@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "rapan_eng.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

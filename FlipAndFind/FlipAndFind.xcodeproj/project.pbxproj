@@ -18,6 +18,7 @@
 		CB552FCA2BD63F62008AE1C3 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FC92BD63F62008AE1C3 /* GameModel.swift */; };
 		CB552FCE2BD6563A008AE1C3 /* NavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */; };
 		CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEA2BD95618008AE1C3 /* CardFactory.swift */; };
+		CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */; };
 		CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */; };
 		CB8430F12BD2BAE900AC058E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */; };
 		CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5742BCBC35A005F91EA /* MainViewController.swift */; };
@@ -45,6 +46,7 @@
 		CB552FC92BD63F62008AE1C3 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		CB552FEA2BD95618008AE1C3 /* CardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFactory.swift; sourceTree = "<group>"; };
+		CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extencion.swift"; sourceTree = "<group>"; };
 		CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CB85E5742BCBC35A005F91EA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				CB85E5772BCBC40F005F91EA /* Color+Extension.swift */,
+				CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */,
 				CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */,
 				CB85E5792BCBC5FD005F91EA /* Localization.swift */,
 			);
@@ -268,6 +271,7 @@
 				CB552FC22BD63876008AE1C3 /* SaveButton.swift in Sources */,
 				CB85E5992BCFB32A005F91EA /* SettingsCell.swift in Sources */,
 				CB85E59C2BCFB3BF005F91EA /* SettingsModels.swift in Sources */,
+				CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift in Sources */,
 				CB85E5972BCFB0A7005F91EA /* SettingsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

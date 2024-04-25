@@ -13,9 +13,9 @@ final class SettingsCollectionViewController: UICollectionViewController {
     private let sectionHeaderID = String(describing: SectionHeader.self)
     private let saveButtonID = String(describing: SaveButton.self)
     
-    private var cardCount: CardCount = .eight
-    private var theme: Theme = .dinosaurio
-    private var language: Language = .english
+    private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen
+    private var theme: Theme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio
+    private var language: Language = Language(rawValue: UserDefaults.standard.language) ?? .english
     
     private let saveButton = UIButton()
     
@@ -46,7 +46,18 @@ final class SettingsCollectionViewController: UICollectionViewController {
     }
     
     @objc private func tapSaveButton() {
-        saveButton.alpha = 0.6
+        UserDefaults.standard.cardCount = cardCount.rawValue
+        UserDefaults.standard.theme = theme.rawValue
+        UserDefaults.standard.language = language.rawValue
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.saveButton.alpha = 0.6
+        }) { _ in
+            UIView.animate(withDuration: 0.2) {
+                self.saveButton.alpha = 1.0
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

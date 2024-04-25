@@ -16,7 +16,7 @@ enum CardCount: Int, CaseIterable {
 }
 
 enum Theme: String, CaseIterable {
-    case dinosaurio
+    case dinosaurio, seaanimals, halloween, farm, insects, jungle
     
     var imageName: String {
         return self.rawValue
@@ -25,7 +25,17 @@ enum Theme: String, CaseIterable {
     func getFactory() -> CardTypeFactory {
         switch self {
         case .dinosaurio:
-            return CardFactory(types: DinosaurType.allCases)
+            CardFactory(types: DinosaurType.allCases)
+        case .seaanimals:
+            CardFactory(types: SeaAnimals.allCases)
+        case .halloween:
+            CardFactory(types: Halloween.allCases)
+        case .farm:
+            CardFactory(types: Farm.allCases)
+        case .insects:
+            CardFactory(types: Insects.allCases)
+        case .jungle:
+            CardFactory(types: Jungle.allCases)
         }
     }
 }

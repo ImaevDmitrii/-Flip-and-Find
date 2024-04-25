@@ -65,7 +65,6 @@ final class CardCell: UICollectionViewCell {
             ])
             $0.contentMode = .scaleAspectFit
         }
-        
         frontImage.isHidden = true
     }
     
