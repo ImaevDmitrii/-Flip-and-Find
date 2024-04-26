@@ -35,7 +35,7 @@ enum DinosaurType: String, CaseIterable, CardType {
     case alamosaurus, amargasaurus, ankylosaurus, apatosaurus, brachiosaurus, dimorphodon, gallimimus, gargoyleosaurus, lambeosaurus, parasaurolophus, pteranodon, spinosaurus, stegosaurus, styracosaurus, trex, triceratops
 }
 
-enum SeaAnimals: String, CaseIterable, CardType {
+enum SeaAnimalsType: String, CaseIterable, CardType {
     var imageName: String {
         self.rawValue
     }
@@ -47,7 +47,7 @@ enum SeaAnimals: String, CaseIterable, CardType {
     case angelfish, cancerhermit, clownfish, crab, dolphin, hornedzankle, jellyfish, octopus, oyster, rapan, seahorse, seaturtle, shrimp, starfish, surgeonfish, zebrafish
 }
 
-enum Halloween: String, CaseIterable, CardType {
+enum HalloweenType: String, CaseIterable, CardType {
     var imageName: String {
         self.rawValue
     }
@@ -59,7 +59,7 @@ enum Halloween: String, CaseIterable, CardType {
     case witch, ghost, skeleton, werewolf, zombi, vampire, jacklantern, mummy, owl, potion, blackcat, witchhat, witchsbroom, pumpkin, trickortreat
 }
 
-enum Farm: String, CaseIterable, CardType {
+enum FarmType: String, CaseIterable, CardType {
     var imageName: String {
         self.rawValue
     }
@@ -68,10 +68,10 @@ enum Farm: String, CaseIterable, CardType {
         "farm"
     }
     
-    case cat, chicken, cow, dog, donkey, goat, goose, horse, mouse, pato, pig, ram, rooster, sheep, turkey
+    case cat, chicken, cow, dog, donkey, goat, goose, horse, mouse, pato, pig, ram, rooster, sheep, turkey, rabbit
 }
 
-enum Insects: String, CaseIterable, CardType {
+enum InsectsType: String, CaseIterable, CardType {
     var imageName: String {
         self.rawValue
     }
@@ -83,7 +83,7 @@ enum Insects: String, CaseIterable, CardType {
     case snail, grasshopper, spider, butterfly, cockroach, dragonfly, mosquito, bee, worm, fly, caterpillar, mantis, ladybug, blackant, redant,rhinocerosbeetle
 }
 
-enum Jungle: String, CaseIterable, CardType {
+enum JungleType: String, CaseIterable, CardType {
     var imageName: String {
         self.rawValue
     }
@@ -92,5 +92,5 @@ enum Jungle: String, CaseIterable, CardType {
         "jungle"
     }
     
-    case panther, lion, monkey, elephant, crocodile, leopard, gorilla, giraffe, koala, sloth, toucan, panda, hummingbird, chameleon
+    case panther, lion, monkey, elephant, crocodile, leopard, gorilla, giraffe, koala, sloth, toucan, panda, hummingbird, chameleon, hippopotamus, lemur
 }

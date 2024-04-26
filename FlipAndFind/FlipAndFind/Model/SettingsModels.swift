@@ -27,15 +27,15 @@ enum Theme: String, CaseIterable {
         case .dinosaurio:
             CardFactory(types: DinosaurType.allCases)
         case .seaanimals:
-            CardFactory(types: SeaAnimals.allCases)
+            CardFactory(types: SeaAnimalsType.allCases)
         case .halloween:
-            CardFactory(types: Halloween.allCases)
+            CardFactory(types: HalloweenType.allCases)
         case .farm:
-            CardFactory(types: Farm.allCases)
+            CardFactory(types: FarmType.allCases)
         case .insects:
-            CardFactory(types: Insects.allCases)
+            CardFactory(types: InsectsType.allCases)
         case .jungle:
-            CardFactory(types: Jungle.allCases)
+            CardFactory(types: JungleType.allCases)
         }
     }
 }
