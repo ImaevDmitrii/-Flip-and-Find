@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "hippopotamus_esp.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
