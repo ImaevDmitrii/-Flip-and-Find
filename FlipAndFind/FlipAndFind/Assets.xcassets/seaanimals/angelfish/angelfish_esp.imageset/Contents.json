@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "angelfish_esp.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

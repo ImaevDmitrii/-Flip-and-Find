@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "koala_rus.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

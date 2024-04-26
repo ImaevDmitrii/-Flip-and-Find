@@ -11,7 +11,6 @@ final class GameCollectionViewController: UICollectionViewController {
     
     private let cellId = String(describing: CardCell.self)
     private let gameModel = GameModel()
-    private var selectedTheme: Theme = .dinosaurio
     
     init(){
         let layout = UICollectionViewFlowLayout()
@@ -36,7 +35,7 @@ final class GameCollectionViewController: UICollectionViewController {
     
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
-        title = "Dinosaurs"
+        title = UserDefaults.standard.theme
     }
     
     private func configureLayout() {
@@ -59,8 +58,10 @@ final class GameCollectionViewController: UICollectionViewController {
     }
     
     private func setupGame() {
+        let selectedCardCount = UserDefaults.standard.cardCount
+        let selectedTheme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio
         let factory = selectedTheme.getFactory()
-        gameModel.setupGame(numberOfPairs: 6, factory: factory)
+        gameModel.setupGame(numberOfPairs: selectedCardCount, factory: factory)
         collectionView.reloadData()
     }
 }
