@@ -19,6 +19,13 @@
 		CB552FCE2BD6563A008AE1C3 /* NavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */; };
 		CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEA2BD95618008AE1C3 /* CardFactory.swift */; };
 		CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */; };
+		CB552FEF2BDB89FC008AE1C3 /* ResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEE2BDB89FC008AE1C3 /* ResultsModel.swift */; };
+		CB552FF12BDB8A52008AE1C3 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FF02BDB8A52008AE1C3 /* ResultsTableViewController.swift */; };
+		CB552FF32BDB8B09008AE1C3 /* GameRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FF22BDB8B09008AE1C3 /* GameRecordTableViewCell.swift */; };
+		CB552FF52BDB8D34008AE1C3 /* LatestGamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FF42BDB8D34008AE1C3 /* LatestGamesTableViewCell.swift */; };
+		CB552FF72BDCDD5D008AE1C3 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FF62BDCDD5D008AE1C3 /* GameStorage.swift */; };
+		CB552FFD2BDD2B1F008AE1C3 /* TableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FFC2BDD2B1F008AE1C3 /* TableSectionHeader.swift */; };
+		CB552FFF2BDD2B43008AE1C3 /* CollectionSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FFE2BDD2B43008AE1C3 /* CollectionSectionHeader.swift */; };
 		CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */; };
 		CB8430F12BD2BAE900AC058E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */; };
 		CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5742BCBC35A005F91EA /* MainViewController.swift */; };
@@ -47,6 +54,13 @@
 		CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		CB552FEA2BD95618008AE1C3 /* CardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFactory.swift; sourceTree = "<group>"; };
 		CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extencion.swift"; sourceTree = "<group>"; };
+		CB552FEE2BDB89FC008AE1C3 /* ResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsModel.swift; sourceTree = "<group>"; };
+		CB552FF02BDB8A52008AE1C3 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		CB552FF22BDB8B09008AE1C3 /* GameRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecordTableViewCell.swift; sourceTree = "<group>"; };
+		CB552FF42BDB8D34008AE1C3 /* LatestGamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestGamesTableViewCell.swift; sourceTree = "<group>"; };
+		CB552FF62BDCDD5D008AE1C3 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
+		CB552FFC2BDD2B1F008AE1C3 /* TableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSectionHeader.swift; sourceTree = "<group>"; };
+		CB552FFE2BDD2B43008AE1C3 /* CollectionSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionHeader.swift; sourceTree = "<group>"; };
 		CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CB85E5742BCBC35A005F91EA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +124,8 @@
 			children = (
 				CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */,
 				CB552FC12BD63876008AE1C3 /* SaveButton.swift */,
+				CB552FFC2BDD2B1F008AE1C3 /* TableSectionHeader.swift */,
+				CB552FFE2BDD2B43008AE1C3 /* CollectionSectionHeader.swift */,
 			);
 			path = ReusableView;
 			sourceTree = "<group>";
@@ -117,8 +133,10 @@
 		CB552FCC2BD64136008AE1C3 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				CB552FF22BDB8B09008AE1C3 /* GameRecordTableViewCell.swift */,
 				CB85E5982BCFB32A005F91EA /* SettingsCell.swift */,
 				CB552FC52BD63D85008AE1C3 /* CardCell.swift */,
+				CB552FF42BDB8D34008AE1C3 /* LatestGamesTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -137,6 +155,7 @@
 				CB85E5742BCBC35A005F91EA /* MainViewController.swift */,
 				CB85E5962BCFB0A7005F91EA /* SettingsCollectionViewController.swift */,
 				CB552FC32BD63D5C008AE1C3 /* GameCollectionViewController.swift */,
+				CB552FF02BDB8A52008AE1C3 /* ResultsTableViewController.swift */,
 				CB552FCC2BD64136008AE1C3 /* Cells */,
 				CB552FCB2BD64131008AE1C3 /* ReusableView */,
 			);
@@ -178,6 +197,8 @@
 				CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */,
 				CB552FC72BD63DB9008AE1C3 /* CardModel.swift */,
 				CB552FC92BD63F62008AE1C3 /* GameModel.swift */,
+				CB552FEE2BDB89FC008AE1C3 /* ResultsModel.swift */,
+				CB552FF62BDCDD5D008AE1C3 /* GameStorage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,10 +278,15 @@
 			files = (
 				CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */,
 				CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */,
+				CB552FF32BDB8B09008AE1C3 /* GameRecordTableViewCell.swift in Sources */,
 				CB85E57D2BCBC692005F91EA /* MainCoordinator.swift in Sources */,
+				CB552FF52BDB8D34008AE1C3 /* LatestGamesTableViewCell.swift in Sources */,
+				CB552FFD2BDD2B1F008AE1C3 /* TableSectionHeader.swift in Sources */,
 				CB85E57A2BCBC5FD005F91EA /* Localization.swift in Sources */,
+				CB552FF12BDB8A52008AE1C3 /* ResultsTableViewController.swift in Sources */,
 				CB4A1D972BBFE50F00A3DBE4 /* AppDelegate.swift in Sources */,
 				CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */,
+				CB552FEF2BDB89FC008AE1C3 /* ResultsModel.swift in Sources */,
 				CB552FCE2BD6563A008AE1C3 /* NavigationBar+Extension.swift in Sources */,
 				CB552FCA2BD63F62008AE1C3 /* GameModel.swift in Sources */,
 				CB4A1D992BBFE50F00A3DBE4 /* SceneDelegate.swift in Sources */,
@@ -271,8 +297,10 @@
 				CB552FC22BD63876008AE1C3 /* SaveButton.swift in Sources */,
 				CB85E5992BCFB32A005F91EA /* SettingsCell.swift in Sources */,
 				CB85E59C2BCFB3BF005F91EA /* SettingsModels.swift in Sources */,
+				CB552FF72BDCDD5D008AE1C3 /* GameStorage.swift in Sources */,
 				CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift in Sources */,
 				CB85E5972BCFB0A7005F91EA /* SettingsCollectionViewController.swift in Sources */,
+				CB552FFF2BDD2B43008AE1C3 /* CollectionSectionHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

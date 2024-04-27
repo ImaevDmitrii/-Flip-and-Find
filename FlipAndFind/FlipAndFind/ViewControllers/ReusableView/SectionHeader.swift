@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SectionHeader: UICollectionReusableView {
+final class SectionHeader: UIView {
     
     private let titleLabel = UILabel()
     

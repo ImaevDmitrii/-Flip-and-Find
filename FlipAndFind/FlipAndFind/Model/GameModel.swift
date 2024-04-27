@@ -12,9 +12,13 @@ final class GameModel {
     var cards: [CardModel] = []
     var isCheckingMatches = false
     var firstFlippedCardIndex: Int?
+    var startTime: Date?
+    var timer: Timer?
     
     func setupGame(numberOfPairs: Int, factory: CardTypeFactory) {
         cards = factory.createCards(numberOfPairs: numberOfPairs).shuffled()
+        startTime = Date()
+        startTimer()
     }
     
     func flipCard(index: Int) {
@@ -32,6 +36,7 @@ final class GameModel {
             cards[index].isMatched = true
             isCheckingMatches = false
             firstFlippedCardIndex = nil
+            checkIfGameIsOver()
         } else {
             firstFlippedCardIndex = index
         }
@@ -49,5 +54,33 @@ final class GameModel {
     
     func checkAllPairsFound() -> Bool {
         cards.allSatisfy { $0.isMatched }
+    }
+    
+    private func checkIfGameIsOver() {
+        if checkAllPairsFound() {
+            stopTimer()
+            let completionTime = calculateCompletionTime()
+            let latestGame = LatestGames(theme: .dinosaurio, date: Date(), cardCount: cards.count / 2, completionTime: completionTime)
+            GameStorage.shared.saveLatestGame(latestGame)
+        }
+    }
+    
+    private func calculateCompletionTime() -> TimeInterval {
+        guard let start = startTime else { return 0 }
+        return Date().timeIntervalSince(start)
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.updateTimer()
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func updateTimer() {
     }
 }
