@@ -10,7 +10,7 @@ import UIKit
 final class SettingsCollectionViewController: UICollectionViewController {
     
     private let cellID = String(describing: SettingsCell.self)
-    private let sectionHeaderID = String(describing: SectionHeader.self)
+    private let sectionHeaderID = String(describing: CollectionSectionHeader.self)
     private let saveButtonID = String(describing: SaveButton.self)
     
     private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen
@@ -35,7 +35,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
+        collectionView.register(CollectionSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         collectionView.register(SaveButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: saveButtonID)
         setup()
     }
@@ -126,7 +126,7 @@ extension SettingsCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderID, for: indexPath) as? SectionHeader else {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderID, for: indexPath) as? CollectionSectionHeader else {
                 return UICollectionReusableView()
             }
             

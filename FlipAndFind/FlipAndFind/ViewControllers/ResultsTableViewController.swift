@@ -7,83 +7,93 @@
 
 import UIKit
 
-class ResultsTableViewController: UITableViewController {
-
+final class ResultsTableViewController: UITableViewController {
+    
+    var gameRecords: [GameRecord] = []
+    var latestGames: [LatestGames] = []
+    
+    private let gameRecordsCellId = String(describing: GameRecordTableViewCell.self)
+    private let latestsGamesCellId = String(describing: LatestGamesTableViewCell.self)
+    private let sectionHeaderId = String(describing: TableSectionHeader.self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.register(GameRecordTableViewCell.self, forCellReuseIdentifier: gameRecordsCellId)
+        tableView.register(LatestGamesTableViewCell.self, forCellReuseIdentifier: latestsGamesCellId)
+        tableView.register(TableSectionHeader.self, forHeaderFooterViewReuseIdentifier: sectionHeaderId)
+        setup()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadGameData()
+    }
+    
+    private func setup() {
+        tableView.backgroundColor = .backgroundColor
+        tableView.separatorStyle = .none
+        title = "My Games"
+    }
+    
+    private func loadGameData() {
+        gameRecords = GameStorage.shared.loadGameRecords()
+        latestGames = GameStorage.shared.loadLatestGames()
+        tableView.reloadData()
+    }
+    
+    private func saveGameData() {
+        if let recordsData = try? JSONEncoder().encode(gameRecords) {
+            UserDefaults.standard.set(recordsData, forKey: "gameRecords")
+        }
+        
+        if let latestData = try? JSONEncoder().encode(latestGames) {
+            UserDefaults.standard.set(latestData, forKey: "latestGames")
+        }
+    }
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
 
+extension ResultsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        section == 0 ? 5 : latestGames.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: gameRecordsCellId, for: indexPath) as! GameRecordTableViewCell
+            let cardCounts = [8, 12, 18, 24, 32]
+            let cardCount = cardCounts[indexPath.row]
+            if let record = gameRecords.first(where: { $0.cardCount == cardCount }) {
+                cell.cardCountLabel.text = "\(record.cardCount) Cards"
+                cell.timeLabel.text = record.completionTime.formattedTime()
+            } else {
+                cell.cardCountLabel.text = "\(cardCount) Cards"
+                cell.timeLabel.text = "-"
+            }
+            cell.isUserInteractionEnabled = false
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: latestsGamesCellId, for: indexPath) as! LatestGamesTableViewCell
+            let game = latestGames[indexPath.row]
+            let isRecord = gameRecords.contains { record in
+                record.cardCount == game.cardCount && record.completionTime > game.completionTime
+            }
+            cell.configure(with: game, isRecord: isRecord)
+            cell.isUserInteractionEnabled = false
+            return cell
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: sectionHeaderId) as? TableSectionHeader else { return nil }
+        
+        header.configure(title: section == 0 ? "My records" : "Latest games")
+        
+        return header
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

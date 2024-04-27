@@ -15,7 +15,7 @@ enum CardCount: Int, CaseIterable {
     }
 }
 
-enum Theme: String, CaseIterable {
+enum Theme: String, CaseIterable, Codable {
     case dinosaurio, seaanimals, halloween, farm, insects, jungle
     
     var imageName: String {

@@ -1,5 +1,5 @@
 //
-//  TableHeader.swift
+//  TableSectionHeader.swift
 //  FlipAndFind
 //
 //  Created by Dmitrii Imaev on 27.04.2024.

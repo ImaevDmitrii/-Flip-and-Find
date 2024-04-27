@@ -34,7 +34,7 @@ final class MainCoordinator: Coordinator {
     }
     
     func showMyGames() {
-        let resultsViewController = MainViewController()
+        let resultsViewController = ResultsTableViewController()
         navigationController.pushViewController(resultsViewController, animated: true)
     }
     
