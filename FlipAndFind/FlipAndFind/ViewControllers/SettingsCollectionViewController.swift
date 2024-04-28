@@ -40,12 +40,43 @@ final class SettingsCollectionViewController: UICollectionViewController {
         setup()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.isMovingFromParent {
+                showExitAlert()
+            }
+    }
+    
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
         title = "Settings"
     }
     
-    @objc private func tapSaveButton() {
+    private func showExitAlert() {
+        let alertView = ExitAlert(frame: .zero)
+        alertView.configure(title: "Save changes?",
+                            hiddenSecondTitle: true,
+                            confirmButtonTitle: "Yes",
+                            cancelButtonTitle: "No")
+        view.addSubview(alertView)
+        
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
+            alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
+            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
+        ])
+        
+        alertView.onConfirm = { [weak self] in
+            self?.saveButtonTapped()
+        }
+        alertView.onCancel = {
+            alertView.removeFromSuperview()
+        }
+    }
+    
+    @objc private func saveButtonTapped() {
         UserDefaults.standard.cardCount = cardCount.rawValue
         UserDefaults.standard.theme = theme.rawValue
         UserDefaults.standard.language = language.rawValue
@@ -149,7 +180,7 @@ extension SettingsCollectionViewController: UICollectionViewDelegateFlowLayout {
             }
             
             if indexPath.section == collectionView.numberOfSections - 1 {
-                footer.saveButton.addTarget(self, action: #selector(tapSaveButton), for: .touchUpInside)
+                footer.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
             }
             return footer
         }

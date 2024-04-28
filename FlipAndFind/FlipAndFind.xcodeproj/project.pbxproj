@@ -37,6 +37,9 @@
 		CB85E5972BCFB0A7005F91EA /* SettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5962BCFB0A7005F91EA /* SettingsCollectionViewController.swift */; };
 		CB85E5992BCFB32A005F91EA /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5982BCFB32A005F91EA /* SettingsCell.swift */; };
 		CB85E59C2BCFB3BF005F91EA /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */; };
+		CBB1814F2BDE3D9000420015 /* GameOverAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB1814E2BDE3D8F00420015 /* GameOverAlertView.swift */; };
+		CBB181512BDE403900420015 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBB181502BDE403900420015 /* Montserrat-Regular.ttf */; };
+		CBB181532BDEAF8800420015 /* ExitAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB181522BDEAF8800420015 /* ExitAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		CB85E5962BCFB0A7005F91EA /* SettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewController.swift; sourceTree = "<group>"; };
 		CB85E5982BCFB32A005F91EA /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		CBB1814E2BDE3D8F00420015 /* GameOverAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverAlertView.swift; sourceTree = "<group>"; };
+		CBB181502BDE403900420015 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		CBB181522BDEAF8800420015 /* ExitAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,7 @@
 				CB4A1D962BBFE50F00A3DBE4 /* AppDelegate.swift */,
 				CB4A1D982BBFE50F00A3DBE4 /* SceneDelegate.swift */,
 				CB85E5732BCBC340005F91EA /* ViewControllers */,
+				CBB1814D2BDE3D2200420015 /* AlertViews */,
 				CB552FE92BD955EE008AE1C3 /* Factory */,
 				CB85E59A2BCFB3A1005F91EA /* Model */,
 				CB85E57B2BCBC681005F91EA /* Coordinator */,
@@ -184,6 +191,7 @@
 		CB85E5802BCBCAD1005F91EA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				CBB181502BDE403900420015 /* Montserrat-Regular.ttf */,
 				CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */,
 				CB85E5942BCBF0B7005F91EA /* Nunito-SemiBold.ttf */,
 				CB85E5922BCBF05C005F91EA /* Nunito-Black.ttf */,
@@ -201,6 +209,15 @@
 				CB552FF62BDCDD5D008AE1C3 /* GameStorage.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CBB1814D2BDE3D2200420015 /* AlertViews */ = {
+			isa = PBXGroup;
+			children = (
+				CBB1814E2BDE3D8F00420015 /* GameOverAlertView.swift */,
+				CBB181522BDEAF8800420015 /* ExitAlert.swift */,
+			);
+			path = AlertViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB181512BDE403900420015 /* Montserrat-Regular.ttf in Resources */,
 				CB85E5932BCBF05C005F91EA /* Nunito-Black.ttf in Resources */,
 				CB4A1DA02BBFE51100A3DBE4 /* Assets.xcassets in Resources */,
 				CB4A1DA32BBFE51100A3DBE4 /* Base in Resources */,
@@ -277,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */,
+				CBB1814F2BDE3D9000420015 /* GameOverAlertView.swift in Sources */,
 				CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */,
 				CB552FF32BDB8B09008AE1C3 /* GameRecordTableViewCell.swift in Sources */,
 				CB85E57D2BCBC692005F91EA /* MainCoordinator.swift in Sources */,
@@ -288,6 +307,7 @@
 				CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */,
 				CB552FEF2BDB89FC008AE1C3 /* ResultsModel.swift in Sources */,
 				CB552FCE2BD6563A008AE1C3 /* NavigationBar+Extension.swift in Sources */,
+				CBB181532BDEAF8800420015 /* ExitAlert.swift in Sources */,
 				CB552FCA2BD63F62008AE1C3 /* GameModel.swift in Sources */,
 				CB4A1D992BBFE50F00A3DBE4 /* SceneDelegate.swift in Sources */,
 				CB552FC42BD63D5C008AE1C3 /* GameCollectionViewController.swift in Sources */,
