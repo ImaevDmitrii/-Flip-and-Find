@@ -1,5 +1,5 @@
 //
-//  GameOverAlertView.swift
+//  GameEndAlert.swift
 //  FlipAndFind
 //
 //  Created by Dmitrii Imaev on 28.04.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GameOverAlertView: UIView {
+final class GameEndAlert: UIView {
     
     private let titleLabel = UILabel()
     private let themeLabel = UILabel()
@@ -23,6 +23,9 @@ final class GameOverAlertView: UIView {
     
     private let playButton = UIButton()
     private let backButton = UIButton()
+    
+    var onPlayAgain: (() -> Void)?
+    var onBackToMenu: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init (frame: frame)
@@ -67,6 +70,9 @@ final class GameOverAlertView: UIView {
         
         playButton.setTitle("Play again", for: .normal)
         backButton.setTitle("Back to menu", for: .normal)
+        
+        playButton.addTarget(self, action: #selector(playAgainTapped), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backToMenuTapped), for: .touchUpInside)
         
         textTimeLabel.text = "Your Time"
         
@@ -137,5 +143,13 @@ final class GameOverAlertView: UIView {
         themeLabel.text = theme
         cardCountLabel.text = "\(cardCount) cards"
         timeLabel.text = time
+    }
+    
+    @objc private func playAgainTapped() {
+        onPlayAgain?()
+    }
+    
+    @objc private func backToMenuTapped() {
+        onBackToMenu?()
     }
 }
