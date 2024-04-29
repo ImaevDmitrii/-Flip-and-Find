@@ -27,6 +27,7 @@ final class GameCollectionViewController: UICollectionViewController {
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: cellId)
         setup()
         setupGame()
+        setupNavigationBar()
     }
     
     override func viewWillLayoutSubviews() {
@@ -36,6 +37,10 @@ final class GameCollectionViewController: UICollectionViewController {
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
         title = UserDefaults.standard.theme
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackAction))
     }
     
     private func configureLayout() {
@@ -63,6 +68,41 @@ final class GameCollectionViewController: UICollectionViewController {
         let factory = selectedTheme.getFactory()
         gameModel.setupGame(numberOfPairs: selectedCardCount, factory: factory)
         collectionView.reloadData()
+    }
+    
+    private func showExitAlert() {
+        let alertView = ExitAlert(frame: .zero)
+        alertView.configure(title: "Do you want to leave the game?",
+                            hiddenSecondTitle: false,
+                            confirmButtonTitle: "Keep playing",
+                            cancelButtonTitle: "Leave the game")
+        
+        view.addSubview(alertView)
+        
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
+            alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
+            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
+        ])
+        
+        alertView.onTopButton = { [weak self] in
+            self?.gameModel.resumeTimer()
+            alertView.removeFromSuperview()
+        }
+        alertView.onBottomButton = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc private func handleBackAction() {
+        if !gameModel.checkAllPairsFound() {
+            gameModel.pauseTimer()
+            showExitAlert()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -115,7 +155,24 @@ extension GameCollectionViewController {
             }
         }
         if gameModel.checkAllPairsFound() {
-            print("alrt")
+            showGameOverAlert()
         }
     }
+    
+    private func showGameOverAlert() {
+        let alertView = GameOverAlertView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        alertView.configure(title: "Game Over", theme: gameModel.currentTheme?.rawValue ?? "Dinosaur", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f seconds", gameModel.calculateCompletionTime()))
+        
+        view.addSubview(alertView)
+        
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
+            alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
+            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
+        ])
+    }
 }
+

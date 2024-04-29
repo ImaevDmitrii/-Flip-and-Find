@@ -14,6 +14,7 @@ final class GameModel {
     var firstFlippedCardIndex: Int?
     var startTime: Date?
     var timer: Timer?
+    var currentTheme: Theme?
     
     func setupGame(numberOfPairs: Int, factory: CardTypeFactory) {
         cards = factory.createCards(numberOfPairs: numberOfPairs).shuffled()
@@ -65,7 +66,7 @@ final class GameModel {
         }
     }
     
-    private func calculateCompletionTime() -> TimeInterval {
+    func calculateCompletionTime() -> TimeInterval {
         guard let start = startTime else { return 0 }
         return Date().timeIntervalSince(start)
     }
@@ -79,6 +80,14 @@ final class GameModel {
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    func pauseTimer() {
+        stopTimer()
+    }
+    
+    func resumeTimer() {
+        startTimer()
     }
     
     private func updateTimer() {

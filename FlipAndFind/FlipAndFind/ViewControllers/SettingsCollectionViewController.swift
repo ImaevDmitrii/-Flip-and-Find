@@ -13,11 +13,20 @@ final class SettingsCollectionViewController: UICollectionViewController {
     private let sectionHeaderID = String(describing: CollectionSectionHeader.self)
     private let saveButtonID = String(describing: SaveButton.self)
     
-    private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen
-    private var theme: Theme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio
-    private var language: Language = Language(rawValue: UserDefaults.standard.language) ?? .english
-    
     private let saveButton = UIButton()
+    
+    private var settingsChanged = false
+    
+    private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen {
+        didSet { settingsChanged = true }
+    }
+    private var theme: Theme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio {
+        didSet { settingsChanged = true }
+    }
+    private var language: Language = Language(rawValue: UserDefaults.standard.language) ?? .english {
+        didSet { settingsChanged = true }
+    }
+    
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -38,6 +47,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
         collectionView.register(CollectionSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         collectionView.register(SaveButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: saveButtonID)
         setup()
+        setupNavigationBar()
     }
     
     private func setup() {
@@ -45,10 +55,47 @@ final class SettingsCollectionViewController: UICollectionViewController {
         title = "Settings"
     }
     
-    @objc private func tapSaveButton() {
+    private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackAction))
+    }
+    
+    private func showExitAlert() {
+        let alertView = ExitAlert(frame: .zero)
+        alertView.configure(title: "Save changes?",
+                            hiddenSecondTitle: true,
+                            confirmButtonTitle: "Yes",
+                            cancelButtonTitle: "No")
+        view.addSubview(alertView)
+        
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
+            alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
+            alertView.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 250)
+        ])
+        
+        alertView.onTopButton = { [weak self] in
+            self?.saveButtonTapped()
+        }
+        alertView.onBottomButton = {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc private func handleBackAction() {
+        if settingsChanged {
+            showExitAlert()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc private func saveButtonTapped() {
         UserDefaults.standard.cardCount = cardCount.rawValue
         UserDefaults.standard.theme = theme.rawValue
         UserDefaults.standard.language = language.rawValue
+        settingsChanged = false
         
         UIView.animate(withDuration: 0.2, animations: {
             self.saveButton.alpha = 0.6
@@ -149,7 +196,7 @@ extension SettingsCollectionViewController: UICollectionViewDelegateFlowLayout {
             }
             
             if indexPath.section == collectionView.numberOfSections - 1 {
-                footer.saveButton.addTarget(self, action: #selector(tapSaveButton), for: .touchUpInside)
+                footer.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
             }
             return footer
         }
