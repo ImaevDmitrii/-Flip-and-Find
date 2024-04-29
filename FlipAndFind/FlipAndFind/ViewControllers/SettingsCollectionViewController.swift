@@ -13,11 +13,20 @@ final class SettingsCollectionViewController: UICollectionViewController {
     private let sectionHeaderID = String(describing: CollectionSectionHeader.self)
     private let saveButtonID = String(describing: SaveButton.self)
     
-    private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen
-    private var theme: Theme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio
-    private var language: Language = Language(rawValue: UserDefaults.standard.language) ?? .english
-    
     private let saveButton = UIButton()
+    
+    private var settingsChanged = false
+    
+    private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen {
+        didSet { settingsChanged = true }
+    }
+    private var theme: Theme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio {
+        didSet { settingsChanged = true }
+    }
+    private var language: Language = Language(rawValue: UserDefaults.standard.language) ?? .english {
+        didSet { settingsChanged = true }
+    }
+    
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -38,18 +47,16 @@ final class SettingsCollectionViewController: UICollectionViewController {
         collectionView.register(CollectionSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         collectionView.register(SaveButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: saveButtonID)
         setup()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if self.isMovingFromParent {
-                showExitAlert()
-            }
+        setupNavigationBar()
     }
     
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
         title = "Settings"
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackAction))
     }
     
     private func showExitAlert() {
@@ -64,15 +71,23 @@ final class SettingsCollectionViewController: UICollectionViewController {
         NSLayoutConstraint.activate([
             alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
             alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
-            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
+            alertView.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 250)
         ])
         
-        alertView.onConfirm = { [weak self] in
+        alertView.onTopButton = { [weak self] in
             self?.saveButtonTapped()
         }
-        alertView.onCancel = {
-            alertView.removeFromSuperview()
+        alertView.onBottomButton = {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    @objc private func handleBackAction() {
+        if settingsChanged {
+            showExitAlert()
+        } else {
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -80,6 +95,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
         UserDefaults.standard.cardCount = cardCount.rawValue
         UserDefaults.standard.theme = theme.rawValue
         UserDefaults.standard.language = language.rawValue
+        settingsChanged = false
         
         UIView.animate(withDuration: 0.2, animations: {
             self.saveButton.alpha = 0.6

@@ -82,6 +82,14 @@ final class GameModel {
         timer = nil
     }
     
+    func pauseTimer() {
+        stopTimer()
+    }
+    
+    func resumeTimer() {
+        startTimer()
+    }
+    
     private func updateTimer() {
     }
 }

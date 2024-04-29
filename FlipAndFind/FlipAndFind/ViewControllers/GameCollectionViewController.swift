@@ -27,22 +27,20 @@ final class GameCollectionViewController: UICollectionViewController {
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: cellId)
         setup()
         setupGame()
+        setupNavigationBar()
     }
     
     override func viewWillLayoutSubviews() {
         updateLayoutForSize(view.bounds.size)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if self.isMovingFromParent {
-                showExitAlert()
-            }
-    }
-    
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
         title = UserDefaults.standard.theme
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackAction))
     }
     
     private func configureLayout() {
@@ -89,11 +87,21 @@ final class GameCollectionViewController: UICollectionViewController {
             alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
         ])
         
-        alertView.onConfirm = { [weak self] in
+        alertView.onTopButton = { [weak self] in
+            self?.gameModel.resumeTimer()
+            alertView.removeFromSuperview()
+        }
+        alertView.onBottomButton = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-        alertView.onCancel = {
-            alertView.removeFromSuperview()
+    }
+    
+    @objc private func handleBackAction() {
+        if !gameModel.checkAllPairsFound() {
+            gameModel.pauseTimer()
+            showExitAlert()
+        } else {
+            navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -165,7 +173,6 @@ extension GameCollectionViewController {
             alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
             alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
         ])
-        
     }
 }
 
