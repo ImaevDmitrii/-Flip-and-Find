@@ -160,8 +160,8 @@ extension GameCollectionViewController {
     }
     
     private func showGameOverAlert() {
-        let alertView = GameOverAlertView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        alertView.configure(title: "Game Over", theme: gameModel.currentTheme?.rawValue ?? "Dinosaur", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f seconds", gameModel.calculateCompletionTime()))
+        let alertView = GameEndAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        alertView.configure(title: "You won!", theme: gameModel.currentTheme?.rawValue ?? "Dinosaur", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f", gameModel.calculateCompletionTime()))
         
         view.addSubview(alertView)
         
@@ -173,6 +173,15 @@ extension GameCollectionViewController {
             alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
             alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
         ])
+        
+        alertView.onPlayAgain = { [weak self] in
+            self?.setupGame()
+            alertView.removeFromSuperview()
+        }
+        
+        alertView.onBackToMenu = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
 }
 
