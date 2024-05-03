@@ -46,5 +46,9 @@ enum Language: String, CaseIterable {
     var imageName: String {
         return self.rawValue
     }
+    
+    var string: String {
+        return self.rawValue
+    }
 }
 

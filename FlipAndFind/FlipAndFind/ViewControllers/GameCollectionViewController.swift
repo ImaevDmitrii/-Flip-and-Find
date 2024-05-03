@@ -12,6 +12,8 @@ final class GameCollectionViewController: UICollectionViewController {
     private let cellId = String(describing: CardCell.self)
     private let gameModel = GameModel()
     
+    private let bigImageView = UIImageView()
+    
     init(){
         let layout = UICollectionViewFlowLayout()
         super.init(collectionViewLayout: layout)
@@ -26,8 +28,9 @@ final class GameCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: cellId)
         setup()
-        setupGame()
+        setupBigImageView()
         setupNavigationBar()
+        setupGame()
     }
     
     override func viewWillLayoutSubviews() {
@@ -37,6 +40,24 @@ final class GameCollectionViewController: UICollectionViewController {
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
         title = UserDefaults.standard.theme
+    }
+    
+    private func setupBigImageView() {
+        view.addSubview(bigImageView)
+        
+        bigImageView.layer.cornerRadius = 10
+        bigImageView.clipsToBounds = true
+        bigImageView.layer.opacity = 0
+        bigImageView.contentMode = .scaleAspectFit
+        
+        bigImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            bigImageView.widthAnchor.constraint(equalToConstant: 200),
+            bigImageView.heightAnchor.constraint(equalToConstant: 200),
+            bigImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bigImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     private func setupNavigationBar() {
@@ -68,6 +89,21 @@ final class GameCollectionViewController: UICollectionViewController {
         let factory = selectedTheme.getFactory()
         gameModel.setupGame(numberOfPairs: selectedCardCount, factory: factory)
         collectionView.reloadData()
+    }
+    
+    private func showBigImage(with imageName: String) {
+        bigImageView.image = UIImage(named: imageName)
+        bigImageView.isHidden = false
+        bigImageView.alpha = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.bigImageView.alpha = 1
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3, delay: 1.0, options: [], animations: {
+                self.bigImageView.alpha = 0
+            }, completion: { _ in
+                self.bigImageView.isHidden = true
+            })
+        })
     }
     
     private func showExitAlert() {
@@ -123,6 +159,9 @@ extension GameCollectionViewController {
         
         let card = gameModel.cards[indexPath.row]
         cell.configureCard(with: card)
+        cell.onShowBigImage = { [weak self] imageName in
+            self?.showBigImage(with: imageName)
+        }
         
         return cell
     }
@@ -161,7 +200,7 @@ extension GameCollectionViewController {
     
     private func showGameOverAlert() {
         let alertView = GameEndAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        alertView.configure(title: "You won!", theme: gameModel.currentTheme?.rawValue ?? "Dinosaur", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f", gameModel.calculateCompletionTime()))
+        alertView.configure(title: "You won!", theme: gameModel.currentTheme?.rawValue ?? "Error", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f", gameModel.calculateCompletionTime()))
         
         view.addSubview(alertView)
         

@@ -13,7 +13,7 @@ final class CardCell: UICollectionViewCell {
     private let frontImage = UIImageView()
     private let backImage = UIImageView()
     
-    private let dinosaurType: DinosaurType
+    private var cardModel: CardModel?
     
     private let animationDuration = 0.5
     private let scaleDuration = 0.3
@@ -22,8 +22,9 @@ final class CardCell: UICollectionViewCell {
     
     private let animationOptions: UIView.AnimationOptions = [.transitionFlipFromLeft, .showHideTransitionViews]
     
+    var onShowBigImage: ((String) -> Void)?
+    
     override init(frame: CGRect) {
-        self.dinosaurType = DinosaurType.allCases.randomElement() ?? .alamosaurus
         super.init(frame: frame)
         configure()
     }
@@ -79,9 +80,9 @@ final class CardCell: UICollectionViewCell {
     }
     
     func configureCard(with card: CardModel) {
-        let dinosaurType = DinosaurType.allCases.randomElement()
+        cardModel = card
         frontImage.image = UIImage(named: card.imageName)
-        backImage.image = UIImage(named: dinosaurType?.backImage ?? "")
+        backImage.image = UIImage(named: card.cardType.backImage)
         updateVisibility(isFlipped: card.isFlipped)
     }
     
@@ -92,21 +93,17 @@ final class CardCell: UICollectionViewCell {
     
     func flip(to isFlipped: Bool) {
         UIView.transition(with: containerView, duration: animationDuration, options: animationOptions, animations: {
-            self.updateVisibility(isFlipped: isFlipped)
-        }, completion: { finished in
-            if isFlipped && finished {
-                self.animateScaleUpAndDown()
-            }
-        })
-    }
-    
-    private func animateScaleUpAndDown() {
-        UIView.animate(withDuration: scaleDuration, delay: scaleDelay, options: [], animations: {
-            self.frontImage.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        }, completion: { _ in
-            UIView.animate(withDuration: self.scaleDuration, delay: self.holdDuration, options: [], animations: {
-                self.frontImage.transform = .identity
-            }, completion: nil)
-        })
-    }
+               self.updateVisibility(isFlipped: isFlipped)
+           }, completion: { finished in
+               if finished {
+                   self.cardModel?.isFlipped = isFlipped
+                   if let imageName = self.cardModel?.imageName, isFlipped {
+                       let languageSuffix = UserDefaults.standard.language
+                       let fullImageName = "\(imageName)_\(languageSuffix)"
+                       print("Preparing to show big image: \(fullImageName)")
+                       self.onShowBigImage?(fullImageName)
+                   }
+               }
+           })
+       }
 }
