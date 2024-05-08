@@ -41,7 +41,7 @@ enum Theme: String, CaseIterable, Codable {
 }
 
 enum Language: String, CaseIterable {
-    case english = "eng", russian = "rus", spanish = "esp"
+    case english = "en", russian = "ru", spanish = "es"
     
     var imageName: String {
         return self.rawValue

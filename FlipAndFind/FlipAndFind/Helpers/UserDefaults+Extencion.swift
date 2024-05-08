@@ -25,7 +25,17 @@ extension UserDefaults {
     }
     
     var language: String {
-        get { string(forKey: Keys.language) ?? Language.english.rawValue }
-        set { set(newValue, forKey: Keys.language) }
+        get {
+            let lang = string(forKey: Keys.language) ?? Language.english.rawValue
+            return lang
+        }
+        set {
+            set(newValue, forKey: Keys.language)
+            NotificationCenter.default.post(name: .languageChanged, object: nil)
+        }
     }
+}
+
+extension Notification.Name {
+    static let languageChanged = Notification.Name("LanguageChangedNotification")
 }

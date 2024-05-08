@@ -31,8 +31,8 @@ final class LatestGamesTableViewCell: UITableViewCell {
     
     func configure(with game: LatestGames, isRecord: Bool) {
         themeLabel.text = game.theme.rawValue
-        dateLabel.text = game.date.formattedDateString()
-        cardCountLabel.text = "\(game.cardCount) Cards"
+        dateLabel.text = game.date.customFormattedDateString()
+        cardCountLabel.text = "\(game.cardCount) \(Localization.cards)"
         timeLabel.text = game.completionTime.formattedTime()
         
         trophyIcon.isHidden = !isRecord

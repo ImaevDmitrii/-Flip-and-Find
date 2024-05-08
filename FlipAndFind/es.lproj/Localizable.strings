@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  FlipAndFind
+
+  Created by Dmitrii Imaev on 08.05.2024.
+  
+*/
+"New Game" = "Nuevo juego";
+"My Games" = "Mis juegos";
+"Settings" = "Configuración";
+"Save changes?" = "¿Guardar cambios?";
+"Yes" = "Sí";
+"No" = "No";
+"Number of cards" = "Número de tarjetas";
+"Game theme" = "Tema del juego";
+"Language" = "Idioma";
+"Do you want to leave the game?" = "¿Deseas salir del juego?";
+"Keep playing" = "Continuar jugando";
+"Leave the game" = "Salir del juego";
+"You won!" = "¡Has ganado!";
+"cards" = "cartas";
+"My records" = "Mis récords";
+"Latest games" = "Últimos juegos";
+"Save" = "Guardar";
+"Play again" = "Jugar de nuevo";
+"Back to menu" = "Volver al menú";
+"Your Time" = "Tu tiempo";
+"Your will lose all your progress" = "Perderás todo tu progreso";

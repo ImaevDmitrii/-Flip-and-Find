@@ -29,7 +29,6 @@ final class GameCollectionViewController: UICollectionViewController {
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: cellId)
         setup()
         setupBigImageView()
-        setupNavigationBar()
         setupGame()
     }
     
@@ -40,6 +39,8 @@ final class GameCollectionViewController: UICollectionViewController {
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
         title = UserDefaults.standard.theme
+        navigationController?.setupNavigationBar()
+        navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
     }
     
     private func setupBigImageView() {
@@ -58,10 +59,6 @@ final class GameCollectionViewController: UICollectionViewController {
             bigImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bigImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackAction))
     }
     
     private func configureLayout() {
@@ -107,11 +104,11 @@ final class GameCollectionViewController: UICollectionViewController {
     }
     
     private func showExitAlert() {
-        let alertView = ExitAlert(frame: .zero)
-        alertView.configure(title: "Do you want to leave the game?",
+        let alertView = ExitAlert(frame: CGRect.zero)
+        alertView.configure(title: Localization.doYouWantToLeave,
                             hiddenSecondTitle: false,
-                            confirmButtonTitle: "Keep playing",
-                            cancelButtonTitle: "Leave the game")
+                            confirmButtonTitle: Localization.keepPlaying,
+                            cancelButtonTitle: Localization.leaveGame)
         
         view.addSubview(alertView)
         
@@ -120,7 +117,7 @@ final class GameCollectionViewController: UICollectionViewController {
             alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
             alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
             alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 280)
         ])
         
         alertView.onTopButton = { [weak self] in
@@ -200,7 +197,7 @@ extension GameCollectionViewController {
     
     private func showGameOverAlert() {
         let alertView = GameEndAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        alertView.configure(title: "You won!", theme: gameModel.currentTheme?.rawValue ?? "Error", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f", gameModel.calculateCompletionTime()))
+        alertView.configure(title: "You won!", theme: gameModel.currentTheme?.rawValue ?? "", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f", gameModel.calculateCompletionTime()))
         
         view.addSubview(alertView)
         
@@ -223,4 +220,3 @@ extension GameCollectionViewController {
         }
     }
 }
-

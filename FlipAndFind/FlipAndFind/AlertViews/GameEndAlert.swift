@@ -49,7 +49,7 @@ final class GameEndAlert: UIView {
         
         [themeLabel, cardCountLabel, textTimeLabel].forEach {
             $0.textColor = .customBlack
-            $0.font = UIFont(name: "Montserrat-Regular", size: 16)
+            $0.font = .bodyText
         }
         
         [cardIcon, clockIcon].forEach {
@@ -63,21 +63,21 @@ final class GameEndAlert: UIView {
         
         [playButton, backButton].forEach {
             $0.backgroundColor = .customBiege
-            $0.titleLabel?.font = UIFont(name: "Nunito-SemiBold", size: 24)
+            $0.titleLabel?.font = .buttonFont
             $0.setTitleColor(.customBlack, for: .normal)
             $0.layer.cornerRadius = 10
         }
         
-        playButton.setTitle("Play again", for: .normal)
-        backButton.setTitle("Back to menu", for: .normal)
+        playButton.setTitle(Localization.playAgain, for: .normal)
+        backButton.setTitle(Localization.backToMenu, for: .normal)
         
         playButton.addTarget(self, action: #selector(playAgainTapped), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(backToMenuTapped), for: .touchUpInside)
         
-        textTimeLabel.text = "Your Time"
+        textTimeLabel.text = Localization.yourTime
         
         titleLabel.textColor = .customBlue
-        titleLabel.font = UIFont(name: "Montserrat-SemiBold", size: 24)
+        titleLabel.font = .secondHeader
         
         timeLabel.textColor = .customBlack
         
@@ -122,9 +122,7 @@ final class GameEndAlert: UIView {
             
             clockIcon.centerYAnchor.constraint(equalTo: textTimeLabel.bottomAnchor, constant: 20),
             clockIcon.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -10),
-            clockIcon.widthAnchor.constraint(equalToConstant: 20),
-            clockIcon.heightAnchor.constraint(equalToConstant: 20),
-            
+           
             playButton.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20),
             playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
@@ -141,7 +139,7 @@ final class GameEndAlert: UIView {
     func configure(title: String, theme: String, cardCount: Int, time: String) {
         titleLabel.text = title
         themeLabel.text = theme
-        cardCountLabel.text = "\(cardCount) cards"
+        cardCountLabel.text = "\(cardCount) \(Localization.cards)"
         timeLabel.text = time
     }
     

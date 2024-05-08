@@ -19,12 +19,30 @@ final class MainViewController: UIViewController {
     
     private let headerView = UIView()
     
+    private let textTitle = "Memory \nBoom"
+    
     var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: .languageChanged, object: nil)
+        updateLanguage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLanguage()
+    }
+    
+    @objc private func updateLanguage() {
+        startButton.setTitle(Localization.newGame, for: .normal)
+        myGamesButton.setTitle(Localization.myGames, for: .normal)
+        settingsButton.setTitle(Localization.settings, for: .normal)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupViews() {
@@ -34,9 +52,10 @@ final class MainViewController: UIViewController {
         headerView.layer.cornerRadius = 50
         headerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
-        titleLabel.text = "Flip And Find"
+        titleLabel.text = textTitle
         titleLabel.textColor = .customWhite
-        titleLabel.font = UIFont(name: "Nunito-Black", size: 52)
+        titleLabel.font = .logoMain
+        titleLabel.numberOfLines = .zero
         titleLabel.textAlignment = .center
         titleLabel.backgroundColor = .clear
         
@@ -55,7 +74,7 @@ final class MainViewController: UIViewController {
             $0.backgroundColor = .customBiege
             $0.setTitleColor(.customBlack, for: .normal)
             $0.layer.cornerRadius = 10
-            $0.titleLabel?.font = UIFont(name: "Nunito-SemiBold", size: 24)
+            $0.titleLabel?.font = .buttonFont
         }
         
         startButton.addTarget(self, action: #selector(tapStartButton), for: .touchUpInside)
@@ -122,4 +141,3 @@ final class MainViewController: UIViewController {
         buttonOpacity(button: settingsButton)
     }
 }
-    

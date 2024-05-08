@@ -13,8 +13,8 @@ final class SaveButton: UICollectionReusableView {
     let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .customBiege
-        button.setTitle("Save", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Nunito-SemiBold", size: 24)
+        button.setTitle(Localization.save, for: .normal)
+        button.titleLabel?.font = .buttonFont
         button.setTitleColor(.customBlack, for: .normal)
         button.layer.cornerRadius = 10
         return button
