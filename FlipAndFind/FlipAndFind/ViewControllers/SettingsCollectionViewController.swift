@@ -27,7 +27,6 @@ final class SettingsCollectionViewController: UICollectionViewController {
         didSet { settingsChanged = true }
     }
     
-    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
