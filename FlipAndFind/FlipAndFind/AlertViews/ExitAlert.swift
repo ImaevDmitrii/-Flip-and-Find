@@ -39,20 +39,24 @@ final class ExitAlert: UIView {
         layer.shadowRadius = 9
         
         secondTitleLabel.textColor = .customBlack
-        secondTitleLabel.font = UIFont(name: "Montserrat-Regular", size: 16)
+        secondTitleLabel.font = .bodyText
         secondTitleLabel.numberOfLines = 0
         
-        secondTitleLabel.text = "Your will lose all your progress"
+        secondTitleLabel.text = Localization.youWillLoseProgress
+        secondTitleLabel.numberOfLines = 2
         
         [topButton, bottomButton].forEach {
             $0.backgroundColor = .customBiege
-            $0.titleLabel?.font = UIFont(name: "Nunito-SemiBold", size: 24)
+            $0.titleLabel?.font = .buttonFont
             $0.setTitleColor(.customBlack, for: .normal)
             $0.layer.cornerRadius = 10
         }
         
         titleLabel.textColor = .customBlue
-        titleLabel.font = UIFont(name: "Montserrat-SemiBold", size: 24)
+        titleLabel.font = .secondHeader
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.textAlignment = .center
         
         topButton.addTarget(self, action: #selector(topButtonTapped), for: .touchUpInside)
         bottomButton.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
@@ -68,8 +72,9 @@ final class ExitAlert: UIView {
         }
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 60),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 40),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
             secondTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             secondTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -79,7 +84,7 @@ final class ExitAlert: UIView {
             topButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             topButton.heightAnchor.constraint(equalToConstant: 50),
             
-            bottomButton.topAnchor.constraint(equalTo: topButton.bottomAnchor, constant: 10),
+            bottomButton.topAnchor.constraint(equalTo: topButton.bottomAnchor, constant: 15),
             bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             bottomButton.heightAnchor.constraint(equalToConstant: 50),

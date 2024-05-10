@@ -100,7 +100,6 @@ final class CardCell: UICollectionViewCell {
                    if let imageName = self.cardModel?.imageName, isFlipped {
                        let languageSuffix = UserDefaults.standard.language
                        let fullImageName = "\(imageName)_\(languageSuffix)"
-                       print("Preparing to show big image: \(fullImageName)")
                        self.onShowBigImage?(fullImageName)
                    }
                }

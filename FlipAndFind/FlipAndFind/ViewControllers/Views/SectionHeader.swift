@@ -22,7 +22,7 @@ final class SectionHeader: UIView {
     
     private func setupViews() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont(name: "Montserrat-SemiBold", size: 24)
+        titleLabel.font = .secondHeader
         titleLabel.textColor = .darkGray
         addSubview(titleLabel)
         

@@ -47,32 +47,29 @@ final class SettingsCollectionViewController: UICollectionViewController {
         collectionView.register(CollectionSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         collectionView.register(SaveButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: saveButtonID)
         setup()
-        setupNavigationBar()
     }
     
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
-        title = "Settings"
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackAction))
+        title = Localization.settings
+        navigationController?.setupNavigationBar()
+        navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
     }
     
     private func showExitAlert() {
         let alertView = ExitAlert(frame: .zero)
-        alertView.configure(title: "Save changes?",
+        alertView.configure(title: Localization.saveChanges,
                             hiddenSecondTitle: true,
-                            confirmButtonTitle: "Yes",
-                            cancelButtonTitle: "No")
+                            confirmButtonTitle: Localization.yes,
+                            cancelButtonTitle: Localization.no)
         view.addSubview(alertView)
         
         alertView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
             alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
-            alertView.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
-            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 250)
+            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 140)
         ])
         
         alertView.onTopButton = { [weak self] in
@@ -95,6 +92,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
         UserDefaults.standard.cardCount = cardCount.rawValue
         UserDefaults.standard.theme = theme.rawValue
         UserDefaults.standard.language = language.rawValue
+        NotificationCenter.default.post(name: .languageChanged, object: nil)
         settingsChanged = false
         
         UIView.animate(withDuration: 0.2, animations: {
@@ -179,11 +177,11 @@ extension SettingsCollectionViewController: UICollectionViewDelegateFlowLayout {
             
             switch indexPath.section {
             case 0:
-                header.configure(title: "Number of cards")
+                header.configure(title: Localization.numberOfCards)
             case 1:
-                header.configure(title: "Game theme")
+                header.configure(title: Localization.gameTheme)
             case 2:
-                header.configure(title: "Language")
+                header.configure(title: Localization.language)
             default:
                 break
             }

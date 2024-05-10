@@ -18,6 +18,17 @@ enum CardCount: Int, CaseIterable {
 enum Theme: String, CaseIterable, Codable {
     case dinosaurio, seaanimals, halloween, farm, insects, jungle
     
+    var localizedName: String {
+        switch self {
+        case .dinosaurio: return Localization.dinosaur
+        case .seaanimals: return Localization.seaAnimals
+        case .halloween: return Localization.halloween
+        case .farm: return Localization.farm
+        case .insects: return Localization.insects
+        case .jungle: return Localization.jungle
+        }
+    }
+    
     var imageName: String {
         return self.rawValue
     }
@@ -41,7 +52,7 @@ enum Theme: String, CaseIterable, Codable {
 }
 
 enum Language: String, CaseIterable {
-    case english = "eng", russian = "rus", spanish = "esp"
+    case english = "en", russian = "ru", spanish = "es"
     
     var imageName: String {
         return self.rawValue
@@ -52,3 +63,9 @@ enum Language: String, CaseIterable {
     }
 }
 
+extension Theme {
+    static func from(string: String?) -> Theme {
+        guard let string = string, let theme = Theme(rawValue: string) else { return .dinosaurio }
+        return theme
+    }
+}

@@ -14,10 +14,13 @@ final class GameCollectionViewController: UICollectionViewController {
     
     private let bigImageView = UIImageView()
     
+    private var theme: Theme?
+    
     init(){
         let layout = UICollectionViewFlowLayout()
         super.init(collectionViewLayout: layout)
         configureLayout()
+        initializeTheme()
     }
     
     required init?(coder: NSCoder) {
@@ -29,7 +32,6 @@ final class GameCollectionViewController: UICollectionViewController {
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: cellId)
         setup()
         setupBigImageView()
-        setupNavigationBar()
         setupGame()
     }
     
@@ -37,9 +39,16 @@ final class GameCollectionViewController: UICollectionViewController {
         updateLayoutForSize(view.bounds.size)
     }
     
+    private func initializeTheme() {
+            let themeString = UserDefaults.standard.string(forKey: "theme")
+            theme = Theme.from(string: themeString)
+        }
+    
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
-        title = UserDefaults.standard.theme
+        title = theme?.localizedName
+        navigationController?.setupNavigationBar()
+        navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
     }
     
     private func setupBigImageView() {
@@ -58,10 +67,6 @@ final class GameCollectionViewController: UICollectionViewController {
             bigImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bigImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBackAction))
     }
     
     private func configureLayout() {
@@ -107,11 +112,11 @@ final class GameCollectionViewController: UICollectionViewController {
     }
     
     private func showExitAlert() {
-        let alertView = ExitAlert(frame: .zero)
-        alertView.configure(title: "Do you want to leave the game?",
+        let alertView = ExitAlert(frame: CGRect.zero)
+        alertView.configure(title: Localization.doYouWantToLeave,
                             hiddenSecondTitle: false,
-                            confirmButtonTitle: "Keep playing",
-                            cancelButtonTitle: "Leave the game")
+                            confirmButtonTitle: Localization.keepPlaying,
+                            cancelButtonTitle: Localization.leaveGame)
         
         view.addSubview(alertView)
         
@@ -120,7 +125,7 @@ final class GameCollectionViewController: UICollectionViewController {
             alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
             alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
             alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
+            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 280)
         ])
         
         alertView.onTopButton = { [weak self] in
@@ -148,7 +153,6 @@ extension GameCollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
-    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         gameModel.cards.count
@@ -200,7 +204,7 @@ extension GameCollectionViewController {
     
     private func showGameOverAlert() {
         let alertView = GameEndAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        alertView.configure(title: "You won!", theme: gameModel.currentTheme?.rawValue ?? "Error", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f", gameModel.calculateCompletionTime()))
+        alertView.configure(title: Localization.youWon, theme: theme?.localizedName ?? "", cardCount: gameModel.cards.count / 2, time: gameModel.calculateCompletionTime())
         
         view.addSubview(alertView)
         
@@ -223,4 +227,3 @@ extension GameCollectionViewController {
         }
     }
 }
-

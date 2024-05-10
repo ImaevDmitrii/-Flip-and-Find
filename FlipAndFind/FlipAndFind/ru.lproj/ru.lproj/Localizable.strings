@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  FlipAndFind
+
+  Created by Dmitrii Imaev on 08.05.2024.
+  
+ */
+"newGame" = "Новая игра";
+"myGames" = "Мои игры";
+"settings"= "Настройки";
+"saveChanges" = "Сохранить изменения?";
+"yes" = "Да";
+"no" = "Нет";
+"numberOfCards" = "Количество карточек";
+"gameTheme" = "Тема игры";
+"language" = "Язык";
+"doYouWantToLeave" = "Вы хотите выйти из игры?";
+"keepPlaying" = "Продолжить игру";
+"leaveGame" = "Выйти из игры";
+"youWon" = "Вы выиграли!";
+"cards" = "карты";
+"myRecords" = "Мои рекорды";
+"latestGames" = "Последние игры";
+"save" = "Сохранить";
+"playAgain" = "Играть снова";
+"backToMenu" = "Вернуться в меню";
+"yourTime" = "Ваше время";
+"youWillLoseProgress" = "Вы потеряете весь ваш прогресс";
+"dinosaur"  = "Динозавры";
+"seaAnimals" = "Морские животные";
+"halloween" = "Хэллоуин";
+"farm" = "Ферма";
+"insects" = "Насекомые";
+"jungle" = "Джунгли";

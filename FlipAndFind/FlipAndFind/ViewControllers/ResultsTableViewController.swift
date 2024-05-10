@@ -32,13 +32,19 @@ final class ResultsTableViewController: UITableViewController {
     private func setup() {
         tableView.backgroundColor = .backgroundColor
         tableView.separatorStyle = .none
-        title = "My Games"
+        title = Localization.myGames
+        navigationController?.setupNavigationBar()
+        navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
     }
     
     private func loadGameData() {
         gameRecords = GameStorage.shared.loadGameRecords()
         latestGames = GameStorage.shared.loadLatestGames()
         tableView.reloadData()
+    }
+    
+    @objc private func handleBackAction() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func saveGameData() {
@@ -69,10 +75,10 @@ extension ResultsTableViewController {
             let cardCounts = [8, 12, 18, 24, 32]
             let cardCount = cardCounts[indexPath.row]
             if let record = gameRecords.first(where: { $0.cardCount == cardCount }) {
-                cell.cardCountLabel.text = "\(record.cardCount) Cards"
+                cell.cardCountLabel.text = "\(record.cardCount) \(Localization.cards)"
                 cell.timeLabel.text = record.completionTime.formattedTime()
             } else {
-                cell.cardCountLabel.text = "\(cardCount) Cards"
+                cell.cardCountLabel.text = "\(cardCount) \(Localization.cards)"
                 cell.timeLabel.text = "-"
             }
             cell.isUserInteractionEnabled = false
@@ -92,7 +98,11 @@ extension ResultsTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: sectionHeaderId) as? TableSectionHeader else { return nil }
         
-        header.configure(title: section == 0 ? "My records" : "Latest games")
+        header.configure(title: section == 0 ? Localization.myRecords : Localization.latestGames)
+        
+        var backgroundConfig = UIBackgroundConfiguration.clear()
+        backgroundConfig.backgroundColor = UIColor.backgroundColor
+        header.backgroundConfiguration = backgroundConfig
         
         return header
     }
