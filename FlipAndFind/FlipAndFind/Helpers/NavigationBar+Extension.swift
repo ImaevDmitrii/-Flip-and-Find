@@ -16,13 +16,15 @@ extension UINavigationController {
         appearence.titleTextAttributes = [.foregroundColor: UIColor.customWhite, .font: .secondHeader ?? UIFont.systemFont(ofSize: 24)]
         appearence.largeTitleTextAttributes = [.foregroundColor: UIColor.customWhite, .font: .largeSecondHeader ?? UIFont.systemFont(ofSize: 34)]
         
-        navigationBar.layer.cornerRadius = 50
-        navigationBar.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        navigationBar.layer.masksToBounds = true
+        appearence.shadowColor = nil
+        
         navigationBar.standardAppearance = appearence
         navigationBar.compactAppearance = appearence
         navigationBar.scrollEdgeAppearance = appearence
         navigationBar.tintColor = .customWhite
+        
+        navigationBar.layer.masksToBounds = false
+        navigationBar.isTranslucent = false
     }
     
     func setupBackButton(action: Selector, target: Any?) {
