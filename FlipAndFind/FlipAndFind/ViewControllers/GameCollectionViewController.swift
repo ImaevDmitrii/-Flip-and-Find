@@ -14,10 +14,13 @@ final class GameCollectionViewController: UICollectionViewController {
     
     private let bigImageView = UIImageView()
     
+    private var theme: Theme?
+    
     init(){
         let layout = UICollectionViewFlowLayout()
         super.init(collectionViewLayout: layout)
         configureLayout()
+        initializeTheme()
     }
     
     required init?(coder: NSCoder) {
@@ -36,9 +39,14 @@ final class GameCollectionViewController: UICollectionViewController {
         updateLayoutForSize(view.bounds.size)
     }
     
+    private func initializeTheme() {
+            let themeString = UserDefaults.standard.string(forKey: "theme")
+            theme = Theme.from(string: themeString)
+        }
+    
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
-        title = UserDefaults.standard.theme
+        title = theme?.localizedName
         navigationController?.setupNavigationBar()
         navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
     }
@@ -146,7 +154,6 @@ extension GameCollectionViewController {
         1
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         gameModel.cards.count
     }
@@ -197,7 +204,7 @@ extension GameCollectionViewController {
     
     private func showGameOverAlert() {
         let alertView = GameEndAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        alertView.configure(title: "You won!", theme: gameModel.currentTheme?.rawValue ?? "", cardCount: gameModel.cards.count / 2, time: String(format: "%.2f", gameModel.calculateCompletionTime()))
+        alertView.configure(title: Localization.youWon, theme: theme?.localizedName ?? "", cardCount: gameModel.cards.count / 2, time: gameModel.calculateCompletionTime())
         
         view.addSubview(alertView)
         

@@ -30,7 +30,7 @@ final class LatestGamesTableViewCell: UITableViewCell {
     }
     
     func configure(with game: LatestGames, isRecord: Bool) {
-        themeLabel.text = game.theme.rawValue
+        themeLabel.text = game.theme.localizedName
         dateLabel.text = game.date.customFormattedDateString()
         cardCountLabel.text = "\(game.cardCount) \(Localization.cards)"
         timeLabel.text = game.completionTime.formattedTime()
@@ -48,6 +48,11 @@ final class LatestGamesTableViewCell: UITableViewCell {
         stackView.alignment = .center
         
         trophyIcon.isHidden = true
+        
+        themeLabel.numberOfLines = 0
+        themeLabel.lineBreakMode = .byWordWrapping
+        themeLabel.adjustsFontSizeToFitWidth = true
+        themeLabel.minimumScaleFactor = 0.5
         
         separatorView.backgroundColor = .customBlack
         

@@ -17,6 +17,8 @@ final class GameModel {
     var currentTheme: Theme?
     
     func setupGame(numberOfPairs: Int, factory: CardTypeFactory) {
+        let themeString = UserDefaults.standard.string(forKey: "theme")
+        currentTheme = Theme(rawValue: themeString ?? Theme.dinosaurio.rawValue) ?? .dinosaurio
         cards = factory.createCards(numberOfPairs: numberOfPairs).shuffled()
         startTime = Date()
         startTimer()
@@ -61,7 +63,7 @@ final class GameModel {
         if checkAllPairsFound() {
             stopTimer()
             let completionTime = calculateCompletionTime()
-            let latestGame = LatestGames(theme: .dinosaurio, date: Date(), cardCount: cards.count / 2, completionTime: completionTime)
+            let latestGame = LatestGames(theme: currentTheme ?? .farm, date: Date(), cardCount: cards.count / 2, completionTime: completionTime)
             GameStorage.shared.saveLatestGame(latestGame)
         }
     }

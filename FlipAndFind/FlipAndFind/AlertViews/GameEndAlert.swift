@@ -136,11 +136,16 @@ final class GameEndAlert: UIView {
         ])
     }
     
-    func configure(title: String, theme: String, cardCount: Int, time: String) {
+    func configure(title: String, theme: String, cardCount: Int, time: TimeInterval) {
         titleLabel.text = title
         themeLabel.text = theme
         cardCountLabel.text = "\(cardCount) \(Localization.cards)"
-        timeLabel.text = time
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "mm:ss"
+        
+        let formattedTime = formatter.string(from: Date(timeIntervalSinceReferenceDate: time))
+        timeLabel.text = formattedTime
     }
     
     @objc private func playAgainTapped() {

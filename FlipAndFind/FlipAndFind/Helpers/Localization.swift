@@ -17,25 +17,31 @@ extension String {
 }
 
 struct Localization {
-    static var newGame: String { "New Game".localized }
-    static var myGames: String { "My Games".localized }
-    static var settings: String { "Settings".localized }
-    static var saveChanges: String { "Save changes?".localized }
-    static var yes: String { "Yes".localized }
-    static var no: String { "No".localized }
-    static var numberOfCards: String { "Number of cards".localized }
-    static var gameTheme: String { "Game theme".localized }
-    static var language: String { "Language".localized }
-    static var doYouWantToLeave: String { "Do you want to leave the game?".localized }
-    static var keepPlaying: String { "Keep playing".localized }
-    static var leaveGame: String { "Leave the game".localized }
-    static var youWon: String { "You won!".localized }
+    static var newGame: String { "newGame".localized }
+    static var myGames: String { "myGames".localized }
+    static var settings: String { "settings".localized }
+    static var saveChanges: String { "saveChanges".localized }
+    static var yes: String { "yes".localized }
+    static var no: String { "no".localized }
+    static var numberOfCards: String { "numberOfCards".localized }
+    static var gameTheme: String { "gameTheme".localized }
+    static var language: String { "language".localized }
+    static var doYouWantToLeave: String { "doYouWantToLeave".localized }
+    static var keepPlaying: String { "keepPlaying".localized }
+    static var leaveGame: String { "leaveGame".localized }
+    static var youWon: String { "youWon".localized }
     static var cards: String { "cards".localized }
-    static var myRecords: String { "My records".localized }
-    static var latestGames: String { "Latest games".localized }
-    static var save: String { "Save".localized }
-    static var playAgain: String { "Play again".localized }
-    static var backToMenu: String { "Back to menu".localized }
-    static var yourTime: String { "Your Time".localized }
-    static var youWillLoseProgress: String { "Your will lose all your progress".localized }
+    static var myRecords: String { "myRecords".localized }
+    static var latestGames: String { "latestGames".localized }
+    static var save: String { "save".localized }
+    static var playAgain: String { "playAgain".localized }
+    static var backToMenu: String { "backToMenu".localized }
+    static var yourTime: String { "yourTime".localized }
+    static var youWillLoseProgress: String { "youWillLoseProgress".localized }
+    static var dinosaur: String {"dinosaur".localized }
+    static var seaAnimals: String { "seaAnimals".localized }
+    static var halloween: String { "halloween".localized }
+    static var farm: String { "farm".localized }
+    static var insects: String { "insects".localized }
+    static var jungle: String {"jungle".localized }
 }

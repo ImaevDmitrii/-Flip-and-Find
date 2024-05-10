@@ -3,26 +3,31 @@
   FlipAndFind
 
   Created by Dmitrii Imaev on 08.05.2024.
-  
-*/
-"New Game" = "New Game";
-"My Games" = "My Games";
-"Settings" = "Settings";
-"Save changes?" = "Save changes?";
-"Yes" = "Yes";
-"No" = "No";
-"Number of cards" = "Number of cards";
-"Game theme" = "Game theme";
-"Language" = "Language";
-"Do you want to leave the game?" = "Do you want to leave the game?";
-"Keep playing" = "Keep playing";
-"Leave the game" = "Leave the game";
-"You won!" = "You won!";
+ */
+"newGame" = "New Game";
+"myGames" = "My Games";
+"settings" = "Settings";
+"saveChanges" = "Save changes?";
+"yes" = "Yes";
+"no" = "No";
+"numberOfCards" = "Number of cards";
+"gameTheme" = "Game theme";
+"language" = "Language";
+"doYouWantToLeave"  = "Do you want to leave the game?";
+"keepPlaying" = "Keep playing";
+"leaveGame" = "Leave the game";
+"youWon" = "You won!";
 "cards" = "cards";
-"My records" = "My records";
-"Latest games" = "Latest games";
-"Save" = "Save";
-"Play again" = "Play again";
-"Back to menu" = "Back to menu";
-"Your Time" = "Your Time";
-"Your will lose all your progress" = "Your will lose all your progress";
+"myRecords" = "My records";
+"latestGames" = "Latest games";
+"save" = "Save";
+"playAgain" = "Play again";
+"backToMenu" = "Back to menu";
+"yourTime" = "Your Time";
+"youWillLoseProgress" = "Your will lose all your progress";
+"dinosaur" = "Dinosaur";
+"seaAnimals" = "Sea Animals";
+"halloween" = "Halloween";
+"farm" = "Farm";
+"insects" = "Insects";
+"jungle" = "Jungle";
