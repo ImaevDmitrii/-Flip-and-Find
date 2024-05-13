@@ -19,17 +19,19 @@ struct CardFactory: CardTypeFactory {
     }
     
     func createCards(numberOfPairs: Int) -> [CardModel] {
-        let shuffledTypes = types.shuffled()
-        let limitedPairs = min(numberOfPairs, shuffledTypes.count)
-        
         var cards = [CardModel]()
-        for id in 0..<limitedPairs {
-            let type = shuffledTypes[id]
+        
+        let availableTypes = types.shuffled()
+        var currentPairIndex = 0
+        
+        while cards.count < numberOfPairs {
+            let type = availableTypes[currentPairIndex % availableTypes.count]
             let cardId = Int(UUID().hashValue)
             let card1 = CardModel(id: cardId, cardType: type)
             let card2 = CardModel(id: cardId, cardType: type)
             cards.append(contentsOf: [card1, card2])
+            currentPairIndex += 1
         }
-        return cards
+        return cards.shuffled()
     }
 }
