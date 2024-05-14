@@ -20,6 +20,7 @@ final class ExitAlert: UIView {
     
     override init(frame: CGRect) {
         super.init (frame: frame)
+        applyAlertStyle()
         setupViews()
         setupConstraints()
     }
@@ -29,15 +30,6 @@ final class ExitAlert: UIView {
     }
     
     private func setupViews() {
-        backgroundColor = .customWhite
-        layer.cornerRadius = 20
-        clipsToBounds = false
-        
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.25
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 9
-        
         secondTitleLabel.textColor = .customBlack
         secondTitleLabel.font = .bodyText
         secondTitleLabel.numberOfLines = 0

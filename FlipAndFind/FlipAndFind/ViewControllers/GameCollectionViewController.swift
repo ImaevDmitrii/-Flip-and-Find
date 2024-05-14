@@ -112,27 +112,36 @@ final class GameCollectionViewController: UICollectionViewController {
     }
     
     private func showExitAlert() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let overlayView = UIVisualEffectView(effect: blurEffect)
+        overlayView.frame = view.bounds
+        overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(overlayView)
+        
         let alertView = ExitAlert(frame: CGRect.zero)
         alertView.configure(title: Localization.doYouWantToLeave,
                             hiddenSecondTitle: false,
                             confirmButtonTitle: Localization.keepPlaying,
                             cancelButtonTitle: Localization.leaveGame)
-        
         view.addSubview(alertView)
         
         alertView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
-            alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
-            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 280)
+            alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 16),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -16),
+            alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.8)
+                
         ])
         
-        alertView.onTopButton = { [weak self] in
+        alertView.onTopButton = { [weak self, weak overlayView] in
             self?.gameModel.resumeTimer()
+            overlayView?.removeFromSuperview()
             alertView.removeFromSuperview()
         }
-        alertView.onBottomButton = { [weak self] in
+        alertView.onBottomButton = { [weak self, weak overlayView] in
+            overlayView?.removeFromSuperview()
             self?.navigationController?.popViewController(animated: true)
         }
     }
@@ -203,26 +212,36 @@ extension GameCollectionViewController {
     }
     
     private func showGameOverAlert() {
-        let alertView = GameEndAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        alertView.configure(title: Localization.youWon, theme: theme?.localizedName ?? "", cardCount: gameModel.cards.count / 2, time: gameModel.calculateCompletionTime())
+        let blurEffect = UIBlurEffect(style: .light)
+        let overlayView = UIVisualEffectView(effect: blurEffect)
+        overlayView.frame = view.bounds
+        overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(overlayView)
         
+        let alertView = GameEndAlert(frame: .zero)
+        alertView.configure(title: Localization.youWon,
+                            theme: theme?.localizedName ?? "",
+                            cardCount: gameModel.cards.count / 2,
+                            time: gameModel.calculateCompletionTime())
         view.addSubview(alertView)
         
         alertView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
-            alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
-            alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
-            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400)
+            alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 16),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -16),
+            alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.8)
         ])
         
-        alertView.onPlayAgain = { [weak self] in
+        alertView.onPlayAgain = { [weak self, weak overlayView] in
             self?.setupGame()
+            overlayView?.removeFromSuperview()
             alertView.removeFromSuperview()
         }
         
-        alertView.onBackToMenu = { [weak self] in
+        alertView.onBackToMenu = { [weak self, weak overlayView] in
+            overlayView?.removeFromSuperview()
             self?.navigationController?.popViewController(animated: true)
         }
     }

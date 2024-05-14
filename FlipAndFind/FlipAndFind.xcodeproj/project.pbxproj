@@ -12,6 +12,7 @@
 		CB450E212BEB65AD00151DB4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB450E1F2BEB65AD00151DB4 /* Localizable.strings */; };
 		CB450E2D2BEB675000151DB4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB450E2B2BEB675000151DB4 /* Localizable.strings */; };
 		CB450E332BEB68F300151DB4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB450E312BEB68F300151DB4 /* Localizable.strings */; };
+		CB478FC12BF33CC6004C9C01 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB478FC02BF33CC6004C9C01 /* UIView+Extension.swift */; };
 		CB4A1D972BBFE50F00A3DBE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A1D962BBFE50F00A3DBE4 /* AppDelegate.swift */; };
 		CB4A1D992BBFE50F00A3DBE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4A1D982BBFE50F00A3DBE4 /* SceneDelegate.swift */; };
 		CB4A1DA02BBFE51100A3DBE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB4A1D9F2BBFE51100A3DBE4 /* Assets.xcassets */; };
@@ -23,7 +24,7 @@
 		CB552FCA2BD63F62008AE1C3 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FC92BD63F62008AE1C3 /* GameModel.swift */; };
 		CB552FCE2BD6563A008AE1C3 /* NavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */; };
 		CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEA2BD95618008AE1C3 /* CardFactory.swift */; };
-		CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */; };
+		CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extension.swift */; };
 		CB552FEF2BDB89FC008AE1C3 /* ResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FEE2BDB89FC008AE1C3 /* ResultsModel.swift */; };
 		CB552FF12BDB8A52008AE1C3 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FF02BDB8A52008AE1C3 /* ResultsTableViewController.swift */; };
 		CB552FF32BDB8B09008AE1C3 /* GameRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FF22BDB8B09008AE1C3 /* GameRecordTableViewCell.swift */; };
@@ -56,6 +57,7 @@
 		CB450E2C2BEB675000151DB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CB450E2F2BEB67BA00151DB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CB450E342BEB68F500151DB4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CB478FC02BF33CC6004C9C01 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CB4A1D932BBFE50F00A3DBE4 /* FlipAndFind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlipAndFind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB4A1D962BBFE50F00A3DBE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB4A1D982BBFE50F00A3DBE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,7 +71,7 @@
 		CB552FC92BD63F62008AE1C3 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		CB552FEA2BD95618008AE1C3 /* CardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFactory.swift; sourceTree = "<group>"; };
-		CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extencion.swift"; sourceTree = "<group>"; };
+		CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		CB552FEE2BDB89FC008AE1C3 /* ResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsModel.swift; sourceTree = "<group>"; };
 		CB552FF02BDB8A52008AE1C3 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		CB552FF22BDB8B09008AE1C3 /* GameRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -214,11 +216,12 @@
 			isa = PBXGroup;
 			children = (
 				CB85E5772BCBC40F005F91EA /* Color+Extension.swift */,
-				CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift */,
+				CB552FEC2BDA42A0008AE1C3 /* UserDefaults+Extension.swift */,
 				CB552FCD2BD6563A008AE1C3 /* NavigationBar+Extension.swift */,
 				CB85E5792BCBC5FD005F91EA /* Localization.swift */,
 				CB450E182BEB558100151DB4 /* Font+Extension.swift */,
 				CB3E079E2BEB952A007C2803 /* Date+Extension.swift */,
+				CB478FC02BF33CC6004C9C01 /* UIView+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -364,10 +367,11 @@
 				CB85E5782BCBC40F005F91EA /* Color+Extension.swift in Sources */,
 				CB552FC82BD63DB9008AE1C3 /* CardModel.swift in Sources */,
 				CB552FC22BD63876008AE1C3 /* SaveButton.swift in Sources */,
+				CB478FC12BF33CC6004C9C01 /* UIView+Extension.swift in Sources */,
 				CB85E5992BCFB32A005F91EA /* SettingsCell.swift in Sources */,
 				CB85E59C2BCFB3BF005F91EA /* SettingsModels.swift in Sources */,
 				CB552FF72BDCDD5D008AE1C3 /* GameStorage.swift in Sources */,
-				CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extencion.swift in Sources */,
+				CB552FED2BDA42A0008AE1C3 /* UserDefaults+Extension.swift in Sources */,
 				CB85E5972BCFB0A7005F91EA /* SettingsCollectionViewController.swift in Sources */,
 				CB450E192BEB558100151DB4 /* Font+Extension.swift in Sources */,
 				CB552FFF2BDD2B43008AE1C3 /* CollectionSectionHeader.swift in Sources */,

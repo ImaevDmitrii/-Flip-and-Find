@@ -56,6 +56,12 @@ final class SettingsCollectionViewController: UICollectionViewController {
     }
     
     private func showExitAlert() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let overlayView = UIVisualEffectView(effect: blurEffect)
+        overlayView.frame = view.bounds
+        overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(overlayView)
+        
         let alertView = ExitAlert(frame: .zero)
         alertView.configure(title: Localization.saveChanges,
                             hiddenSecondTitle: true,
@@ -65,17 +71,22 @@ final class SettingsCollectionViewController: UICollectionViewController {
         
         alertView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            alertView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
-            alertView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
-            alertView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: 140)
+            alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 36),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -36),
+            alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.5)
+            
         ])
         
-        alertView.onTopButton = { [weak self] in
+        alertView.onTopButton = { [weak self, weak overlayView] in
             self?.saveButtonTapped()
+            overlayView?.removeFromSuperview()
         }
-        alertView.onBottomButton = {
-            self.navigationController?.popViewController(animated: true)
+                
+        alertView.onBottomButton = { [weak self, weak overlayView] in
+            overlayView?.removeFromSuperview()
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     

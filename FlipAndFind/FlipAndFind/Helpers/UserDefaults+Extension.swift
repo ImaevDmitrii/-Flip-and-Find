@@ -1,5 +1,5 @@
 //
-//  UserDefaults+Extencion.swift
+//  UserDefaults+Extension.swift
 //  FlipAndFind
 //
 //  Created by Dmitrii Imaev on 25.04.2024.
