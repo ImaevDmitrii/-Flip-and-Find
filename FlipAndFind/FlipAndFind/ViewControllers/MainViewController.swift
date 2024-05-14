@@ -10,16 +10,15 @@ import UIKit
 final class MainViewController: UIViewController {
     
     private let titleLabel = UILabel()
-    
     private let startButton = UIButton()
     private let myGamesButton = UIButton()
     private let settingsButton = UIButton()
-    
     private let stackView = UIStackView()
-    
     private let headerView = UIView()
+    private let scrollView = UIScrollView()
     
-    private let textTitle = "Memory \nBoom"
+    private let textTitleLandscape = "Memory Boom"
+    private let textTitlePortrait = "Memory \nBoom"
     
     var coordinator: MainCoordinator?
     
@@ -27,6 +26,7 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        updateTitleLabel(for: view.bounds.size)
         NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: .languageChanged, object: nil)
         updateLanguage()
     }
@@ -34,6 +34,13 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateLanguage()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+            self.updateTitleLabel(for: size)
+        }, completion: nil)
     }
     
     @objc private func updateLanguage() {
@@ -52,7 +59,6 @@ final class MainViewController: UIViewController {
         headerView.layer.cornerRadius = 50
         headerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
-        titleLabel.text = textTitle
         titleLabel.textColor = .customWhite
         titleLabel.font = .logoMain
         titleLabel.numberOfLines = .zero
@@ -64,8 +70,6 @@ final class MainViewController: UIViewController {
         stackView.spacing = 20
         stackView.alignment = .center
         
-        [startButton, myGamesButton, settingsButton].forEach(stackView.addArrangedSubview)
-        
         startButton.setTitle(Localization.newGame, for: .normal)
         myGamesButton.setTitle(Localization.myGames, for: .normal)
         settingsButton.setTitle(Localization.settings, for: .normal)
@@ -75,50 +79,67 @@ final class MainViewController: UIViewController {
             $0.setTitleColor(.customBlack, for: .normal)
             $0.layer.cornerRadius = 10
             $0.titleLabel?.font = .buttonFont
+            stackView.addArrangedSubview($0)
         }
         
-        startButton.addTarget(self, action: #selector(tapStartButton), for: .touchUpInside)
-        myGamesButton.addTarget(self, action: #selector(tapMyGamesButton), for: .touchUpInside)
-        settingsButton.addTarget(self, action: #selector(tapSettingsButton), for: .touchUpInside)
+        scrollView.addSubview(stackView)
         
-        view.addSubview(headerView)
-        view.addSubview(titleLabel)
-        view.addSubview(stackView)
+        [headerView, titleLabel, scrollView].forEach {
+            view.addSubview($0)
+        }
+        
+        setupButtonsAction()
     }
     
     private func setupConstraints() {
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        startButton.translatesAutoresizingMaskIntoConstraints = false
-        myGamesButton.translatesAutoresizingMaskIntoConstraints = false
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        [headerView, titleLabel, stackView, scrollView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        [startButton, myGamesButton, settingsButton].forEach {
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+            $0.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 48).isActive = true
+            $0.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -48).isActive = true
+        }
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 200),
+            headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
             
             titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 60),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            startButton.heightAnchor.constraint(equalToConstant: 50),
-            myGamesButton.heightAnchor.constraint(equalToConstant: 50),
-            settingsButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            startButton.widthAnchor.constraint(equalToConstant: 225),
-            myGamesButton.widthAnchor.constraint(equalToConstant: 225),
-            settingsButton.widthAnchor.constraint(equalToConstant: 225)
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
     
+    private func updateTitleLabel(for size: CGSize) {
+        if size.width > size.height {
+            titleLabel.text = textTitleLandscape
+        } else {
+            titleLabel.text = textTitlePortrait
+        }
+    }
+    
+    private func setupButtonsAction() {
+        startButton.addTarget(self, action: #selector(tapStartButton), for: .touchUpInside)
+        myGamesButton.addTarget(self, action: #selector(tapMyGamesButton), for: .touchUpInside)
+        settingsButton.addTarget(self, action: #selector(tapSettingsButton), for: .touchUpInside)
+    }
+    
     private func buttonOpacity(button: UIButton) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             button.alpha = 1.0
         }
     }
