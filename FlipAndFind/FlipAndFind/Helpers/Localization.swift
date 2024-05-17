@@ -43,5 +43,6 @@ struct Localization {
     static var halloween: String { "halloween".localized }
     static var farm: String { "farm".localized }
     static var insects: String { "insects".localized }
-    static var jungle: String {"jungle".localized }
+    static var jungle: String { "jungle".localized }
+    static var slogan: String { "slogan".localized }
 }

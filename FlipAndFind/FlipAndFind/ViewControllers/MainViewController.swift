@@ -29,6 +29,7 @@ final class MainViewController: UIViewController {
         updateTitleLabel(for: view.bounds.size)
         NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: .languageChanged, object: nil)
         updateLanguage()
+        startAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +65,7 @@ final class MainViewController: UIViewController {
         titleLabel.numberOfLines = .zero
         titleLabel.textAlignment = .center
         titleLabel.backgroundColor = .clear
+        titleLabel.alpha = 0
         
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -79,6 +81,7 @@ final class MainViewController: UIViewController {
             $0.setTitleColor(.customBlack, for: .normal)
             $0.layer.cornerRadius = 10
             $0.titleLabel?.font = .buttonFont
+            $0.alpha = 0
             stackView.addArrangedSubview($0)
         }
         
@@ -138,27 +141,34 @@ final class MainViewController: UIViewController {
         settingsButton.addTarget(self, action: #selector(tapSettingsButton), for: .touchUpInside)
     }
     
-    private func buttonOpacity(button: UIButton) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            button.alpha = 1.0
-        }
+    private func changeOpacity(view: UIView, delay: TimeInterval) {
+        UIView.animate(withDuration: 0.5, delay: delay, options: .curveEaseInOut, animations: {
+            view.alpha = 1.0
+        })
+    }
+    
+    private func startAnimation() {
+        changeOpacity(view: titleLabel, delay: 0.1)
+        changeOpacity(view: startButton, delay: 0.3)
+        changeOpacity(view: myGamesButton, delay: 0.6)
+        changeOpacity(view: settingsButton, delay: 0.9)
     }
     
     @objc private func tapStartButton() {
         startButton.alpha = 0.6
         coordinator?.startGame()
-        buttonOpacity(button: startButton)
+        changeOpacity(view: startButton, delay: 0)
     }
     
     @objc private func tapMyGamesButton() {
         myGamesButton.alpha = 0.6
         coordinator?.showMyGames()
-        buttonOpacity(button: myGamesButton)
+        changeOpacity(view: myGamesButton, delay: 0)
     }
     
     @objc private func tapSettingsButton() {
         settingsButton.alpha = 0.6
         coordinator?.showSettings()
-        buttonOpacity(button: settingsButton)
+        changeOpacity(view: settingsButton, delay: 0)
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB17472A2BF7893E005A21AD /* LaunchAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1747292BF7893E005A21AD /* LaunchAnimationViewController.swift */; };
 		CB3E079F2BEB952A007C2803 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3E079E2BEB952A007C2803 /* Date+Extension.swift */; };
 		CB450E192BEB558100151DB4 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB450E182BEB558100151DB4 /* Font+Extension.swift */; };
 		CB450E212BEB65AD00151DB4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB450E1F2BEB65AD00151DB4 /* Localizable.strings */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB1747292BF7893E005A21AD /* LaunchAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAnimationViewController.swift; sourceTree = "<group>"; };
 		CB3E079E2BEB952A007C2803 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		CB450E182BEB558100151DB4 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		CB450E262BEB671600151DB4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				CB552FF02BDB8A52008AE1C3 /* ResultsTableViewController.swift */,
 				CB552FCC2BD64136008AE1C3 /* Cells */,
 				CB552FCB2BD64131008AE1C3 /* Views */,
+				CB1747292BF7893E005A21AD /* LaunchAnimationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB552FEB2BD95618008AE1C3 /* CardFactory.swift in Sources */,
+				CB17472A2BF7893E005A21AD /* LaunchAnimationViewController.swift in Sources */,
 				CBB1814F2BDE3D9000420015 /* GameEndAlert.swift in Sources */,
 				CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */,
 				CB552FF32BDB8B09008AE1C3 /* GameRecordTableViewCell.swift in Sources */,
