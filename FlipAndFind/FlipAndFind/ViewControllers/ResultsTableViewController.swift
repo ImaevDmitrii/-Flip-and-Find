@@ -71,7 +71,7 @@ extension ResultsTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: gameRecordsCellId, for: indexPath) as! GameRecordTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: gameRecordsCellId, for: indexPath) as? GameRecordTableViewCell else { return UITableViewCell() }
             let cardCounts = [8, 12, 18, 24, 32]
             let cardCount = cardCounts[indexPath.row]
             if let record = gameRecords.first(where: { $0.cardCount == cardCount }) {
@@ -84,7 +84,7 @@ extension ResultsTableViewController {
             cell.isUserInteractionEnabled = false
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: latestsGamesCellId, for: indexPath) as! LatestGamesTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: latestsGamesCellId, for: indexPath) as? LatestGamesTableViewCell else { return UITableViewCell() }
             let game = latestGames[indexPath.row]
             let isRecord = gameRecords.contains { record in
                 record.cardCount == game.cardCount && record.completionTime > game.completionTime

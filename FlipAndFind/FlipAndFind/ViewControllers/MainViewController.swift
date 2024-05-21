@@ -49,6 +49,7 @@ final class MainViewController: UIViewController {
         myGamesButton.setTitle(Localization.myGames, for: .normal)
         settingsButton.setTitle(Localization.settings, for: .normal)
     }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

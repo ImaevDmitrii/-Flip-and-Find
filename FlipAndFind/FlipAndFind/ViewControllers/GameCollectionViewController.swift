@@ -62,8 +62,8 @@ final class GameCollectionViewController: UICollectionViewController {
         bigImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            bigImageView.widthAnchor.constraint(equalToConstant: 200),
-            bigImageView.heightAnchor.constraint(equalToConstant: 200),
+            bigImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            bigImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             bigImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bigImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])

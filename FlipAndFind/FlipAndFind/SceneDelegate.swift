@@ -13,7 +13,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var coordinator: MainCoordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
@@ -23,8 +22,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self?.showMainScreen()
         }
         window?.rootViewController = launchVC
-        
-        
         window?.makeKeyAndVisible()
     }
     
@@ -32,7 +29,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         coordinator = MainCoordinator(navigationController: navigationController)
         coordinator?.start()
-        
         window?.rootViewController = navigationController
     }
 }

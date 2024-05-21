@@ -38,7 +38,7 @@ final class LaunchAnimationViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         
-        subtitleLabel.text = "Search. Play. Memorize."
+        subtitleLabel.text = Localization.slogan
         subtitleLabel.textColor = .black
         subtitleLabel.font = .systemFont(ofSize: 18, weight: .medium)
         subtitleLabel.textAlignment = .center
@@ -101,7 +101,7 @@ final class LaunchAnimationViewController: UIViewController {
     }
     
     private func initialAnimations() {
-        UIView.animate(withDuration: 1.3, delay: 0, options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: 1.3, delay: 0.5, options: [.curveEaseInOut], animations: {
             self.firstSquare.transform = self.firstSquare.transform.translatedBy(x: -self.view.bounds.width, y: 0)
             self.secondSquare.transform = self.secondSquare.transform.translatedBy(x: self.view.bounds.width, y: 0)
             self.thirdSquare.transform = self.thirdSquare.transform.translatedBy(x: -self.view.bounds.width, y: 0)
@@ -115,8 +115,7 @@ final class LaunchAnimationViewController: UIViewController {
                 
                 let totalHeight = self.view.bounds.height
                 let headerHeight = self.view.bounds.height * 0.373
-                let offset: CGFloat = -(totalHeight * 0.05)
-                
+              
                 self.containerView.transform = CGAffineTransform(translationX: 0, y: -(totalHeight - headerHeight ))
             }, completion: { _ in
                 self.completionHandler?()

@@ -12,27 +12,15 @@ struct GameRecord: Codable {
     let completionTime: TimeInterval
 }
 
-struct LatestGames: Codable {
+struct LatestGames: Codable, Equatable {
     let theme: Theme
     let date: Date
     let cardCount: Int
     let completionTime: TimeInterval
 }
 
-extension Date {
-    func formattedDateString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        return formatter.string(from: self)
-    }
-}
-
-extension TimeInterval {
-    func formattedTime() -> String {
-        let time = Int(self)
-        let minutes = time / 60
-        let seconds = time % 60
-        return String(format: "%02d:%02d", minutes, seconds)
+extension LatestGames {
+    static func == (lhs: LatestGames, rhs: LatestGames) -> Bool {
+        return lhs.date == rhs.date && lhs.cardCount == rhs.cardCount && lhs.completionTime == rhs.completionTime
     }
 }

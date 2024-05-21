@@ -15,7 +15,14 @@ final class GameStorage {
     func saveLatestGame(_ game: LatestGames) {
         var games = loadLatestGames()
         games.append(game)
-        games = Array(games.suffix(15))
+        
+        if games.count > 15 {
+            if let gameToRemove = games.first(where: { !isBestGame($0) }) {
+                if let index = games.firstIndex(of: gameToRemove) {
+                    games.remove(at: index)
+                }
+            }
+        }
         
         guard let encodedGames = try? JSONEncoder().encode(games) else { return }
         UserDefaults.standard.set(encodedGames, forKey: latestGamesKey)
@@ -33,6 +40,11 @@ final class GameStorage {
         guard let encodedRecords = try? JSONEncoder().encode(records) else { return }
         UserDefaults.standard.set(encodedRecords, forKey: recordsKey)
     }
+    
+    private func isBestGame(_ game: LatestGames) -> Bool {
+           let records = loadGameRecords()
+           return records.contains { $0.cardCount == game.cardCount && $0.completionTime >= game.completionTime }
+       }
     
     func loadGameRecords() -> [GameRecord] {
         (try? JSONDecoder().decode([GameRecord].self, from: UserDefaults.standard.data(forKey: recordsKey) ?? Data())) ?? []
