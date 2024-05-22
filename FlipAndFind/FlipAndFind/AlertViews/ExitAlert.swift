@@ -29,6 +29,19 @@ final class ExitAlert: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if secondTitleLabel.isHidden {
+            NSLayoutConstraint.activate([
+                topButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                topButton.topAnchor.constraint(equalTo: secondTitleLabel.bottomAnchor, constant: 20)
+            ])
+        }
+    }
+    
     private func setupViews() {
         secondTitleLabel.textColor = .customBlack
         secondTitleLabel.font = .bodyText
@@ -64,14 +77,13 @@ final class ExitAlert: UIView {
         }
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 40),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
             secondTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             secondTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            topButton.topAnchor.constraint(equalTo: secondTitleLabel.bottomAnchor, constant: 20),
             topButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             topButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             topButton.heightAnchor.constraint(equalToConstant: 50),

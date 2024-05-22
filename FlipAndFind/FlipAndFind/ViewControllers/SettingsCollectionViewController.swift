@@ -75,8 +75,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
             alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
             alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 36),
             alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -36),
-            alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.5)
-            
+            alertView.heightAnchor.constraint(greaterThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.3)
         ])
         
         alertView.onTopButton = { [weak self, weak overlayView] in

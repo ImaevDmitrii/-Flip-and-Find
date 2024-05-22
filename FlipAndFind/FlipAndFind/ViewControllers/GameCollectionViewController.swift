@@ -40,9 +40,9 @@ final class GameCollectionViewController: UICollectionViewController {
     }
     
     private func initializeTheme() {
-            let themeString = UserDefaults.standard.string(forKey: "theme")
-            theme = Theme.from(string: themeString)
-        }
+        let themeString = UserDefaults.standard.string(forKey: "theme")
+        theme = Theme.from(string: themeString)
+    }
     
     private func setup() {
         collectionView.backgroundColor = .backgroundColor
@@ -132,7 +132,7 @@ final class GameCollectionViewController: UICollectionViewController {
             alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 16),
             alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -16),
             alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.8)
-                
+            
         ])
         
         alertView.onTopButton = { [weak self, weak overlayView] in
@@ -141,6 +141,41 @@ final class GameCollectionViewController: UICollectionViewController {
             alertView.removeFromSuperview()
         }
         alertView.onBottomButton = { [weak self, weak overlayView] in
+            overlayView?.removeFromSuperview()
+            self?.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    private func showGameOverAlert() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let overlayView = UIVisualEffectView(effect: blurEffect)
+        overlayView.frame = view.bounds
+        overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(overlayView)
+        
+        let alertView = GameEndAlert(frame: .zero)
+        alertView.configure(title: Localization.youWon,
+                            theme: theme?.localizedName ?? "",
+                            cardCount: gameModel.cards.count / 2,
+                            time: gameModel.calculateCompletionTime())
+        view.addSubview(alertView)
+        
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 16),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -16),
+            alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 1.0)
+        ])
+        
+        alertView.onPlayAgain = { [weak self, weak overlayView] in
+            self?.setupGame()
+            overlayView?.removeFromSuperview()
+            alertView.removeFromSuperview()
+        }
+        
+        alertView.onBackToMenu = { [weak self, weak overlayView] in
             overlayView?.removeFromSuperview()
             self?.navigationController?.popViewController(animated: true)
         }
@@ -208,41 +243,6 @@ extension GameCollectionViewController {
         }
         if gameModel.checkAllPairsFound() {
             showGameOverAlert()
-        }
-    }
-    
-    private func showGameOverAlert() {
-        let blurEffect = UIBlurEffect(style: .light)
-        let overlayView = UIVisualEffectView(effect: blurEffect)
-        overlayView.frame = view.bounds
-        overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(overlayView)
-        
-        let alertView = GameEndAlert(frame: .zero)
-        alertView.configure(title: Localization.youWon,
-                            theme: theme?.localizedName ?? "",
-                            cardCount: gameModel.cards.count / 2,
-                            time: gameModel.calculateCompletionTime())
-        view.addSubview(alertView)
-        
-        alertView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
-            alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
-            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 16),
-            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -16),
-            alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.8)
-        ])
-        
-        alertView.onPlayAgain = { [weak self, weak overlayView] in
-            self?.setupGame()
-            overlayView?.removeFromSuperview()
-            alertView.removeFromSuperview()
-        }
-        
-        alertView.onBackToMenu = { [weak self, weak overlayView] in
-            overlayView?.removeFromSuperview()
-            self?.navigationController?.popViewController(animated: true)
         }
     }
 }

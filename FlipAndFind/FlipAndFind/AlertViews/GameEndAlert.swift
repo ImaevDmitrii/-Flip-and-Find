@@ -44,11 +44,6 @@ final class GameEndAlert: UIView {
             $0.font = .bodyText
         }
         
-        [cardIcon, clockIcon].forEach {
-            $0.widthAnchor.constraint(equalToConstant: 16).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        }
-        
         [leftMedalIcon, rightMedalIcon].forEach {
             $0.contentMode = .scaleAspectFit
         }
@@ -84,18 +79,18 @@ final class GameEndAlert: UIView {
         }
         
         NSLayoutConstraint.activate([
-            leftMedalIcon.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            leftMedalIcon.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -8),
-            leftMedalIcon.widthAnchor.constraint(equalToConstant: 30),
-            leftMedalIcon.heightAnchor.constraint(equalToConstant: 30),
+            leftMedalIcon.topAnchor.constraint(equalTo: topAnchor, constant: 30),
+            leftMedalIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            leftMedalIcon.widthAnchor.constraint(equalToConstant: 40),
+            leftMedalIcon.heightAnchor.constraint(equalToConstant: 40),
             
-            rightMedalIcon.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            rightMedalIcon.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8),
-            rightMedalIcon.widthAnchor.constraint(equalToConstant: 30),
-            rightMedalIcon.heightAnchor.constraint(equalToConstant: 30),
+            rightMedalIcon.topAnchor.constraint(equalTo: topAnchor, constant: 30),
+            rightMedalIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            rightMedalIcon.widthAnchor.constraint(equalToConstant: 40),
+            rightMedalIcon.heightAnchor.constraint(equalToConstant: 40),
             
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 60),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             
             themeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             themeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
@@ -105,6 +100,8 @@ final class GameEndAlert: UIView {
             
             cardIcon.centerYAnchor.constraint(equalTo: cardCountLabel.centerYAnchor),
             cardIcon.trailingAnchor.constraint(equalTo: cardCountLabel.leadingAnchor, constant: -8),
+            cardIcon.heightAnchor.constraint(equalToConstant: 24),
+            cardIcon.widthAnchor.constraint(equalToConstant: 24),
             
             textTimeLabel.topAnchor.constraint(equalTo: cardIcon.bottomAnchor, constant: 20),
             textTimeLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -114,6 +111,8 @@ final class GameEndAlert: UIView {
             
             clockIcon.centerYAnchor.constraint(equalTo: textTimeLabel.bottomAnchor, constant: 20),
             clockIcon.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -10),
+            clockIcon.widthAnchor.constraint(equalToConstant: 24),
+            clockIcon.heightAnchor.constraint(equalToConstant: 24),
            
             playButton.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20),
             playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
