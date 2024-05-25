@@ -8,7 +8,17 @@
 import Foundation
 
 enum CardCount: Int, CaseIterable {
-    case eight = 8, twelve = 12, eighteen = 18, twentyFour = 24, thirty = 32
+    case eight = 8, twelve = 12, eighteen = 18, twentyFour = 24, thirtyTwo = 32
+    
+    var localizedName: String {
+        switch self {
+        case .eight: return rawValue.description 
+        case .twelve: return rawValue.description
+        case .eighteen: return rawValue.description
+        case.twentyFour: return rawValue.description
+        case .thirtyTwo: return rawValue.description
+        }
+    }
     
     var imageName: String {
         return "\(self.rawValue) card"

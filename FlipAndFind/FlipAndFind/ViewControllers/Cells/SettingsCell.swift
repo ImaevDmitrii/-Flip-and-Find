@@ -15,7 +15,6 @@ final class SettingsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        addLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -23,21 +22,9 @@ final class SettingsCell: UICollectionViewCell {
     }
     
     private func setup() {
-        contentView.addSubview(imageView)
+        setupShadowAndRadius()
+        
         imageView.contentMode = .scaleAspectFit
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.6)
-        ])
-    }
-    
-    private func addLabel() {
-        contentView.addSubview(label)
         
         label.textAlignment = .center
         label.font = .bodyText
@@ -45,9 +32,17 @@ final class SettingsCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         
-        label.translatesAutoresizingMaskIntoConstraints = false
+        [imageView, label].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7),
+            
             label.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -55,7 +50,17 @@ final class SettingsCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with imageName: String, isSelected: Bool, text: String? = nil) {
+    private func setupShadowAndRadius() {
+        layer.cornerRadius = 10
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 9
+        layer.shadowOpacity = 0.4
+        clipsToBounds = false
+        layer.masksToBounds = false
+    }
+    
+    func configure(with imageName: String, isSelected: Bool, text: String) {
         imageView.image = UIImage(named: isSelected ? imageName + "_choosen" : imageName)
         
         label.text = text

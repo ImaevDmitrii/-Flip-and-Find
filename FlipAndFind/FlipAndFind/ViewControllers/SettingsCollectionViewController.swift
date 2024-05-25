@@ -31,7 +31,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 5, right: 20)
-        layout.minimumLineSpacing = 5
+        layout.minimumLineSpacing = 3
         layout.minimumInteritemSpacing = 5
         super.init(collectionViewLayout: layout)
     }
@@ -142,7 +142,7 @@ extension SettingsCollectionViewController {
         switch indexPath.section {
         case 0:
             let currendCardCount = CardCount.allCases[indexPath.item]
-            cell.configure(with: currendCardCount.imageName, isSelected: currendCardCount == self.cardCount)
+            cell.configure(with: currendCardCount.imageName, isSelected: currendCardCount == self.cardCount, text: currendCardCount.localizedName + " " + Localization.cards)
         case 1:
             let currentTheme = Theme.allCases[indexPath.item]
             cell.configure(with: currentTheme.imageName, isSelected: currentTheme == self.theme, text: currentTheme.localizedName)

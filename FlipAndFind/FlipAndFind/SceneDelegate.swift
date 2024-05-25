@@ -32,3 +32,4 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
     }
 }
+

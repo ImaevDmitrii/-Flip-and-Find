@@ -14,27 +14,27 @@ final class HeaderView: UIView {
     private let cardsIcon = UIImageView(image: UIImage(named: "card_white"))
     private let cardsLabel = UILabel()
     
+    private let startTime = "00:00"
+    private let timerFormat = "%02d:%02d"
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
+    private func setupViews() {
         backgroundColor = .customBlue
         
-        addSubview(timerIcon)
-        addSubview(timerLabel)
-        addSubview(cardsIcon)
-        addSubview(cardsLabel)
+        [timerIcon, timerLabel, cardsIcon, cardsLabel].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        timerIcon.translatesAutoresizingMaskIntoConstraints = false
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        cardsIcon.translatesAutoresizingMaskIntoConstraints = false
-        cardsLabel.translatesAutoresizingMaskIntoConstraints = false
+        timerLabel.text = startTime
         
         NSLayoutConstraint.activate([
             timerIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -64,7 +64,7 @@ final class HeaderView: UIView {
     func updateTimerLabel(with elapsedTime: TimeInterval) {
         let minutes = Int(elapsedTime) / 60
         let seconds = Int(elapsedTime) % 60
-        timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        timerLabel.text = String(format: timerFormat, minutes, seconds)
     }
     
     func updateCardsLabel(found: Int, total: Int) {

@@ -71,7 +71,7 @@ final class GameModel {
         if checkAllPairsFound() {
             stopTimer()
             let completionTime = calculateCompletionTime()
-            let latestGame = LatestGames(theme: currentTheme ?? .farm, date: Date(), cardCount: cards.count / 2, completionTime: completionTime)
+            let latestGame = LatestGames(theme: currentTheme ?? .farm, date: Date(), cardCount: cards.count, completionTime: completionTime)
             GameStorage.shared.saveLatestGame(latestGame)
         }
     }

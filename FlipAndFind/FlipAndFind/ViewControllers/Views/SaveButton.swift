@@ -28,8 +28,8 @@ final class SaveButton: UICollectionReusableView {
         NSLayoutConstraint.activate([
             saveButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             saveButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 48),
-            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -48)
+            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
     }
     

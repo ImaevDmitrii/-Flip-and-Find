@@ -39,7 +39,7 @@ final class ResultsTableViewController: UITableViewController {
     
     private func loadGameData() {
         gameRecords = GameStorage.shared.loadGameRecords()
-        latestGames = GameStorage.shared.loadLatestGames()
+        latestGames = GameStorage.shared.loadLatestGames().reversed()
         tableView.reloadData()
     }
     

@@ -56,7 +56,7 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         navigationController?.setupNavigationBar()
         navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
         setupBigImageView()
-        setupBottomView()
+        setupHeaderView()
     }
     
     private func setupBigImageView() {
@@ -70,14 +70,14 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         bigImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            bigImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            bigImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            bigImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            bigImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
             bigImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bigImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
-    private func setupBottomView() {
+    private func setupHeaderView() {
         view.addSubview(headerView)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,17 +96,9 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return }
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 5
-    }
-    
-    private func resetBottomView() {
-        headerView.updateCardsLabel(found: 0, total: 0)
-        headerView.updateTimerLabel(with: 0)
     }
     
     private func setupGame() {
-        resetBottomView()
-        
         let selectedCardCount = UserDefaults.standard.cardCount
         let selectedTheme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio
         let factory = selectedTheme.getFactory()
@@ -115,27 +107,35 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
             self?.headerView.updateTimerLabel(with: elapsedTime)
         }
         gameModel.foundCardsUpdateHandler = { [weak self] in
-            self?.updateBottomView()
+            self?.updateHeaderView()
         }
         collectionView.reloadData()
+        updateHeaderView()
     }
     
     private func showBigImage(with imageName: String) {
+        let overlayView = UIView(frame: view.bounds)
+        overlayView.backgroundColor = .clear
+        view.addSubview(overlayView)
+        
         bigImageView.image = UIImage(named: imageName)
         bigImageView.isHidden = false
         bigImageView.alpha = 0
         UIView.animate(withDuration: 0.3, animations: {
+            self.gameModel.pauseTimer()
             self.bigImageView.alpha = 1
         }, completion: { _ in
             UIView.animate(withDuration: 0.3, delay: 1.0, options: [], animations: {
                 self.bigImageView.alpha = 0
             }, completion: { _ in
                 self.bigImageView.isHidden = true
+                self.gameModel.resumeTimer()
+                overlayView.removeFromSuperview()
             })
         })
     }
     
-    private func updateBottomView() {
+    private func updateHeaderView() {
             let foundCards = gameModel.cards.filter { $0.isMatched }.count / 2
             let totalCards = gameModel.cards.count
             headerView.updateCardsLabel(found: foundCards, total: totalCards / 2)
@@ -188,7 +188,7 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         let alertView = GameEndAlert(frame: .zero)
         alertView.configure(title: Localization.youWon,
                             theme: theme?.localizedName ?? "",
-                            cardCount: gameModel.cards.count / 2,
+                            cardCount: gameModel.cards.count,
                             time: gameModel.calculateCompletionTime())
         view.addSubview(alertView)
         
