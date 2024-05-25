@@ -13,4 +13,5 @@ extension UIFont {
     static let secondHeader = UIFont(name: "Montserrat-SemiBold", size: 24)
     static let largeSecondHeader = UIFont(name: "Montserrat-SemiBold", size: 34)
     static let bodyText =  UIFont(name: "Montserrat-Regular", size: 16)
+    static let label = UIFont(name: "Montserrat-SemiBold", size: 18)
 }

@@ -54,6 +54,14 @@ enum Theme: String, CaseIterable, Codable {
 enum Language: String, CaseIterable {
     case english = "en", russian = "ru", spanish = "es"
     
+    var localizedName: String {
+        switch self {
+        case .english: return Localization.english
+        case .russian: return Localization.russian
+        case .spanish: return Localization.spanish
+        }
+    }
+        
     var imageName: String {
         return self.rawValue
     }

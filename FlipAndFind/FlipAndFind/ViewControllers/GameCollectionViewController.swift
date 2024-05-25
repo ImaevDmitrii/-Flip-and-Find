@@ -7,12 +7,13 @@
 
 import UIKit
 
-final class GameCollectionViewController: UICollectionViewController {
+final class GameCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let cellId = String(describing: CardCell.self)
     private let gameModel = GameModel()
     
     private let bigImageView = UIImageView()
+    private let headerView = HeaderView()
     
     private var theme: Theme?
     
@@ -31,12 +32,17 @@ final class GameCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: cellId)
         setup()
-        setupBigImageView()
         setupGame()
     }
     
-    override func viewWillLayoutSubviews() {
-        updateLayoutForSize(view.bounds.size)
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { _ in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }, completion: { _ in
+            self.collectionView.reloadData()
+        })
     }
     
     private func initializeTheme() {
@@ -49,6 +55,8 @@ final class GameCollectionViewController: UICollectionViewController {
         title = theme?.localizedName
         navigationController?.setupNavigationBar()
         navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
+        setupBigImageView()
+        setupBottomView()
     }
     
     private func setupBigImageView() {
@@ -69,30 +77,46 @@ final class GameCollectionViewController: UICollectionViewController {
         ])
     }
     
+    private func setupBottomView() {
+        view.addSubview(headerView)
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            headerView.heightAnchor.constraint(equalToConstant: 50),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
+        
+        collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+    }
+    
     private func configureLayout() {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return }
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        layout.minimumLineSpacing = 15
-        layout.minimumInteritemSpacing = 15
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
     }
     
-    private func updateLayoutForSize(_ size: CGSize) {
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        
-        let numberOfColumns: CGFloat = size.width > size.height ? 6 : 4
-        let padding: CGFloat = 20
-        let minimumItemSpacing: CGFloat = 15
-        let availableWidth = size.width - padding * 2 - (numberOfColumns - 1) * minimumItemSpacing
-        let itemWidth = availableWidth / numberOfColumns
-        
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
+    private func resetBottomView() {
+        headerView.updateCardsLabel(found: 0, total: 0)
+        headerView.updateTimerLabel(with: 0)
     }
     
     private func setupGame() {
+        resetBottomView()
+        
         let selectedCardCount = UserDefaults.standard.cardCount
         let selectedTheme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio
         let factory = selectedTheme.getFactory()
         gameModel.setupGame(numberOfPairs: selectedCardCount, factory: factory)
+        gameModel.timerUpdateHandler = { [weak self] elapsedTime in
+            self?.headerView.updateTimerLabel(with: elapsedTime)
+        }
+        gameModel.foundCardsUpdateHandler = { [weak self] in
+            self?.updateBottomView()
+        }
         collectionView.reloadData()
     }
     
@@ -111,7 +135,15 @@ final class GameCollectionViewController: UICollectionViewController {
         })
     }
     
+    private func updateBottomView() {
+            let foundCards = gameModel.cards.filter { $0.isMatched }.count / 2
+            let totalCards = gameModel.cards.count
+            headerView.updateCardsLabel(found: foundCards, total: totalCards / 2)
+        }
+    
     private func showExitAlert() {
+        gameModel.pauseTimer()
+        
         let blurEffect = UIBlurEffect(style: .light)
         let overlayView = UIVisualEffectView(effect: blurEffect)
         overlayView.frame = view.bounds
@@ -189,6 +221,28 @@ final class GameCollectionViewController: UICollectionViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let totalItems = gameModel.cards.count
+        let columns = Int(sqrt(Double(totalItems)).rounded(.up))
+        let rows = (totalItems + columns - 1) / columns
+        
+        let horizontalSpacing = (collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing ?? .zero
+        let verticalSpacing = (collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing ?? .zero
+        let insets = (collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset ?? .zero
+        
+        let bottomInset = collectionView.safeAreaInsets.bottom + 50
+        
+        let totalHorizontalSpacing = horizontalSpacing * CGFloat(columns - 1) + insets.left + insets.right
+        let totalVerticalSpacing = verticalSpacing * CGFloat(rows - 1) + insets.top + insets.bottom + bottomInset
+        
+        let itemWidth = (collectionView.bounds.width - totalHorizontalSpacing) / CGFloat(columns)
+        let itemHeight = (collectionView.bounds.height - totalVerticalSpacing) / CGFloat(rows)
+        
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -210,7 +264,6 @@ extension GameCollectionViewController {
         cell.onShowBigImage = { [weak self] imageName in
             self?.showBigImage(with: imageName)
         }
-        
         return cell
     }
     

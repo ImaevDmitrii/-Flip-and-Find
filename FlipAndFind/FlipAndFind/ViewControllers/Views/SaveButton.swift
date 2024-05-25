@@ -9,7 +9,6 @@ import UIKit
 
 final class SaveButton: UICollectionReusableView {
     
-    
     let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .customBiege
@@ -29,8 +28,8 @@ final class SaveButton: UICollectionReusableView {
         NSLayoutConstraint.activate([
             saveButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             saveButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            saveButton.widthAnchor.constraint(equalToConstant: 250),
-            saveButton.heightAnchor.constraint(equalToConstant: 50)
+            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 48),
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -48)
         ])
     }
     

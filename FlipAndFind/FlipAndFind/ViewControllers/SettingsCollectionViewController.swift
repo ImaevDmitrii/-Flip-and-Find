@@ -30,9 +30,9 @@ final class SettingsCollectionViewController: UICollectionViewController {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 80, height: 80)
-        layout.sectionInset = UIEdgeInsets(top: 32, left: 28, bottom: 20, right: 28)
-        layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 5, right: 20)
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
         super.init(collectionViewLayout: layout)
     }
     
@@ -42,10 +42,14 @@ final class SettingsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        iDregister()
+        setup()
+    }
+    
+    private func iDregister() {
         collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.register(CollectionSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         collectionView.register(SaveButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: saveButtonID)
-        setup()
     }
     
     private func setup() {
@@ -53,6 +57,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
         title = Localization.settings
         navigationController?.setupNavigationBar()
         navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
+        collectionView.contentInsetAdjustmentBehavior = .always
     }
     
     private func showExitAlert() {
@@ -122,7 +127,6 @@ extension SettingsCollectionViewController {
         3
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0: return CardCount.allCases.count
@@ -141,10 +145,10 @@ extension SettingsCollectionViewController {
             cell.configure(with: currendCardCount.imageName, isSelected: currendCardCount == self.cardCount)
         case 1:
             let currentTheme = Theme.allCases[indexPath.item]
-            cell.configure(with: currentTheme.imageName, isSelected: currentTheme == self.theme)
+            cell.configure(with: currentTheme.imageName, isSelected: currentTheme == self.theme, text: currentTheme.localizedName)
         case 2:
             let currentLanguage = Language.allCases[indexPath.item]
-            cell.configure(with: currentLanguage.imageName, isSelected: currentLanguage == self.language)
+            cell.configure(with: currentLanguage.imageName, isSelected: currentLanguage == self.language, text: currentLanguage.localizedName)
         default: break
         }
         
@@ -166,7 +170,13 @@ extension SettingsCollectionViewController {
     
 }
 
+//MARK: UICollectionViewDelegateFlowLayout
+
 extension SettingsCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: collectionView.bounds.width / 3 - 20, height: 160)
+        }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 40)
     }

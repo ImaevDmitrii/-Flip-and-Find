@@ -10,11 +10,18 @@ import Foundation
 final class GameModel {
     
     var cards: [CardModel] = []
-    var isCheckingMatches = false
     var firstFlippedCardIndex: Int?
-    var startTime: Date?
-    var timer: Timer?
-    var currentTheme: Theme?
+    
+    private var isCheckingMatches = false
+    private  var currentTheme: Theme?
+    
+    private var startTime: Date?
+    private var pauseStartTime: Date?
+    private var pausedTime: TimeInterval = 0
+    private var timer: Timer?
+    
+    var timerUpdateHandler: ((TimeInterval) -> Void)?
+    var foundCardsUpdateHandler: (() -> Void)?
     
     func setupGame(numberOfPairs: Int, factory: CardTypeFactory) {
         let themeString = UserDefaults.standard.string(forKey: "theme")
@@ -43,6 +50,7 @@ final class GameModel {
         } else {
             firstFlippedCardIndex = index
         }
+        foundCardsUpdateHandler?()
     }
     
     func flipBack(firstIndex: Int, secondIndex: Int) {
@@ -70,7 +78,7 @@ final class GameModel {
     
     func calculateCompletionTime() -> TimeInterval {
         guard let start = startTime else { return 0 }
-        return Date().timeIntervalSince(start)
+        return Date().timeIntervalSince(start) - pausedTime
     }
     
     private func startTimer() {
@@ -85,13 +93,21 @@ final class GameModel {
     }
     
     func pauseTimer() {
+        pauseStartTime = Date()
         stopTimer()
     }
     
     func resumeTimer() {
+        if let pauseStart = pauseStartTime {
+                let pauseDuration = Date().timeIntervalSince(pauseStart)
+                startTime = startTime?.addingTimeInterval(pauseDuration)
+            }
         startTimer()
     }
     
     private func updateTimer() {
+        guard let start = startTime else { return }
+        let elapsedTime = Date().timeIntervalSince(start)
+        timerUpdateHandler?(elapsedTime)
     }
 }

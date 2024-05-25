@@ -28,7 +28,6 @@ final class MainViewController: UIViewController {
         setupConstraints()
         updateTitleLabel(for: view.bounds.size)
         NotificationCenter.default.addObserver(self, selector: #selector(updateLanguage), name: .languageChanged, object: nil)
-        updateLanguage()
         startAnimation()
     }
     
@@ -73,26 +72,26 @@ final class MainViewController: UIViewController {
         stackView.spacing = 20
         stackView.alignment = .center
         
-        startButton.setTitle(Localization.newGame, for: .normal)
-        myGamesButton.setTitle(Localization.myGames, for: .normal)
-        settingsButton.setTitle(Localization.settings, for: .normal)
-        
-        [startButton, myGamesButton, settingsButton].forEach {
-            $0.backgroundColor = .customBiege
-            $0.setTitleColor(.customBlack, for: .normal)
-            $0.layer.cornerRadius = 10
-            $0.titleLabel?.font = .buttonFont
-            $0.alpha = 0
-            stackView.addArrangedSubview($0)
-        }
+        setupButton(startButton, title: Localization.newGame)
+        setupButton(myGamesButton, title: Localization.myGames)
+        setupButton(settingsButton, title: Localization.settings)
         
         scrollView.addSubview(stackView)
         
         [headerView, titleLabel, scrollView].forEach {
             view.addSubview($0)
         }
-        
         setupButtonsAction()
+    }
+    
+    private func setupButton(_ button: UIButton, title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .customBiege
+        button.setTitleColor(.customBlack, for: .normal)
+        button.layer.cornerRadius = 10
+        button.titleLabel?.font = .buttonFont
+        button.alpha = 0
+        stackView.addArrangedSubview(button)
     }
     
     private func setupConstraints() {
@@ -129,11 +128,7 @@ final class MainViewController: UIViewController {
     }
     
     private func updateTitleLabel(for size: CGSize) {
-        if size.width > size.height {
-            titleLabel.text = textTitleLandscape
-        } else {
-            titleLabel.text = textTitlePortrait
-        }
+        titleLabel.text = size.width > size.height ? textTitleLandscape : textTitlePortrait
     }
     
     private func setupButtonsAction() {
@@ -148,6 +143,11 @@ final class MainViewController: UIViewController {
         })
     }
     
+    private func animateButtonTap(button: UIButton) {
+        button.alpha = 0.6
+        changeOpacity(view: button, delay: 0)
+    }
+    
     private func startAnimation() {
         changeOpacity(view: titleLabel, delay: 0.1)
         changeOpacity(view: startButton, delay: 0.3)
@@ -156,20 +156,17 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func tapStartButton() {
-        startButton.alpha = 0.6
+        animateButtonTap(button: startButton)
         coordinator?.startGame()
-        changeOpacity(view: startButton, delay: 0)
     }
     
     @objc private func tapMyGamesButton() {
-        myGamesButton.alpha = 0.6
+        animateButtonTap(button: myGamesButton)
         coordinator?.showMyGames()
-        changeOpacity(view: myGamesButton, delay: 0)
     }
     
     @objc private func tapSettingsButton() {
-        settingsButton.alpha = 0.6
+        animateButtonTap(button: settingsButton)
         coordinator?.showSettings()
-        changeOpacity(view: settingsButton, delay: 0)
     }
 }

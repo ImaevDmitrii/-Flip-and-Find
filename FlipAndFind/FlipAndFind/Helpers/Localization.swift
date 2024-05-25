@@ -45,4 +45,7 @@ struct Localization {
     static var insects: String { "insects".localized }
     static var jungle: String { "jungle".localized }
     static var slogan: String { "slogan".localized }
+    static var english: String { "english".localized }
+    static var russian: String { "russian".localized }
+    static var spanish: String { "spanish".localized }
 }

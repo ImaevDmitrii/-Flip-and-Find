@@ -36,6 +36,7 @@
 		CB552FF72BDCDD5D008AE1C3 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FF62BDCDD5D008AE1C3 /* GameStorage.swift */; };
 		CB552FFD2BDD2B1F008AE1C3 /* TableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FFC2BDD2B1F008AE1C3 /* TableSectionHeader.swift */; };
 		CB552FFF2BDD2B43008AE1C3 /* CollectionSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB552FFE2BDD2B43008AE1C3 /* CollectionSectionHeader.swift */; };
+		CB6AC5822C007C16002F79D4 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AC5812C007C16002F79D4 /* HeaderView.swift */; };
 		CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */; };
 		CB8430F12BD2BAE900AC058E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */; };
 		CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E5742BCBC35A005F91EA /* MainViewController.swift */; };
@@ -87,6 +88,7 @@
 		CB552FF62BDCDD5D008AE1C3 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
 		CB552FFC2BDD2B1F008AE1C3 /* TableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSectionHeader.swift; sourceTree = "<group>"; };
 		CB552FFE2BDD2B43008AE1C3 /* CollectionSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionHeader.swift; sourceTree = "<group>"; };
+		CB6AC5812C007C16002F79D4 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CB8430EE2BD2B9DC00AC058E /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		CB8430F02BD2BAE800AC058E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CB85E5742BCBC35A005F91EA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				CB552FC12BD63876008AE1C3 /* SaveButton.swift */,
 				CB552FFC2BDD2B1F008AE1C3 /* TableSectionHeader.swift */,
 				CB552FFE2BDD2B43008AE1C3 /* CollectionSectionHeader.swift */,
+				CB6AC5812C007C16002F79D4 /* HeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				CB17472A2BF7893E005A21AD /* LaunchAnimationViewController.swift in Sources */,
 				CBB1814F2BDE3D9000420015 /* GameEndAlert.swift in Sources */,
 				CB85E5752BCBC35A005F91EA /* MainViewController.swift in Sources */,
+				CB6AC5822C007C16002F79D4 /* HeaderView.swift in Sources */,
 				CB552FF32BDB8B09008AE1C3 /* GameRecordTableViewCell.swift in Sources */,
 				CB85E57D2BCBC692005F91EA /* MainCoordinator.swift in Sources */,
 				CB552FF52BDB8D34008AE1C3 /* LatestGamesTableViewCell.swift in Sources */,
