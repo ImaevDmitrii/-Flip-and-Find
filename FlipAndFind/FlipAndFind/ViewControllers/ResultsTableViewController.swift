@@ -9,8 +9,14 @@ import UIKit
 
 final class ResultsTableViewController: UITableViewController {
     
-    var gameRecords: [GameRecord] = []
-    var latestGames: [LatestGames] = []
+    private var gameRecords: [GameRecord] = []
+    private var latestGames: [LatestGames] = []
+    
+    private let recordsGameKey = "gameRecords"
+    private let latestGameKey = "latestGames"
+    private let defaultTimeText = "00:00"
+    private let numberOfSections = 2
+    private let recordsRows = 5
     
     private let gameRecordsCellId = String(describing: GameRecordTableViewCell.self)
     private let latestsGamesCellId = String(describing: LatestGamesTableViewCell.self)
@@ -18,15 +24,19 @@ final class ResultsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(GameRecordTableViewCell.self, forCellReuseIdentifier: gameRecordsCellId)
-        tableView.register(LatestGamesTableViewCell.self, forCellReuseIdentifier: latestsGamesCellId)
-        tableView.register(TableSectionHeader.self, forHeaderFooterViewReuseIdentifier: sectionHeaderId)
+        idRegister()
         setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         loadGameData()
+    }
+    
+    private func idRegister() {
+        tableView.register(GameRecordTableViewCell.self, forCellReuseIdentifier: gameRecordsCellId)
+        tableView.register(LatestGamesTableViewCell.self, forCellReuseIdentifier: latestsGamesCellId)
+        tableView.register(TableSectionHeader.self, forHeaderFooterViewReuseIdentifier: sectionHeaderId)
     }
     
     private func setup() {
@@ -49,11 +59,11 @@ final class ResultsTableViewController: UITableViewController {
     
     private func saveGameData() {
         if let recordsData = try? JSONEncoder().encode(gameRecords) {
-            UserDefaults.standard.set(recordsData, forKey: "gameRecords")
+            UserDefaults.standard.set(recordsData, forKey: recordsGameKey)
         }
         
         if let latestData = try? JSONEncoder().encode(latestGames) {
-            UserDefaults.standard.set(latestData, forKey: "latestGames")
+            UserDefaults.standard.set(latestData, forKey: latestGameKey)
         }
     }
 }
@@ -62,24 +72,26 @@ final class ResultsTableViewController: UITableViewController {
 
 extension ResultsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 5 : latestGames.count
+        section == .zero ? recordsRows : latestGames.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        if indexPath.section == .zero {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: gameRecordsCellId, for: indexPath) as? GameRecordTableViewCell else { return UITableViewCell() }
-            let cardCounts = [8, 12, 18, 24, 32]
+            let cardCounts = CardCount.allCases
             let cardCount = cardCounts[indexPath.row]
-            if let record = gameRecords.first(where: { $0.cardCount == cardCount }) {
-                cell.cardCountLabel.text = "\(record.cardCount) \(Localization.cards)"
-                cell.timeLabel.text = record.completionTime.formattedTime()
+            if let record = gameRecords.first(where: { $0.cardCount == cardCount.rawValue }) {
+                let count = "\(record.cardCount) \(Localization.cards)"
+                let time = record.completionTime.formattedTime()
+                cell.configure(count: count, time: time)
             } else {
-                cell.cardCountLabel.text = "\(cardCount) \(Localization.cards)"
-                cell.timeLabel.text = "-"
+                let count = "\(cardCount.rawValue) \(Localization.cards)"
+                let time = defaultTimeText
+                cell.configure(count: count, time: time)
             }
             cell.isUserInteractionEnabled = false
             return cell
@@ -98,7 +110,7 @@ extension ResultsTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: sectionHeaderId) as? TableSectionHeader else { return nil }
         
-        header.configure(title: section == 0 ? Localization.myRecords : Localization.latestGames)
+        header.configure(title: section == .zero ? Localization.myRecords : Localization.latestGames)
         
         var backgroundConfig = UIBackgroundConfiguration.clear()
         backgroundConfig.backgroundColor = UIColor.backgroundColor

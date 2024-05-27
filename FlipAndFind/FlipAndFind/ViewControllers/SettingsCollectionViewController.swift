@@ -42,11 +42,11 @@ final class SettingsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        iDregister()
+        idRegister()
         setup()
     }
     
-    private func iDregister() {
+    private func idRegister() {
         collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.register(CollectionSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderID)
         collectionView.register(SaveButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: saveButtonID)
