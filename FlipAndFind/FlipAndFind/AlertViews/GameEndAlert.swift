@@ -15,8 +15,10 @@ final class GameEndAlert: UIView {
     private let textTimeLabel = UILabel()
     private let timeLabel = UILabel()
     
+    private let timeStackView = UIStackView()
+    
     private let cardIcon = UIImageView(image: UIImage(named: "card_icon"))
-    private let clockIcon = UIImageView(image: UIImage(named: "clock_icon"))
+    private let clockIcon = UIImageView(image: UIImage(systemName: "timer"))
     
     private let rightMedalIcon = UIImageView(image: UIImage(named: "medal_icon"))
     private let leftMedalIcon = UIImageView(image: UIImage(named: "medal_icon"))
@@ -39,6 +41,15 @@ final class GameEndAlert: UIView {
     }
     
     private func setupViews() {
+        timeStackView.axis = .horizontal
+        timeStackView.distribution = .equalSpacing
+        timeStackView.alignment = .center
+        timeStackView.spacing = 5
+        
+        [clockIcon, timeLabel].forEach {
+            timeStackView.addArrangedSubview($0)
+        }
+        
         [themeLabel, cardCountLabel, textTimeLabel].forEach {
             $0.textColor = .customBlack
             $0.font = .bodyText
@@ -65,16 +76,16 @@ final class GameEndAlert: UIView {
         
         titleLabel.textColor = .customBlue
         titleLabel.font = .secondHeader
-        
+        clockIcon.tintColor = .customBlack
         timeLabel.textColor = .customBlack
         
-        [titleLabel, themeLabel, cardCountLabel, textTimeLabel, timeLabel, cardIcon, clockIcon, rightMedalIcon, leftMedalIcon, playButton, backButton].forEach {
+        [titleLabel, themeLabel, cardCountLabel, cardIcon, textTimeLabel, timeStackView, rightMedalIcon, leftMedalIcon, playButton, backButton].forEach {
             addSubview($0)
         }
     }
     
     private func setupConstraints() {
-        [titleLabel, themeLabel, cardCountLabel, textTimeLabel, timeLabel, cardIcon, clockIcon, rightMedalIcon, leftMedalIcon, playButton, backButton].forEach {
+        [titleLabel, themeLabel, cardCountLabel, textTimeLabel, timeLabel, timeStackView, cardIcon, clockIcon, rightMedalIcon, leftMedalIcon, playButton, backButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -106,11 +117,9 @@ final class GameEndAlert: UIView {
             textTimeLabel.topAnchor.constraint(equalTo: cardIcon.bottomAnchor, constant: 20),
             textTimeLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            timeLabel.centerYAnchor.constraint(equalTo: clockIcon.centerYAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 10),
+            timeStackView.centerXAnchor.constraint(equalTo: textTimeLabel.centerXAnchor),
+            timeStackView.topAnchor.constraint(equalTo: textTimeLabel.bottomAnchor, constant: 20),
             
-            clockIcon.centerYAnchor.constraint(equalTo: textTimeLabel.bottomAnchor, constant: 20),
-            clockIcon.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -10),
             clockIcon.widthAnchor.constraint(equalToConstant: 24),
             clockIcon.heightAnchor.constraint(equalToConstant: 24),
            

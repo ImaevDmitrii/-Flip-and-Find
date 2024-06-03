@@ -9,7 +9,7 @@ import UIKit
 
 final class HeaderView: UIView {
     
-    private let timerIcon = UIImageView(image: UIImage(named: "clock_white"))
+    private let timerIcon =  UIImageView(image: UIImage(systemName: "timer"))
     private let timerLabel = UILabel()
     private let cardsIcon = UIImageView(image: UIImage(named: "card_white"))
     private let cardsLabel = UILabel()
@@ -28,6 +28,8 @@ final class HeaderView: UIView {
     
     private func setupViews() {
         backgroundColor = .customBlue
+        
+        timerIcon.tintColor = .customWhite
         
         [timerIcon, timerLabel, cardsIcon, cardsLabel].forEach {
             addSubview($0)

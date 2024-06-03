@@ -15,15 +15,16 @@ final class LatestGamesTableViewCell: UITableViewCell {
     private let timeLabel = UILabel()
     
     private let cardIcon = UIImageView(image: UIImage(named: "card_icon"))
-    private let clockIcon = UIImageView(image: UIImage(named: "clock_icon"))
-    private let trophyIcon = UIImageView(image: UIImage(named: "trophy_icon"))
+    private let clockIcon = UIImageView(image: UIImage(systemName: "timer"))
+    private let trophyIcon = UIImageView(image: UIImage(systemName: "trophy"))
     
     private let separatorView = UIView()
     private let separatorHeight: CGFloat = 1
     
     private let iconSize: CGFloat = 28
     private let padding: CGFloat = 16
-    private let trailingSpacing: CGFloat = 78
+    private let trailingSpacing: CGFloat = 72
+    private let timeSpacing: CGFloat = 12
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,6 +46,10 @@ final class LatestGamesTableViewCell: UITableViewCell {
     
     private func setupViews() {
         backgroundColor = .backgroundColor
+        
+        [clockIcon, trophyIcon, cardIcon].forEach {
+            $0.tintColor = .customBlack
+        }
         
         let stackView = UIStackView(arrangedSubviews: [trophyIcon, themeLabel])
         
@@ -90,7 +95,7 @@ final class LatestGamesTableViewCell: UITableViewCell {
             clockIcon.heightAnchor.constraint(equalToConstant: iconSize),
             
             timeLabel.centerYAnchor.constraint(equalTo: cardIcon.centerYAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: clockIcon.trailingAnchor, constant: padding),
+            timeLabel.leadingAnchor.constraint(equalTo: clockIcon.trailingAnchor, constant: timeSpacing),
             timeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
             
             separatorView.heightAnchor.constraint(equalToConstant: separatorHeight),

@@ -116,7 +116,7 @@ final class MainViewController: UIViewController {
             
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 30),
+            scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 40),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),

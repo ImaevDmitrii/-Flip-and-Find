@@ -12,7 +12,7 @@ final class GameRecordTableViewCell: UITableViewCell {
     private let cardCountLabel = UILabel()
     private let timeLabel = UILabel()
     private let cardIcon = UIImageView(image: UIImage(named: "card_icon"))
-    private let clockIcon = UIImageView(image: UIImage(named: "clock_icon"))
+    private let clockIcon = UIImageView(image: UIImage(systemName: "timer"))
     
     
     private let iconSize: CGFloat = 24
@@ -38,6 +38,9 @@ final class GameRecordTableViewCell: UITableViewCell {
     private func setupViews() {
         backgroundColor = .backgroundColor
         
+        clockIcon.tintColor = .customBlack
+        timeLabel.textAlignment = .center
+        
         [cardIcon, clockIcon, cardCountLabel, timeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
@@ -59,7 +62,8 @@ final class GameRecordTableViewCell: UITableViewCell {
             clockIcon.heightAnchor.constraint(equalToConstant: iconSize),
             
             timeLabel.centerYAnchor.constraint(equalTo: cardIcon.centerYAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: clockIcon.trailingAnchor, constant: labelSpacing)
+            timeLabel.leadingAnchor.constraint(equalTo: clockIcon.trailingAnchor, constant: labelSpacing),
+            timeLabel.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

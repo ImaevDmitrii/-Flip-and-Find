@@ -28,8 +28,8 @@ extension UINavigationController {
     }
     
     func setupBackButton(action: Selector, target: Any?) {
-        let arrowBackImage = UIImage(named: "arrow_back")?.withRenderingMode(.alwaysOriginal)
-        let scaledImage = arrowBackImage?.scaleToSize(size: CGSize(width: 42, height: 32))
+        let arrowBackImage = UIImage(systemName: "arrow.left")
+        let scaledImage = arrowBackImage?.scaleToSize(size: CGSize(width: 34, height: 24))
         let backItem = UIBarButtonItem(image: scaledImage, style: .plain, target: target, action: action)
         topViewController?.navigationItem.leftBarButtonItem = backItem
     }

@@ -22,9 +22,17 @@ final class MainCoordinator: Coordinator {
     }
     
     func start() {
+        let launchVC = LaunchAnimationViewController()
+        launchVC.completionHandler = { [weak self] in
+            self?.showMainMenu()
+        }
+        navigationController.setViewControllers([launchVC], animated: false)
+    }
+    
+   private func showMainMenu() {
         let mainController = MainViewController()
         mainController.coordinator = self
-        navigationController.pushViewController(mainController, animated: true)
+        navigationController.setViewControllers([mainController], animated: false)
     }
     
     func startGame() {

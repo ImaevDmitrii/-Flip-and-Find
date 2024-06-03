@@ -95,7 +95,6 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     private func configureLayout() {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return }
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        layout.minimumLineSpacing = 5
     }
     
     private func setupGame() {
@@ -121,25 +120,23 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         bigImageView.image = UIImage(named: imageName)
         bigImageView.isHidden = false
         bigImageView.alpha = 0
-        UIView.animate(withDuration: 0.3, animations: {
-            self.gameModel.pauseTimer()
+        UIView.animate(withDuration: 0.2, animations: {
             self.bigImageView.alpha = 1
         }, completion: { _ in
-            UIView.animate(withDuration: 0.3, delay: 1.0, options: [], animations: {
+            UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: {
                 self.bigImageView.alpha = 0
             }, completion: { _ in
                 self.bigImageView.isHidden = true
-                self.gameModel.resumeTimer()
                 overlayView.removeFromSuperview()
             })
         })
     }
     
     private func updateHeaderView() {
-            let foundCards = gameModel.cards.filter { $0.isMatched }.count / 2
-            let totalCards = gameModel.cards.count
-            headerView.updateCardsLabel(found: foundCards, total: totalCards / 2)
-        }
+        let foundCards = gameModel.cards.filter { $0.isMatched }.count / 2
+        let totalCards = gameModel.cards.count / 2
+        headerView.updateCardsLabel(found: foundCards, total: totalCards)
+    }
     
     private func showExitAlert() {
         gameModel.pauseTimer()
@@ -225,15 +222,19 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
+              
         let totalItems = gameModel.cards.count
-        let columns = Int(sqrt(Double(totalItems)).rounded(.up))
+        let isLandscape = UIDevice.current.orientation.isLandscape
+        
+        let columns = isLandscape ? Int(sqrt(Double(totalItems)).rounded(.up)) + 1 : Int(sqrt(Double(totalItems)).rounded(.up)) - 1
         let rows = (totalItems + columns - 1) / columns
         
-        let horizontalSpacing = (collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing ?? .zero
-        let verticalSpacing = (collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing ?? .zero
-        let insets = (collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset ?? .zero
+        let horizontalSpacing = flowLayout.minimumInteritemSpacing
+        let verticalSpacing = flowLayout.minimumLineSpacing
+        let insets = flowLayout.sectionInset
         
-        let bottomInset = collectionView.safeAreaInsets.bottom + 50
+        let bottomInset = collectionView.safeAreaInsets.bottom + 30
         
         let totalHorizontalSpacing = horizontalSpacing * CGFloat(columns - 1) + insets.left + insets.right
         let totalVerticalSpacing = verticalSpacing * CGFloat(rows - 1) + insets.top + insets.bottom + bottomInset
@@ -295,7 +296,9 @@ extension GameCollectionViewController {
             }
         }
         if gameModel.checkAllPairsFound() {
-            showGameOverAlert()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.showGameOverAlert()
+            }
         }
     }
 }

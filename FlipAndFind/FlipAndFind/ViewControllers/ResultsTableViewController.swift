@@ -14,7 +14,7 @@ final class ResultsTableViewController: UITableViewController {
     
     private let recordsGameKey = "gameRecords"
     private let latestGameKey = "latestGames"
-    private let defaultTimeText = "00:00"
+    private let defaultTimeText = "-"
     private let numberOfSections = 2
     private let recordsRows = 5
     

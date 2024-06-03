@@ -31,6 +31,8 @@ final class LaunchAnimationViewController: UIViewController {
         view.backgroundColor = .backgroundColor
         
         containerView.backgroundColor = .customBlue
+        containerView.layer.cornerRadius = 50
+        containerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
         titleLabel.text = "Memory \nBoom"
         titleLabel.textColor = .customWhite
@@ -102,21 +104,18 @@ final class LaunchAnimationViewController: UIViewController {
     
     private func initialAnimations() {
         UIView.animate(withDuration: 1.3, delay: 0.5, options: [.curveEaseInOut], animations: {
-            self.firstSquare.transform = self.firstSquare.transform.translatedBy(x: -self.view.bounds.width, y: 0)
+            self.firstSquare.transform = self.firstSquare.transform.translatedBy(x: 0, y: -self.view.bounds.width)
             self.secondSquare.transform = self.secondSquare.transform.translatedBy(x: self.view.bounds.width, y: 0)
             self.thirdSquare.transform = self.thirdSquare.transform.translatedBy(x: -self.view.bounds.width, y: 0)
-            self.fourthSquare.transform = self.fourthSquare.transform.translatedBy(x: self.view.bounds.width, y: 0)
+            self.fourthSquare.transform = self.fourthSquare.transform.translatedBy(x: 0, y: self.view.bounds.width)
             self.subtitleLabel.alpha = 0
         }, completion: { _ in
             UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseInOut], animations: {
-                self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -self.view.bounds.height * 0.3)
-                self.containerView.layer.cornerRadius = 50
-                self.containerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-                
                 let totalHeight = self.view.bounds.height
-                let headerHeight = self.view.bounds.height * 0.373
-              
-                self.containerView.transform = CGAffineTransform(translationX: 0, y: -(totalHeight - headerHeight ))
+                let headerHeight = self.view.bounds.height * 0.3
+                let finalHeight = totalHeight - headerHeight
+                
+                self.containerView.transform = CGAffineTransform(translationX: 0, y: -finalHeight)
             }, completion: { _ in
                 self.completionHandler?()
             })
