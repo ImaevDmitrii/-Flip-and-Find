@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "death_es.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

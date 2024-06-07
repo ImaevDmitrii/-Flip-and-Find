@@ -21,7 +21,7 @@ enum CardCount: Int, CaseIterable {
     }
     
     var imageName: String {
-        return "\(self.rawValue) card"
+        return "\(self.rawValue)"
     }
 }
 

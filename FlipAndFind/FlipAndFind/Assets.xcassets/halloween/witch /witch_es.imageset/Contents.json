@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "witch_es.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

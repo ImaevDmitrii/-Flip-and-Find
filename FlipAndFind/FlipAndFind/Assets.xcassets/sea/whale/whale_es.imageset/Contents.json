@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "whale_es.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
