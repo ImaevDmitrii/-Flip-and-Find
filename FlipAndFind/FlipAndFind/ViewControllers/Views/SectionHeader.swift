@@ -26,11 +26,14 @@ final class SectionHeader: UIView {
         titleLabel.textColor = .darkGray
         addSubview(titleLabel)
         
+        let padding: CGFloat = 16
+        let size: CGFloat = 32
+        
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 32)
+            titleLabel.heightAnchor.constraint(equalToConstant: size)
         ])
     }
     

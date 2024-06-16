@@ -19,12 +19,6 @@ final class LatestGamesTableViewCell: UITableViewCell {
     private let trophyIcon = UIImageView(image: UIImage(systemName: "trophy"))
     
     private let separatorView = UIView()
-    private let separatorHeight: CGFloat = 1
-    
-    private let iconSize: CGFloat = 28
-    private let padding: CGFloat = 16
-    private let trailingSpacing: CGFloat = 72
-    private let timeSpacing: CGFloat = 12
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,6 +39,12 @@ final class LatestGamesTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
+        let separatorHeight: CGFloat = 1
+        let iconSize: CGFloat = 28
+        let padding: CGFloat = 16
+        let trailingSpacing: CGFloat = 72
+        let timeSpacing: CGFloat = 12
+        
         backgroundColor = .backgroundColor
         
         [clockIcon, trophyIcon, cardIcon].forEach {

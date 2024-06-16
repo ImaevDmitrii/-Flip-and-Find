@@ -23,13 +23,16 @@ final class SaveButton: UICollectionReusableView {
         super.init(frame: frame)
         addSubview(saveButton)
         
+        let padding: CGFloat = 16
+        let spacing: CGFloat = 20
+        
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            saveButton.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
             saveButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding)
         ])
     }
     

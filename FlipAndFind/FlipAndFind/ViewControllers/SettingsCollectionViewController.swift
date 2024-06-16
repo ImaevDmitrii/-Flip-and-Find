@@ -67,7 +67,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
         overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(overlayView)
         
-        let alertView = ExitAlert(frame: .zero)
+        let alertView = ConfirmationAlert(frame: .zero)
         alertView.configure(title: Localization.saveChanges,
                             hiddenSecondTitle: true,
                             confirmButtonTitle: Localization.yes,
@@ -83,13 +83,15 @@ final class SettingsCollectionViewController: UICollectionViewController {
             alertView.heightAnchor.constraint(greaterThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.3)
         ])
         
-        alertView.onTopButton = { [weak self, weak overlayView] in
+        alertView.onTopButton = { [weak self, weak overlayView, weak alertView] in
             self?.saveButtonTapped()
             overlayView?.removeFromSuperview()
+            alertView?.removeFromSuperview()
         }
                 
-        alertView.onBottomButton = { [weak self, weak overlayView] in
+        alertView.onBottomButton = { [weak self, weak overlayView, weak alertView] in
             overlayView?.removeFromSuperview()
+            alertView?.removeFromSuperview()
             self?.navigationController?.popViewController(animated: true)
         }
     }

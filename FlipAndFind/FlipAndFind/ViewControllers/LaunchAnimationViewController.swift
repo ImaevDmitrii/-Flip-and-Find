@@ -62,6 +62,9 @@ final class LaunchAnimationViewController: UIViewController {
     
     private func setupConstraints() {
         let squareSize = view.bounds.width * 0.30
+        let padding: CGFloat = 20
+        let bigPadding: CGFloat = 40
+        let spacing: CGFloat = 60
         
         [containerView, titleLabel, subtitleLabel, firstSquare, secondSquare, thirdSquare, fourthSquare].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -74,30 +77,30 @@ final class LaunchAnimationViewController: UIViewController {
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -20),
+            titleLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -padding),
             
             subtitleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
             
             firstSquare.widthAnchor.constraint(equalToConstant: squareSize),
                 firstSquare.heightAnchor.constraint(equalToConstant: squareSize),
-                firstSquare.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60),
-                firstSquare.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+                firstSquare.topAnchor.constraint(equalTo: containerView.topAnchor, constant: spacing),
+                firstSquare.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
                 
                 secondSquare.widthAnchor.constraint(equalToConstant: squareSize),
                 secondSquare.heightAnchor.constraint(equalToConstant: squareSize),
-                secondSquare.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60),
-                secondSquare.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+                secondSquare.topAnchor.constraint(equalTo: containerView.topAnchor, constant: spacing),
+                secondSquare.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
                 
                 thirdSquare.widthAnchor.constraint(equalToConstant: squareSize),
                 thirdSquare.heightAnchor.constraint(equalToConstant: squareSize),
-                thirdSquare.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -60),
-                thirdSquare.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
+                thirdSquare.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -spacing),
+                thirdSquare.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: bigPadding),
                 
                 fourthSquare.widthAnchor.constraint(equalToConstant: squareSize),
                 fourthSquare.heightAnchor.constraint(equalToConstant: squareSize),
-                fourthSquare.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -60),
-                fourthSquare.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40)
+                fourthSquare.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -spacing),
+                fourthSquare.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -bigPadding)
 
         ])
     }

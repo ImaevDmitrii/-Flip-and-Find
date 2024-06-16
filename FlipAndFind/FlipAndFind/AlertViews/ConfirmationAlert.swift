@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ExitAlert: UIView {
+final class ConfirmationAlert: UIView {
     
     private let titleLabel = UILabel()
     private let secondTitleLabel = UILabel()
@@ -31,13 +31,15 @@ final class ExitAlert: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        let padding: CGFloat = 20
+        
         if secondTitleLabel.isHidden {
             NSLayoutConstraint.activate([
-                topButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
+                topButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding)
             ])
         } else {
             NSLayoutConstraint.activate([
-                topButton.topAnchor.constraint(equalTo: secondTitleLabel.bottomAnchor, constant: 20)
+                topButton.topAnchor.constraint(equalTo: secondTitleLabel.bottomAnchor, constant: padding)
             ])
         }
     }
@@ -72,27 +74,32 @@ final class ExitAlert: UIView {
     }
     
     private func setupConstraints() {
+        let buttonHeight: CGFloat = 50
+        let padding: CGFloat = 15
+        let buttonPadding: CGFloat = 30
+        let spacing: CGFloat = 20
+        
         [titleLabel, secondTitleLabel, topButton, bottomButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             
-            secondTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            secondTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: spacing),
             secondTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            topButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            topButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            topButton.heightAnchor.constraint(equalToConstant: 50),
+            topButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: buttonPadding),
+            topButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -buttonPadding),
+            topButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
-            bottomButton.topAnchor.constraint(equalTo: topButton.bottomAnchor, constant: 15),
-            bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            bottomButton.heightAnchor.constraint(equalToConstant: 50),
-            bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            bottomButton.topAnchor.constraint(equalTo: topButton.bottomAnchor, constant: padding),
+            bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: buttonPadding),
+            bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -buttonPadding),
+            bottomButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing)
         ])
     }
     

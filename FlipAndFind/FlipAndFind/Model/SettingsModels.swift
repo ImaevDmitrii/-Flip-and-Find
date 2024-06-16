@@ -8,7 +8,7 @@
 import Foundation
 
 enum CardCount: Int, CaseIterable {
-    case eight = 8, twelve = 12, eighteen = 18, twentyFour = 24, thirtyTwo = 32
+    case eight = 8, twelve = 12, eighteen = 18, twentyFour = 24, thirtyTwo = 32, fourty = 40
     
     var localizedName: String {
         switch self {
@@ -17,11 +17,29 @@ enum CardCount: Int, CaseIterable {
         case .eighteen: return rawValue.description
         case.twentyFour: return rawValue.description
         case .thirtyTwo: return rawValue.description
+        case .fourty: return rawValue.description
         }
     }
     
     var imageName: String {
         return "\(self.rawValue)"
+    }
+    
+    func gridConfiguration(isLandscape: Bool) -> (columns: Int, rows: Int) {
+        switch self {
+        case .eight:
+            return isLandscape ? (4, 2) : (2, 4)
+        case .twelve:
+            return isLandscape ? (6, 2) : (3, 4)
+        case .eighteen:
+            return isLandscape ? (6, 3) : (3, 6)
+        case .twentyFour:
+            return isLandscape ? (8, 3) : (4, 6)
+        case .thirtyTwo:
+            return isLandscape ? (8, 4) : (4, 8)
+        case .fourty:
+            return isLandscape ? (10, 4) : (5, 8)
+        }
     }
 }
 

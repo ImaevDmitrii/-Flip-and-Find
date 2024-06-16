@@ -16,12 +16,10 @@ final class GameEndAlert: UIView {
     private let timeLabel = UILabel()
     
     private let timeStackView = UIStackView()
+    private let cardStackView = UIStackView()
     
     private let cardIcon = UIImageView(image: UIImage(named: "card_icon"))
     private let clockIcon = UIImageView(image: UIImage(systemName: "timer"))
-    
-    private let rightMedalIcon = UIImageView(image: UIImage(named: "medal_icon"))
-    private let leftMedalIcon = UIImageView(image: UIImage(named: "medal_icon"))
     
     private let playButton = UIButton()
     private let backButton = UIButton()
@@ -41,22 +39,28 @@ final class GameEndAlert: UIView {
     }
     
     private func setupViews() {
-        timeStackView.axis = .horizontal
-        timeStackView.distribution = .equalSpacing
-        timeStackView.alignment = .center
-        timeStackView.spacing = 5
+        [timeStackView, cardStackView].forEach {
+            $0.axis = .horizontal
+            $0.distribution = .equalSpacing
+            $0.alignment = .center
+            $0.spacing = 5
+        }
         
         [clockIcon, timeLabel].forEach {
             timeStackView.addArrangedSubview($0)
         }
         
-        [themeLabel, cardCountLabel, textTimeLabel].forEach {
-            $0.textColor = .customBlack
-            $0.font = .bodyText
+        [cardIcon, cardCountLabel].forEach {
+            cardStackView.addArrangedSubview($0)
         }
         
-        [leftMedalIcon, rightMedalIcon].forEach {
-            $0.contentMode = .scaleAspectFit
+        [clockIcon, cardIcon].forEach {
+            $0.tintColor = .customBlack
+        }
+        
+        [themeLabel, cardCountLabel, textTimeLabel, timeLabel].forEach {
+            $0.textColor = .customBlack
+            $0.font = .bodyText
         }
         
         [playButton, backButton].forEach {
@@ -76,63 +80,61 @@ final class GameEndAlert: UIView {
         
         titleLabel.textColor = .customBlue
         titleLabel.font = .secondHeader
-        clockIcon.tintColor = .customBlack
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
+        
         timeLabel.textColor = .customBlack
         
-        [titleLabel, themeLabel, cardCountLabel, cardIcon, textTimeLabel, timeStackView, rightMedalIcon, leftMedalIcon, playButton, backButton].forEach {
+        [titleLabel, themeLabel, cardStackView, textTimeLabel, timeStackView, playButton, backButton].forEach {
             addSubview($0)
         }
     }
     
     private func setupConstraints() {
-        [titleLabel, themeLabel, cardCountLabel, textTimeLabel, timeLabel, timeStackView, cardIcon, clockIcon, rightMedalIcon, leftMedalIcon, playButton, backButton].forEach {
+        let iconSize: CGFloat = 24
+        let buttonHeight: CGFloat = 50
+        let buttonSpacing: CGFloat = 10
+        let padding: CGFloat = 20
+        let spacing: CGFloat = 30
+        let titlePadding: CGFloat = 35
+        
+        [titleLabel, themeLabel, textTimeLabel, cardStackView, timeStackView, playButton, backButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        [clockIcon, cardIcon].forEach {
+            $0.heightAnchor.constraint(equalToConstant: iconSize).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: iconSize).isActive = true
+        }
+        
         NSLayoutConstraint.activate([
-            leftMedalIcon.topAnchor.constraint(equalTo: topAnchor, constant: 30),
-            leftMedalIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            leftMedalIcon.widthAnchor.constraint(equalToConstant: 40),
-            leftMedalIcon.heightAnchor.constraint(equalToConstant: 40),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: titlePadding),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -titlePadding),
             
-            rightMedalIcon.topAnchor.constraint(equalTo: topAnchor, constant: 30),
-            rightMedalIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            rightMedalIcon.widthAnchor.constraint(equalToConstant: 40),
-            rightMedalIcon.heightAnchor.constraint(equalToConstant: 40),
+            themeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: spacing),
+            themeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 30),
+            cardStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: spacing),
+            cardStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             
-            themeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            themeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            textTimeLabel.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: padding),
+            textTimeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             
-            cardCountLabel.centerYAnchor.constraint(equalTo: themeLabel.centerYAnchor),
-            cardCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            
-            cardIcon.centerYAnchor.constraint(equalTo: cardCountLabel.centerYAnchor),
-            cardIcon.trailingAnchor.constraint(equalTo: cardCountLabel.leadingAnchor, constant: -8),
-            cardIcon.heightAnchor.constraint(equalToConstant: 24),
-            cardIcon.widthAnchor.constraint(equalToConstant: 24),
-            
-            textTimeLabel.topAnchor.constraint(equalTo: cardIcon.bottomAnchor, constant: 20),
-            textTimeLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
-            timeStackView.centerXAnchor.constraint(equalTo: textTimeLabel.centerXAnchor),
-            timeStackView.topAnchor.constraint(equalTo: textTimeLabel.bottomAnchor, constant: 20),
-            
-            clockIcon.widthAnchor.constraint(equalToConstant: 24),
-            clockIcon.heightAnchor.constraint(equalToConstant: 24),
+            timeStackView.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: padding),
+            timeStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
            
-            playButton.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20),
-            playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            playButton.heightAnchor.constraint(equalToConstant: 50),
+            playButton.topAnchor.constraint(equalTo: timeStackView.bottomAnchor, constant: padding),
+            playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
+            playButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
+            playButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
-            backButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 10),
-            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            backButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            backButton.heightAnchor.constraint(equalToConstant: 50),
-            backButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            backButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: buttonSpacing),
+            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
+            backButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
+            backButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            backButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing)
         ])
     }
     

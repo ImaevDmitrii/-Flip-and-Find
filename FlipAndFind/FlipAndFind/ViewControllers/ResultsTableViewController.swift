@@ -45,6 +45,7 @@ final class ResultsTableViewController: UITableViewController {
         title = Localization.myGames
         navigationController?.setupNavigationBar()
         navigationController?.setupBackButton(action: #selector(handleBackAction), target: self)
+        navigationController?.setupResetButton(action: #selector(handleResetAction), target: self)
     }
     
     private func loadGameData() {
@@ -55,6 +56,55 @@ final class ResultsTableViewController: UITableViewController {
     
     @objc private func handleBackAction() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func handleResetAction() {
+        showResetAlert()
+    }
+    
+    private func showResetAlert() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let overlayView = UIVisualEffectView(effect: blurEffect)
+        overlayView.frame = view.bounds
+        overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(overlayView)
+        
+        let alertView = ConfirmationAlert(frame: .zero)
+        alertView.configure(title: Localization.resetHistory,
+                            hiddenSecondTitle: true,
+                            confirmButtonTitle: Localization.yes,
+                            cancelButtonTitle: Localization.no)
+        view.addSubview(alertView)
+        
+        let padding: CGFloat = 35
+        
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: padding),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -padding),
+            alertView.heightAnchor.constraint(greaterThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.4)
+        ])
+        
+        alertView.onTopButton = { [weak self, weak overlayView, weak alertView] in
+            self?.resetGameData()
+            overlayView?.removeFromSuperview()
+            alertView?.removeFromSuperview()
+        }
+        
+        alertView.onBottomButton = { [weak overlayView, weak alertView] in
+            overlayView?.removeFromSuperview()
+            alertView?.removeFromSuperview()
+        }
+    }
+    
+    private func resetGameData() {
+        UserDefaults.standard.removeObject(forKey: recordsGameKey)
+        UserDefaults.standard.removeObject(forKey: latestGameKey)
+        gameRecords.removeAll()
+        latestGames.removeAll()
+        tableView.reloadData()
     }
     
     private func saveGameData() {

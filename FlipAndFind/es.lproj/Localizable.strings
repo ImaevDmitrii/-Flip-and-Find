@@ -17,7 +17,7 @@
 "doYouWantToLeave" = "¿Deseas salir del juego?";
 "keepPlaying" = "Continuar jugando";
 "leaveGame" = "Salir del juego";
-"youWon" = "¡Has ganado!";
+"youWon" = "¡Ganaste! ¡Buen trabajo!";
 "cards" = "cartas";
 "myRecords" = "Mis récords";
 "latestGames" = "Últimos juegos";
@@ -36,3 +36,4 @@
 "english" = "Inglés";
 "russian" = "Ruso";
 "spanish" = "Español";
+"resetHistory" = "¿Deseas borrar toda historia de juegos?";

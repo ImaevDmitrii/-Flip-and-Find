@@ -95,14 +95,17 @@ final class MainViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        let buttonHeight: CGFloat = 50
+        let padding: CGFloat = 40
+        
         [headerView, titleLabel, stackView, scrollView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         [startButton, myGamesButton, settingsButton].forEach {
-            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
-            $0.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 48).isActive = true
-            $0.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -48).isActive = true
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: buttonHeight).isActive = true
+            $0.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: padding).isActive = true
+            $0.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -padding).isActive = true
         }
         
         NSLayoutConstraint.activate([
@@ -116,7 +119,7 @@ final class MainViewController: UIViewController {
             
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 40),
+            scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),

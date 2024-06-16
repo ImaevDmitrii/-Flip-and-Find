@@ -38,23 +38,27 @@ final class HeaderView: UIView {
         
         timerLabel.text = startTime
         
+        let spacing: CGFloat = 20
+        let iconSize: CGFloat = 24
+        let padding: CGFloat = 8
+        
         NSLayoutConstraint.activate([
-            timerIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            timerIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
             timerIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
-            timerIcon.widthAnchor.constraint(equalToConstant: 24),
-            timerIcon.heightAnchor.constraint(equalToConstant: 24),
+            timerIcon.widthAnchor.constraint(equalToConstant: iconSize),
+            timerIcon.heightAnchor.constraint(equalToConstant: iconSize),
             
-            timerLabel.leadingAnchor.constraint(equalTo: timerIcon.trailingAnchor, constant: 8),
+            timerLabel.leadingAnchor.constraint(equalTo: timerIcon.trailingAnchor, constant: padding),
             timerLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            cardsIcon.leadingAnchor.constraint(equalTo: timerLabel.trailingAnchor, constant: 20),
+            cardsIcon.leadingAnchor.constraint(equalTo: timerLabel.trailingAnchor, constant: spacing),
             cardsIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
-            cardsIcon.widthAnchor.constraint(equalToConstant: 24),
-            cardsIcon.heightAnchor.constraint(equalToConstant: 24),
+            cardsIcon.widthAnchor.constraint(equalToConstant: iconSize),
+            cardsIcon.heightAnchor.constraint(equalToConstant: iconSize),
             
-            cardsLabel.leadingAnchor.constraint(equalTo: cardsIcon.trailingAnchor, constant: 8),
+            cardsLabel.leadingAnchor.constraint(equalTo: cardsIcon.trailingAnchor, constant: padding),
             cardsLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            cardsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            cardsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing)
         ])
         
         [timerLabel, cardsLabel].forEach {

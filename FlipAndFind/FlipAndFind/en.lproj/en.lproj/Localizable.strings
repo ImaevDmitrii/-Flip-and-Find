@@ -16,7 +16,7 @@
 "doYouWantToLeave"  = "Do you want to leave the game?";
 "keepPlaying" = "Keep playing";
 "leaveGame" = "Leave the game";
-"youWon" = "You won!";
+"youWon" = "You won! Great job!";
 "cards" = "cards";
 "myRecords" = "My records";
 "latestGames" = "Latest games";
@@ -35,3 +35,4 @@
 "english" = "English";
 "russian" = "Russian";
 "spanish" = "Spanish";
+"resetHistory" = "Do you want to reset all game history?";

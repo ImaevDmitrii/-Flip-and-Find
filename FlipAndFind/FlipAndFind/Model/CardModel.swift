@@ -32,7 +32,7 @@ enum DinosaurType: String, CaseIterable, CardType {
         "dinosaurio"
     }
     
-    case allosaurus, ankylosaurus, baryonyx, brachiosaurus, carnosaurus, diplodocus, elasmosaurus, gallimimus, kronosaurus, ornithosaurus, pterodactyl, spinosaurus, stegosaurus, triceraptor, tyrannosaurus, velociraptor
+    case allosaurus, ankylosaurus, baryonyx, brachiosaurus, carnosaurus, diplodocus, elasmosaurus, gallimimus, kronosaurus, ornithosaurus, pterodactyl, spinosaurus, stegosaurus, triceraptor, tyrannosaurus, velociraptor, сorythosaurus, argentinosaurus, dilophasaurus, pteranodon
 }
 
 enum SeaAnimalsType: String, CaseIterable, CardType {
@@ -44,7 +44,7 @@ enum SeaAnimalsType: String, CaseIterable, CardType {
         "seaanimals"
     }
     
-    case clownFish, crab, dolphin, hammerheadShark, jellyfish, killerWhale, stingray, octopus, oyster, hedgehogFish, shark, shrimp, squid, swordfish, turtle, whale
+    case clownFish, crab, dolphin, hammerheadShark, jellyfish, killerWhale, stingray, octopus, oyster, hedgehogFish, shark, shrimp, squid, swordfish, turtle, whale, moorishIdol, regalBlueTang, starfish, seahorse
 }
 
 enum HalloweenType: String, CaseIterable, CardType {
@@ -56,7 +56,7 @@ enum HalloweenType: String, CaseIterable, CardType {
         "halloween"
     }
     
-    case bat, blackCat, death, ghost, monster, mummy, owl, pirate, pumpkin, skeleton, blackSpider, vampire, werewolf, witchHat, witch, zombie
+    case bat, blackCat, death, ghost, monster, mummy, owl, pirate, pumpkin, skeleton, blackSpider, vampire, werewolf, witchHat, witch, zombie, fairy, gargoyle, yeti, frankenstein
 }
 
 enum FarmType: String, CaseIterable, CardType {
@@ -68,7 +68,7 @@ enum FarmType: String, CaseIterable, CardType {
         "farm"
     }
     
-    case cat, cow, dog, donkey, duck, goat, goose, hen, horse, mouse, pig, rabbit, ram, rooster, sheep, turkey
+    case cat, cow, dog, donkey, duck, goat, goose, hen, horse, mouse, pig, rabbit, ram, rooster, sheep, turkey, bull, chick, drake, lama
 }
 
 enum InsectsType: String, CaseIterable, CardType {
@@ -80,7 +80,7 @@ enum InsectsType: String, CaseIterable, CardType {
         "insects"
     }
     
-    case ant, bee, butterfly, caterpillar, cockroach, dragonfly, flea, fly, grasshopper, ladybug, mantis, mosquito, rhinocerosBeetle, stagBeetle, spider, snail
+    case ant, bee, butterfly, caterpillar, cockroach, dragonfly, flea, fly, grasshopper, ladybug, mantis, mosquito, rhinocerosBeetle, stagBeetle, spider, snail, coloradoBeetle, moth, pillbug, wasp
 }
 
 enum JungleType: String, CaseIterable, CardType {
@@ -92,5 +92,5 @@ enum JungleType: String, CaseIterable, CardType {
         "jungle"
     }
     
-    case hummingbird, crocodile, elephant, hippopotamus, giraffe, leopard, lion, monkey, panther, tiger, zebra, gorilla, parrot, flamingo, lemur, rhinoceros
+    case hummingbird, crocodile, elephant, hippopotamus, giraffe, leopard, lion, monkey, panther, tiger, zebra, gorilla, parrot, flamingo, lemur, rhinoceros, сockatoo, python, sloth, gazelle
 }

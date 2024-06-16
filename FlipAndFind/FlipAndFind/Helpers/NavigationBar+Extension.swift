@@ -33,5 +33,12 @@ extension UINavigationController {
         let backItem = UIBarButtonItem(image: scaledImage, style: .plain, target: target, action: action)
         topViewController?.navigationItem.leftBarButtonItem = backItem
     }
+    
+    func setupResetButton(action: Selector, target: Any?) {
+        let resetImage = UIImage(systemName: "arrow.counterclockwise")
+        let scaledImage = resetImage?.scaleToSize(size: CGSize(width: 26, height: 26))
+        let resetItem = UIBarButtonItem(image: scaledImage, style: .plain, target: target, action: action)
+        topViewController?.navigationItem.rightBarButtonItem = resetItem
+    }
 }
 

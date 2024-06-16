@@ -50,7 +50,7 @@
 		CB85E59C2BCFB3BF005F91EA /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */; };
 		CBB1814F2BDE3D9000420015 /* GameEndAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB1814E2BDE3D8F00420015 /* GameEndAlert.swift */; };
 		CBB181512BDE403900420015 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBB181502BDE403900420015 /* Montserrat-Regular.ttf */; };
-		CBB181532BDEAF8800420015 /* ExitAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB181522BDEAF8800420015 /* ExitAlert.swift */; };
+		CBB181532BDEAF8800420015 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB181522BDEAF8800420015 /* ConfirmationAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,7 +102,7 @@
 		CB85E59B2BCFB3BF005F91EA /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		CBB1814E2BDE3D8F00420015 /* GameEndAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndAlert.swift; sourceTree = "<group>"; };
 		CBB181502BDE403900420015 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
-		CBB181522BDEAF8800420015 /* ExitAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlert.swift; sourceTree = "<group>"; };
+		CBB181522BDEAF8800420015 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,7 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				CBB1814E2BDE3D8F00420015 /* GameEndAlert.swift */,
-				CBB181522BDEAF8800420015 /* ExitAlert.swift */,
+				CBB181522BDEAF8800420015 /* ConfirmationAlert.swift */,
 			);
 			path = AlertViews;
 			sourceTree = "<group>";
@@ -375,7 +375,7 @@
 				CB8430EF2BD2B9DC00AC058E /* SectionHeader.swift in Sources */,
 				CB552FEF2BDB89FC008AE1C3 /* ResultsModel.swift in Sources */,
 				CB552FCE2BD6563A008AE1C3 /* NavigationBar+Extension.swift in Sources */,
-				CBB181532BDEAF8800420015 /* ExitAlert.swift in Sources */,
+				CBB181532BDEAF8800420015 /* ConfirmationAlert.swift in Sources */,
 				CB552FCA2BD63F62008AE1C3 /* GameModel.swift in Sources */,
 				CB4A1D992BBFE50F00A3DBE4 /* SceneDelegate.swift in Sources */,
 				CB1747352BFC8D67005A21AD /* Data+Extension.swift in Sources */,

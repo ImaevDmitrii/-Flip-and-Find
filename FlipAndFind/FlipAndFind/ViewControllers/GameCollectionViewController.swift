@@ -17,6 +17,8 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     
     private var theme: Theme?
     
+    private let padding: CGFloat = 35
+    
     init(){
         let layout = UICollectionViewFlowLayout()
         super.init(collectionViewLayout: layout)
@@ -141,13 +143,15 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     private func showExitAlert() {
         gameModel.pauseTimer()
         
+        navigationController?.navigationBar.isUserInteractionEnabled = false
+            
         let blurEffect = UIBlurEffect(style: .light)
         let overlayView = UIVisualEffectView(effect: blurEffect)
         overlayView.frame = view.bounds
         overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(overlayView)
         
-        let alertView = ExitAlert(frame: CGRect.zero)
+        let alertView = ConfirmationAlert(frame: CGRect.zero)
         alertView.configure(title: Localization.doYouWantToLeave,
                             hiddenSecondTitle: false,
                             confirmButtonTitle: Localization.keepPlaying,
@@ -158,8 +162,8 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         NSLayoutConstraint.activate([
             alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
             alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
-            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 16),
-            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -16),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: padding),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -padding),
             alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.8)
             
         ])
@@ -168,6 +172,7 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
             self?.gameModel.resumeTimer()
             overlayView?.removeFromSuperview()
             alertView.removeFromSuperview()
+            self?.navigationController?.navigationBar.isUserInteractionEnabled = true
         }
         alertView.onBottomButton = { [weak self, weak overlayView] in
             overlayView?.removeFromSuperview()
@@ -193,19 +198,20 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         NSLayoutConstraint.activate([
             alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
             alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
-            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 16),
-            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -16),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: padding),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -padding),
             alertView.heightAnchor.constraint(lessThanOrEqualTo: overlayView.heightAnchor, multiplier: 1.0)
         ])
         
-        alertView.onPlayAgain = { [weak self, weak overlayView] in
+        alertView.onPlayAgain = { [weak self, weak overlayView, weak alertView] in
             self?.setupGame()
             overlayView?.removeFromSuperview()
-            alertView.removeFromSuperview()
+            alertView?.removeFromSuperview()
         }
         
-        alertView.onBackToMenu = { [weak self, weak overlayView] in
+        alertView.onBackToMenu = { [weak self, weak overlayView, weak alertView] in
             overlayView?.removeFromSuperview()
+            alertView?.removeFromSuperview()
             self?.navigationController?.popViewController(animated: true)
         }
     }
@@ -223,12 +229,12 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
-              
-        let totalItems = gameModel.cards.count
-        let isLandscape = UIDevice.current.orientation.isLandscape
         
-        let columns = isLandscape ? Int(sqrt(Double(totalItems)).rounded(.up)) + 1 : Int(sqrt(Double(totalItems)).rounded(.up)) - 1
-        let rows = (totalItems + columns - 1) / columns
+        let totalItems = gameModel.cards.count
+        guard let cardCount = CardCount(rawValue: totalItems) else { return .zero }
+        
+        let isLandscape = UIDevice.current.orientation.isLandscape
+        let (columns, rows) = cardCount.gridConfiguration(isLandscape: isLandscape)
         
         let horizontalSpacing = flowLayout.minimumInteritemSpacing
         let verticalSpacing = flowLayout.minimumLineSpacing

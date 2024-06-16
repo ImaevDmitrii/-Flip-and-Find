@@ -48,4 +48,5 @@ struct Localization {
     static var english: String { "english".localized }
     static var russian: String { "russian".localized }
     static var spanish: String { "spanish".localized }
+    static var resetHistory: String { "resetHistory".localized }
 }

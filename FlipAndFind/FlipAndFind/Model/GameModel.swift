@@ -13,7 +13,7 @@ final class GameModel {
     var firstFlippedCardIndex: Int?
     
     private var isCheckingMatches = false
-    private  var currentTheme: Theme?
+    private var currentTheme: Theme?
     
     private var startTime: Date?
     private var pauseStartTime: Date?
