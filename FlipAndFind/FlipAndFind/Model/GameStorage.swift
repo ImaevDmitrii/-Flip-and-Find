@@ -16,7 +16,7 @@ final class GameStorage {
         var games = loadLatestGames()
         games.append(game)
         
-        if games.count > 15 {
+        if games.count > 30 {
             if let gameToRemove = games.first(where: { !isBestGame($0) }) {
                 if let index = games.firstIndex(of: gameToRemove) {
                     games.remove(at: index)
@@ -42,9 +42,17 @@ final class GameStorage {
     }
     
     private func isBestGame(_ game: LatestGames) -> Bool {
-           let records = loadGameRecords()
-           return records.contains { $0.cardCount == game.cardCount && $0.completionTime >= game.completionTime }
-       }
+        let records = loadGameRecords()
+        return records.contains { $0.cardCount == game.cardCount && $0.completionTime >= game.completionTime }
+    }
+    
+    func isRecord(time: TimeInterval, forCardCount cardCount: Int) -> Bool {
+        let records = loadGameRecords()
+        if let record = records.first(where: { $0.cardCount == cardCount }) {
+            return time <= record.completionTime
+        }
+        return true
+    }
     
     func loadGameRecords() -> [GameRecord] {
         (try? JSONDecoder().decode([GameRecord].self, from: UserDefaults.standard.data(forKey: recordsKey) ?? Data())) ?? []

@@ -30,6 +30,7 @@ struct Localization {
     static var keepPlaying: String { "keepPlaying".localized }
     static var leaveGame: String { "leaveGame".localized }
     static var youWon: String { "youWon".localized }
+    static var newRecord: String { "newRecord".localized }
     static var cards: String { "cards".localized }
     static var myRecords: String { "myRecords".localized }
     static var latestGames: String { "latestGames".localized }

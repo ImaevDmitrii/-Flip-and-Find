@@ -18,6 +18,7 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     private var theme: Theme?
     
     private let padding: CGFloat = 35
+    private let numberOfSections = 1
     
     init(){
         let layout = UICollectionViewFlowLayout()
@@ -188,10 +189,19 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         view.addSubview(overlayView)
         
         let alertView = GameEndAlert(frame: .zero)
-        alertView.configure(title: Localization.youWon,
-                            theme: theme?.localizedName ?? "",
-                            cardCount: gameModel.cards.count,
-                            time: gameModel.calculateCompletionTime())
+        
+        let cardCount = gameModel.cards.count
+        let completionTime = gameModel.calculateCompletionTime()
+        let theme = theme?.localizedName ?? ""
+        
+        let isRecord = GameStorage.shared.isRecord(time: completionTime, forCardCount: cardCount / 2)
+        let title = isRecord ? Localization.newRecord : Localization.youWon
+        
+        alertView.configure(title: title,
+                            theme: theme,
+                            cardCount: cardCount,
+                            time: completionTime)
+        
         view.addSubview(alertView)
         
         alertView.translatesAutoresizingMaskIntoConstraints = false
@@ -256,7 +266,7 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
 
 extension GameCollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        numberOfSections
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -32,7 +32,9 @@ final class LatestGamesTableViewCell: UITableViewCell {
     func configure(with game: LatestGames, isRecord: Bool) {
         themeLabel.text = game.theme.localizedName
         dateLabel.text = game.date.customFormattedDateString()
-        cardCountLabel.text = "\(game.cardCount) \(Localization.cards)"
+        let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
+        
+        cardCountLabel.text = "\(game.cardCount) \(LocalizationHelper.localizedCardCount(game.cardCount, languageCode: languageCode))"
         timeLabel.text = game.completionTime.formattedTime()
         
         trophyIcon.isHidden = !isRecord

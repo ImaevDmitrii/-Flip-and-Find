@@ -18,6 +18,7 @@
 "keepPlaying" = "Continuar jugando";
 "leaveGame" = "Salir del juego";
 "youWon" = "¡Ganaste! ¡Buen trabajo!";
+"newRecord" = "¡Ganaste! ¡Nuevo récord!";
 "cards" = "cartas";
 "myRecords" = "Mis récords";
 "latestGames" = "Últimos juegos";

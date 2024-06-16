@@ -141,7 +141,8 @@ final class GameEndAlert: UIView {
     func configure(title: String, theme: String, cardCount: Int, time: TimeInterval) {
         titleLabel.text = title
         themeLabel.text = theme
-        cardCountLabel.text = "\(cardCount) \(Localization.cards)"
+        let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
+        cardCountLabel.text = "\(cardCount) \(LocalizationHelper.localizedCardCount(cardCount, languageCode: languageCode))"
         
         let formatter = DateFormatter()
         formatter.dateFormat = "mm:ss"

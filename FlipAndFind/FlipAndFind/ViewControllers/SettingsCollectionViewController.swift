@@ -17,6 +17,8 @@ final class SettingsCollectionViewController: UICollectionViewController {
     
     private var settingsChanged = false
     
+    private let numberOfSections = 3
+    
     private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen {
         didSet { settingsChanged = true }
     }
@@ -74,12 +76,14 @@ final class SettingsCollectionViewController: UICollectionViewController {
                             cancelButtonTitle: Localization.no)
         view.addSubview(alertView)
         
+        let padding: CGFloat = 36
+        
         alertView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             alertView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
             alertView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
-            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: 36),
-            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -36),
+            alertView.leadingAnchor.constraint(greaterThanOrEqualTo: overlayView.leadingAnchor, constant: padding),
+            alertView.trailingAnchor.constraint(greaterThanOrEqualTo: overlayView.trailingAnchor, constant: -padding),
             alertView.heightAnchor.constraint(greaterThanOrEqualTo: overlayView.heightAnchor, multiplier: 0.3)
         ])
         
@@ -126,7 +130,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
 
 extension SettingsCollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        numberOfSections
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -141,10 +145,12 @@ extension SettingsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? SettingsCell else { return UICollectionViewCell() }
         
+        let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
+        
         switch indexPath.section {
         case 0:
             let currendCardCount = CardCount.allCases[indexPath.item]
-            cell.configure(with: currendCardCount.imageName, isSelected: currendCardCount == self.cardCount, text: currendCardCount.localizedName + " " + Localization.cards)
+            cell.configure(with: currendCardCount.imageName, isSelected: currendCardCount == self.cardCount, text: currendCardCount.localizedName + " " + LocalizationHelper.localizedCardCount(currendCardCount.rawValue, languageCode: languageCode))
         case 1:
             let currentTheme = Theme.allCases[indexPath.item]
             cell.configure(with: currentTheme.imageName, isSelected: currentTheme == self.theme, text: currentTheme.localizedName)

@@ -17,6 +17,7 @@
 "keepPlaying" = "Keep playing";
 "leaveGame" = "Leave the game";
 "youWon" = "You won! Great job!";
+"newRecord" = "You won! New record!";
 "cards" = "cards";
 "myRecords" = "My records";
 "latestGames" = "Latest games";

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CB17472A2BF7893E005A21AD /* LaunchAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1747292BF7893E005A21AD /* LaunchAnimationViewController.swift */; };
-		CB1747352BFC8D67005A21AD /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1747342BFC8D67005A21AD /* Data+Extension.swift */; };
 		CB1747372BFC8D8B005A21AD /* TimeIntervar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1747362BFC8D8B005A21AD /* TimeIntervar+Extension.swift */; };
 		CB1747442BFDCA3B005A21AD /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1747432BFDCA3B005A21AD /* UIImage+Extension.swift */; };
 		CB3E079F2BEB952A007C2803 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3E079E2BEB952A007C2803 /* Date+Extension.swift */; };
@@ -51,11 +50,11 @@
 		CBB1814F2BDE3D9000420015 /* GameEndAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB1814E2BDE3D8F00420015 /* GameEndAlert.swift */; };
 		CBB181512BDE403900420015 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBB181502BDE403900420015 /* Montserrat-Regular.ttf */; };
 		CBB181532BDEAF8800420015 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB181522BDEAF8800420015 /* ConfirmationAlert.swift */; };
+		CBDA51C32C1ED9F600607A45 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDA51C22C1ED9F600607A45 /* LocalizationHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB1747292BF7893E005A21AD /* LaunchAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAnimationViewController.swift; sourceTree = "<group>"; };
-		CB1747342BFC8D67005A21AD /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		CB1747362BFC8D8B005A21AD /* TimeIntervar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeIntervar+Extension.swift"; sourceTree = "<group>"; };
 		CB1747432BFDCA3B005A21AD /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		CB3E079E2BEB952A007C2803 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		CBB1814E2BDE3D8F00420015 /* GameEndAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndAlert.swift; sourceTree = "<group>"; };
 		CBB181502BDE403900420015 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		CBB181522BDEAF8800420015 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
+		CBDA51C22C1ED9F600607A45 /* LocalizationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,9 +234,9 @@
 				CB450E182BEB558100151DB4 /* Font+Extension.swift */,
 				CB3E079E2BEB952A007C2803 /* Date+Extension.swift */,
 				CB478FC02BF33CC6004C9C01 /* UIView+Extension.swift */,
-				CB1747342BFC8D67005A21AD /* Data+Extension.swift */,
 				CB1747362BFC8D8B005A21AD /* TimeIntervar+Extension.swift */,
 				CB1747432BFDCA3B005A21AD /* UIImage+Extension.swift */,
+				CBDA51C22C1ED9F600607A45 /* LocalizationHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -378,8 +378,8 @@
 				CBB181532BDEAF8800420015 /* ConfirmationAlert.swift in Sources */,
 				CB552FCA2BD63F62008AE1C3 /* GameModel.swift in Sources */,
 				CB4A1D992BBFE50F00A3DBE4 /* SceneDelegate.swift in Sources */,
-				CB1747352BFC8D67005A21AD /* Data+Extension.swift in Sources */,
 				CB3E079F2BEB952A007C2803 /* Date+Extension.swift in Sources */,
+				CBDA51C32C1ED9F600607A45 /* LocalizationHelper.swift in Sources */,
 				CB552FC42BD63D5C008AE1C3 /* GameCollectionViewController.swift in Sources */,
 				CB1747372BFC8D8B005A21AD /* TimeIntervar+Extension.swift in Sources */,
 				CB552FC62BD63D85008AE1C3 /* CardCell.swift in Sources */,

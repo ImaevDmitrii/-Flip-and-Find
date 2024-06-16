@@ -16,7 +16,6 @@ final class ResultsTableViewController: UITableViewController {
     private let latestGameKey = "latestGames"
     private let defaultTimeText = "-"
     private let numberOfSections = 2
-    private let recordsRows = 5
     
     private let gameRecordsCellId = String(describing: GameRecordTableViewCell.self)
     private let latestsGamesCellId = String(describing: LatestGamesTableViewCell.self)
@@ -29,7 +28,7 @@ final class ResultsTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         loadGameData()
     }
     
@@ -126,7 +125,7 @@ extension ResultsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == .zero ? recordsRows : latestGames.count
+        section == .zero ? CardCount.allCases.count : latestGames.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -134,12 +133,14 @@ extension ResultsTableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: gameRecordsCellId, for: indexPath) as? GameRecordTableViewCell else { return UITableViewCell() }
             let cardCounts = CardCount.allCases
             let cardCount = cardCounts[indexPath.row]
+            let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
+            
             if let record = gameRecords.first(where: { $0.cardCount == cardCount.rawValue }) {
-                let count = "\(record.cardCount) \(Localization.cards)"
+                let count = "\(record.cardCount) \(LocalizationHelper.localizedCardCount(record.cardCount, languageCode: languageCode))"
                 let time = record.completionTime.formattedTime()
                 cell.configure(count: count, time: time)
             } else {
-                let count = "\(cardCount.rawValue) \(Localization.cards)"
+                let count = "\(cardCount.rawValue) \(LocalizationHelper.localizedCardCount(cardCount.rawValue, languageCode: languageCode))"
                 let time = defaultTimeText
                 cell.configure(count: count, time: time)
             }
@@ -148,9 +149,7 @@ extension ResultsTableViewController {
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: latestsGamesCellId, for: indexPath) as? LatestGamesTableViewCell else { return UITableViewCell() }
             let game = latestGames[indexPath.row]
-            let isRecord = gameRecords.contains { record in
-                record.cardCount == game.cardCount && record.completionTime > game.completionTime
-            }
+            let isRecord = GameStorage.shared.isRecord(time: game.completionTime, forCardCount: game.cardCount)
             cell.configure(with: game, isRecord: isRecord)
             cell.isUserInteractionEnabled = false
             return cell
