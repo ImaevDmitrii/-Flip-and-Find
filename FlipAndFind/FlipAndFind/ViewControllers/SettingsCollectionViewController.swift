@@ -145,12 +145,10 @@ extension SettingsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? SettingsCell else { return UICollectionViewCell() }
         
-        let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
-        
         switch indexPath.section {
         case 0:
             let currendCardCount = CardCount.allCases[indexPath.item]
-            cell.configure(with: currendCardCount.imageName, isSelected: currendCardCount == self.cardCount, text: currendCardCount.localizedName + " " + LocalizationHelper.localizedCardCount(currendCardCount.rawValue, languageCode: languageCode))
+            cell.configure(with: currendCardCount.imageName, isSelected: currendCardCount == self.cardCount, text: currendCardCount.localizedName + " " + LocalizationHelper.localizedCardCount(currendCardCount.rawValue))
         case 1:
             let currentTheme = Theme.allCases[indexPath.item]
             cell.configure(with: currentTheme.imageName, isSelected: currentTheme == self.theme, text: currentTheme.localizedName)

@@ -133,14 +133,13 @@ extension ResultsTableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: gameRecordsCellId, for: indexPath) as? GameRecordTableViewCell else { return UITableViewCell() }
             let cardCounts = CardCount.allCases
             let cardCount = cardCounts[indexPath.row]
-            let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
             
             if let record = gameRecords.first(where: { $0.cardCount == cardCount.rawValue }) {
-                let count = "\(record.cardCount) \(LocalizationHelper.localizedCardCount(record.cardCount, languageCode: languageCode))"
+                let count = "\(record.cardCount) \(LocalizationHelper.localizedCardCount(record.cardCount))"
                 let time = record.completionTime.formattedTime()
                 cell.configure(count: count, time: time)
             } else {
-                let count = "\(cardCount.rawValue) \(LocalizationHelper.localizedCardCount(cardCount.rawValue, languageCode: languageCode))"
+                let count = "\(cardCount.rawValue) \(LocalizationHelper.localizedCardCount(cardCount.rawValue))"
                 let time = defaultTimeText
                 cell.configure(count: count, time: time)
             }
