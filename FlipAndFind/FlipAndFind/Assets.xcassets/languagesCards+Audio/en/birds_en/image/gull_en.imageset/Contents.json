@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "gull_en.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

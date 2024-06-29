@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "puffin_ru.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

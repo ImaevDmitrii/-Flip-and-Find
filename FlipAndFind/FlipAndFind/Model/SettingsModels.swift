@@ -12,7 +12,7 @@ enum CardCount: Int, CaseIterable {
     
     var localizedName: String {
         switch self {
-        case .eight: return rawValue.description 
+        case .eight: return rawValue.description
         case .twelve: return rawValue.description
         case .eighteen: return rawValue.description
         case.twentyFour: return rawValue.description
@@ -44,16 +44,19 @@ enum CardCount: Int, CaseIterable {
 }
 
 enum Theme: String, CaseIterable, Codable {
-    case dinosaurio, seaanimals, halloween, farm, insects, jungle
+    case birds, dinosaur, farm, garden, halloween, insect, jungle, sea, transport
     
     var localizedName: String {
         switch self {
-        case .dinosaurio: return Localization.dinosaur
-        case .seaanimals: return Localization.seaAnimals
-        case .halloween: return Localization.halloween
+        case .birds: return Localization.birds
+        case .dinosaur: return Localization.dinosaur
         case .farm: return Localization.farm
-        case .insects: return Localization.insects
+        case .garden: return Localization.garden
+        case .halloween: return Localization.halloween
+        case .insect: return Localization.insects
         case .jungle: return Localization.jungle
+        case .sea: return Localization.seaAnimals
+        case .transport: return Localization.transport
         }
     }
     
@@ -63,18 +66,24 @@ enum Theme: String, CaseIterable, Codable {
     
     func getFactory() -> CardTypeFactory {
         switch self {
-        case .dinosaurio:
-            CardFactory(types: DinosaurType.allCases)
-        case .seaanimals:
-            CardFactory(types: SeaAnimalsType.allCases)
-        case .halloween:
-            CardFactory(types: HalloweenType.allCases)
+        case .birds:
+            return CardFactory(types: Birds.allCases)
+        case .dinosaur:
+            return CardFactory(types: Dinosaur.allCases)
         case .farm:
-            CardFactory(types: FarmType.allCases)
-        case .insects:
-            CardFactory(types: InsectsType.allCases)
+            return CardFactory(types: Farm.allCases)
+        case .garden:
+            return CardFactory(types: Garden.allCases)
+        case .halloween:
+            return CardFactory(types: Halloween.allCases)
+        case .insect:
+            return CardFactory(types: Insect.allCases)
         case .jungle:
-            CardFactory(types: JungleType.allCases)
+            return CardFactory(types: Jungle.allCases)
+        case .sea:
+            return CardFactory(types: Sea.allCases)
+        case .transport:
+            return CardFactory(types: Transport.allCases)
         }
     }
 }
@@ -89,7 +98,7 @@ enum Language: String, CaseIterable {
         case .spanish: return Localization.spanish
         }
     }
-        
+    
     var imageName: String {
         return self.rawValue
     }
@@ -101,7 +110,7 @@ enum Language: String, CaseIterable {
 
 extension Theme {
     static func from(string: String?) -> Theme {
-        guard let string = string, let theme = Theme(rawValue: string) else { return .dinosaurio }
+        guard let string = string, let theme = Theme(rawValue: string) else { return .birds }
         return theme
     }
 }

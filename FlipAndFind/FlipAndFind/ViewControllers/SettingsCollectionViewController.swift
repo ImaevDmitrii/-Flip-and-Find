@@ -22,7 +22,7 @@ final class SettingsCollectionViewController: UICollectionViewController {
     private var cardCount: CardCount = CardCount(rawValue: UserDefaults.standard.cardCount) ?? .eighteen {
         didSet { settingsChanged = true }
     }
-    private var theme: Theme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio {
+    private var theme: Theme = Theme(rawValue: UserDefaults.standard.theme) ?? .birds {
         didSet { settingsChanged = true }
     }
     private var language: Language = Language(rawValue: UserDefaults.standard.language) ?? .english {

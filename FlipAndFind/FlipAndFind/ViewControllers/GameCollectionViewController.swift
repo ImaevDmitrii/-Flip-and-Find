@@ -17,6 +17,9 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     
     private var theme: Theme?
     
+    private var completionTime: TimeInterval = 0
+    private var isRecordGame: Bool = false
+    
     private let padding: CGFloat = 35
     private let numberOfSections = 1
     
@@ -102,7 +105,7 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
     
     private func setupGame() {
         let selectedCardCount = UserDefaults.standard.cardCount
-        let selectedTheme = Theme(rawValue: UserDefaults.standard.theme) ?? .dinosaurio
+        let selectedTheme = Theme(rawValue: UserDefaults.standard.theme) ?? .birds
         let factory = selectedTheme.getFactory()
         gameModel.setupGame(numberOfPairs: selectedCardCount, factory: factory)
         gameModel.timerUpdateHandler = { [weak self] elapsedTime in
@@ -110,6 +113,13 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         }
         gameModel.foundCardsUpdateHandler = { [weak self] in
             self?.updateHeaderView()
+        }
+        gameModel.gameCompletionHandler = { [weak self] completionTime, isRecord in
+            self?.completionTime = completionTime
+            self?.isRecordGame = isRecord
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self?.showGameOverAlert()
+            }
         }
         collectionView.reloadData()
         updateHeaderView()
@@ -191,11 +201,8 @@ final class GameCollectionViewController: UICollectionViewController, UICollecti
         let alertView = GameEndAlert(frame: .zero)
         
         let cardCount = gameModel.cards.count
-        let completionTime = gameModel.calculateCompletionTime()
         let theme = theme?.localizedName ?? ""
-        
-        let isRecord = GameStorage.shared.isRecord(time: completionTime, forCardCount: cardCount / 2)
-        let title = isRecord ? Localization.newRecord : Localization.youWon
+        let title = isRecordGame ? Localization.newRecord : Localization.youWon
         
         alertView.configure(title: title,
                             theme: theme,
@@ -309,11 +316,6 @@ extension GameCollectionViewController {
                     }
                 }
                 collectionView.isUserInteractionEnabled = true
-            }
-        }
-        if gameModel.checkAllPairsFound() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.showGameOverAlert()
             }
         }
     }

@@ -22,10 +22,11 @@ final class GameModel {
     
     var timerUpdateHandler: ((TimeInterval) -> Void)?
     var foundCardsUpdateHandler: (() -> Void)?
+    var gameCompletionHandler: ((TimeInterval, Bool) -> Void)?
     
     func setupGame(numberOfPairs: Int, factory: CardTypeFactory) {
         let themeString = UserDefaults.standard.string(forKey: "theme")
-        currentTheme = Theme(rawValue: themeString ?? Theme.dinosaurio.rawValue) ?? .dinosaurio
+        currentTheme = Theme(rawValue: themeString ?? Theme.birds.rawValue) ?? .birds
         cards = factory.createCards(numberOfPairs: numberOfPairs).shuffled()
         startTime = Date()
         startTimer()
@@ -73,6 +74,8 @@ final class GameModel {
             let completionTime = calculateCompletionTime()
             let latestGame = LatestGames(theme: currentTheme ?? .farm, date: Date(), cardCount: cards.count, completionTime: completionTime)
             GameStorage.shared.saveLatestGame(latestGame)
+            let isRecord = GameStorage.shared.isRecord(time: completionTime, forCardCount: cards.count)
+            gameCompletionHandler?(completionTime, isRecord)
         }
     }
     

@@ -10,6 +10,22 @@ import Foundation
 protocol CardType {
     var imageName: String { get }
     var backImage: String { get }
+    var soundName: String { get }
+}
+
+extension CardType where Self: RawRepresentable, Self.RawValue == String {
+    var imageName: String {
+        return rawValue
+    }
+    
+    var soundName: String {
+        let languageCode = UserDefaults.standard.string(forKey: "language") ?? "en"
+        return "audio_\(rawValue)_\(languageCode)"
+    }
+    
+    var backImage: String {
+        return String(describing: Self.self).lowercased()
+    }
 }
 
 struct CardModel {
@@ -23,74 +39,39 @@ struct CardModel {
     }
 }
 
-enum DinosaurType: String, CaseIterable, CardType {
-    var imageName: String {
-        self.rawValue
-    }
-    
-    var backImage: String {
-        "dinosaurio"
-    }
-    
-    case allosaurus, ankylosaurus, baryonyx, brachiosaurus, carnosaurus, diplodocus, elasmosaurus, gallimimus, kronosaurus, ornithosaurus, pterodactyl, spinosaurus, stegosaurus, triceraptor, tyrannosaurus, velociraptor, сorythosaurus, argentinosaurus, dilophasaurus, pteranodon
+
+enum Birds: String, CaseIterable, CardType {
+    case blackbird, bullfinch, capercaillie, crow, eagle, gull, heron, magpie, nightingale, owl, greenParrot, penguin, pigeon, puffin, sparrow, stork, swallow, swan, waxwing, woodpecker
 }
 
-enum SeaAnimalsType: String, CaseIterable, CardType {
-    var imageName: String {
-        self.rawValue
-    }
-    
-    var backImage: String {
-        "seaanimals"
-    }
-    
-    case clownFish, crab, dolphin, hammerheadShark, jellyfish, killerWhale, stingray, octopus, oyster, hedgehogFish, shark, shrimp, squid, swordfish, turtle, whale, moorishIdol, regalBlueTang, starfish, seahorse
+enum Dinosaur: String, CaseIterable, CardType {
+    case сorythosaurus, allosaurus, ankylosaurus, argentinosaurus, baryonyx, brachiosaurus, carnosaurus, dilophasaurus, diplodocus, elasmosaurus, gallimimus, kronosaurus, ornithosaurus, pterodactyl, pteranodon, spinosaurus, stegosaurus, triceraptor, tyrannosaurus, velociraptor
 }
 
-enum HalloweenType: String, CaseIterable, CardType {
-    var imageName: String {
-        self.rawValue
-    }
-    
-    var backImage: String {
-        "halloween"
-    }
-    
-    case bat, blackCat, death, ghost, monster, mummy, owl, pirate, pumpkin, skeleton, blackSpider, vampire, werewolf, witchHat, witch, zombie, fairy, gargoyle, yeti, frankenstein
+enum Farm: String, CaseIterable, CardType {
+    case bull, cat, chick, cow, dog, donkey, drake, duck, goat, goose, hen, horse, lama, mouse, pig, rabbit, ram, rooster, sheep, turkey
 }
 
-enum FarmType: String, CaseIterable, CardType {
-    var imageName: String {
-        self.rawValue
-    }
-    
-    var backImage: String {
-        "farm"
-    }
-    
-    case cat, cow, dog, donkey, duck, goat, goose, hen, horse, mouse, pig, rabbit, ram, rooster, sheep, turkey, bull, chick, drake, lama
+enum Garden: String, CaseIterable, CardType {
+    case apple, cabbage, carrot, cherry, corn, cucumber, eggplant, garlic, grape, onion, orange, peach, pear, plum, potato, pumpkin, raspberry, strawberry, tomato, zucchini
 }
 
-enum InsectsType: String, CaseIterable, CardType {
-    var imageName: String {
-        self.rawValue
-    }
-    
-    var backImage: String {
-        "insects"
-    }
-    
-    case ant, bee, butterfly, caterpillar, cockroach, dragonfly, flea, fly, grasshopper, ladybug, mantis, mosquito, rhinocerosBeetle, stagBeetle, spider, snail, coloradoBeetle, moth, pillbug, wasp
+enum Halloween: String, CaseIterable, CardType {
+    case bat, blackCat, death, fairy, frankenstein, gargoyle, ghost, jack, monster, mummy, owlHalloween, pirate, skeleton, spiderHalloween, vampire, werewolf, witch, witchHat, yeti, zombie
 }
 
-enum JungleType: String, CaseIterable, CardType {
-    var imageName: String {
-        self.rawValue
-    }
-    
-    var backImage: String {
-        "jungle"
-    }
-    
-    case hummingbird, crocodile, elephant, hippopotamus, giraffe, leopard, lion, monkey, panther, tiger, zebra, gorilla, parrot, flamingo, lemur, rhinoceros, сockatoo, python, sloth, gazelle
+enum Insect: String, CaseIterable, CardType {
+    case ant, bee, butterfly, caterpillar, cockroach, coloradoBeetle, dragonfly, flea, fly, grasshopper, ladybug, mantis, mosquito, moth, pillbug, rhinocerosBeetle, snail, spider, stagBeetle, wasp
+}
+
+enum Jungle: String, CaseIterable, CardType {
+    case cockatoo, crocodile, elephant, flamingo, gazelle, giraffe, gorilla, hippopotamus, hummingbird, lemur, leopard, lion, monkey, panther, parrot, python, rhinoceros, sloth, tiger, zebra
+}
+
+enum Sea: String, CaseIterable, CardType {
+    case clownFish, crab, dolphin, hammerheadShark, hedgehogFish, jellyfish, killerWhale, moorishIdol, octopus, oyster, regalBlueTang, seahorse, shark, shrimp, squid, starfish, stingray, swordfish, turtle, whale
+}
+
+enum Transport: String, CaseIterable, CardType {
+    case airplane, ambulance, bicycle, boat, bulldozer, bus, car, dumpTruck, fireEngine, garbageTruck, harvester, helicopter, liftingCrane, motorbike, policeCar, ship, tractor, train, truck, van
 }

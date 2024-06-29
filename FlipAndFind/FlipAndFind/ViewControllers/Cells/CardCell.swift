@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 final class CardCell: UICollectionViewCell {
     
@@ -14,6 +15,7 @@ final class CardCell: UICollectionViewCell {
     private let backImage = UIImageView()
     
     private var cardModel: CardModel?
+    private var audioPlayer: AVAudioPlayer?
     
     private let animationDuration = 0.5
     private let scaleDuration = 0.3
@@ -91,18 +93,28 @@ final class CardCell: UICollectionViewCell {
         backImage.isHidden = isFlipped
     }
     
+    private func playSound(named soundName: String) {
+        guard let asset = NSDataAsset(name: soundName) else { return }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(data: asset.data)
+            audioPlayer?.play()
+        }  catch { }
+    }
+    
     func flip(to isFlipped: Bool) {
         UIView.transition(with: containerView, duration: animationDuration, options: animationOptions, animations: {
-               self.updateVisibility(isFlipped: isFlipped)
-           }, completion: { finished in
-               if finished {
-                   self.cardModel?.isFlipped = isFlipped
-                   if let imageName = self.cardModel?.imageName, isFlipped {
-                       let languageSuffix = UserDefaults.standard.language
-                       let fullImageName = "\(imageName)_\(languageSuffix)"
-                       self.onShowBigImage?(fullImageName)
-                   }
-               }
-           })
-       }
+            self.updateVisibility(isFlipped: isFlipped)
+        }, completion: { finished in
+            if finished {
+                self.cardModel?.isFlipped = isFlipped
+                if let imageName = self.cardModel?.imageName, isFlipped {
+                    let languageSuffix = UserDefaults.standard.language
+                    let fullImageName = "\(imageName)_\(languageSuffix)"
+                    self.playSound(named: self.cardModel?.cardType.soundName ?? "")
+                    self.onShowBigImage?(fullImageName)
+                }
+            }
+        })
+    }
 }

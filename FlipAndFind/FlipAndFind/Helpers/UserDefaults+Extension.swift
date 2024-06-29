@@ -20,7 +20,7 @@ extension UserDefaults {
     }
     
     var theme: String {
-        get { string(forKey: Keys.theme) ?? Theme.dinosaurio.rawValue }
+        get { string(forKey: Keys.theme) ?? Theme.birds.rawValue }
         set { set(newValue, forKey: Keys.theme) }
     }
     
